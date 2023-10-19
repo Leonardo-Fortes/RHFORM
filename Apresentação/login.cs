@@ -32,12 +32,10 @@ namespace ProjetoRhForm.Apresentação
             {
                 if (controle.tem)
                 {
-                    MessageBox.Show("Logado com sucesso", "Logado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    login login = new login();
-                    login.Close();
+                    MessageBox.Show("Logado com sucesso", "Logado", MessageBoxButtons.OK, MessageBoxIcon.Information);             
                     BemVindo bv = new BemVindo();
                     bv.Show();
-                    
+                    this.Hide();
 
                 }
 

@@ -41,21 +41,23 @@ namespace ProjetoRhForm.Dal
             }
             return tem;
         }
-        public string cadastrarUsuario(string login, string senha, string confSenha) //cadastro usuario
+        public string cadastrarUsuario(string login, string senha, string confSenha, int id) //cadastro usuario
         {
             if (senha.Equals(confSenha)) // verificação de senha
             {
                     tem = false;
-                    cmd.CommandText = "select cpf from Funcionario where cpf = @login";
+                    cmd.CommandText = "select cpf from Funcionario where cpf = @login and idfuncionario = @id";
                     cmd.Parameters.AddWithValue("@login", login);
+                    cmd.Parameters.AddWithValue("@id", id);
                     cmd.Connection = con.conectar();
                     dr = cmd.ExecuteReader(); 
                     if (dr.HasRows)
                     {
                             dr.Close();
-                            cmd.CommandText = "insert into Usuario (nome,senha) values (@l,@s)";
+                            cmd.CommandText = "insert into Usuario (nome,senha,id_funcionario) values (@l,@s,@idf)";
                             cmd.Parameters.AddWithValue("@l", login);
                             cmd.Parameters.AddWithValue("@s", senha);
+                            cmd.Parameters.AddWithValue("@idf", id);
                         try
                         {
                             cmd.ExecuteNonQuery(); // executando dados 
@@ -69,7 +71,7 @@ namespace ProjetoRhForm.Dal
                     }
                     else
                     {
-                        this.msg = "LOGIN INEXISTENTE!";
+                        this.msg = "LOGIN/CÓDIGO INEXISTENTE!";
                     }
             }
             else
