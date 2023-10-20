@@ -26,33 +26,32 @@ namespace ProjetoRhForm.Apresentação
 
             Controle controle = new Controle();
 
-            if (int.TryParse(txbCodUsu.Text, out int userID))
+
+
+            controle.cadastrar(txbCadUsu.Text, txbCadSenha.Text, txbConfirmarSenha.Text);
+
+            if (controle.msg.Equals(""))
             {
 
-                controle.cadastrar(txbCadUsu.Text, txbCadSenha.Text, txbConfirmarSenha.Text, userID);
-
-                if (controle.msg.Equals(""))
+                if (controle.tem)
                 {
-
-                    if (controle.tem)
-                    {
-                        MessageBox.Show("Cadastrado com sucesso", "Cadastrado!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        BemVindo bv = new BemVindo();
-                        bv.Show();
-                        this.Close();
-                    }
-
-                    else
-                    {
-                        MessageBox.Show("tente novamente!", "ERRO!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-
+                    MessageBox.Show("Cadastrado com sucesso", "Cadastrado!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    BemVindo bv = new BemVindo();
+                    bv.Show();
+                    this.Close();
                 }
+
                 else
                 {
-                    MessageBox.Show(controle.msg);
+                    MessageBox.Show("tente novamente!", "ERRO!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+
             }
+            else
+            {
+                MessageBox.Show(controle.msg);
+            }
+
 
         }
 

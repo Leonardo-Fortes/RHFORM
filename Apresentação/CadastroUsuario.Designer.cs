@@ -35,8 +35,6 @@
             txbConfirmarSenha = new TextBox();
             lbCadSenha = new Label();
             lbConfirmarSenha = new Label();
-            lbCodUsu = new Label();
-            txbCodUsu = new TextBox();
             SuspendLayout();
             // 
             // brnCadUsu
@@ -106,31 +104,11 @@
             lbConfirmarSenha.TabIndex = 8;
             lbConfirmarSenha.Text = "Confirmar Senha";
             // 
-            // lbCodUsu
-            // 
-            lbCodUsu.AutoSize = true;
-            lbCodUsu.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lbCodUsu.Location = new Point(528, 291);
-            lbCodUsu.Name = "lbCodUsu";
-            lbCodUsu.Size = new Size(110, 40);
-            lbCodUsu.TabIndex = 9;
-            lbCodUsu.Text = "Código";
-            // 
-            // txbCodUsu
-            // 
-            txbCodUsu.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txbCodUsu.Location = new Point(644, 296);
-            txbCodUsu.Name = "txbCodUsu";
-            txbCodUsu.Size = new Size(60, 29);
-            txbCodUsu.TabIndex = 10;
-            // 
             // CadastroUsuario
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(txbCodUsu);
-            Controls.Add(lbCodUsu);
             Controls.Add(lbConfirmarSenha);
             Controls.Add(lbCadSenha);
             Controls.Add(txbConfirmarSenha);
@@ -153,7 +131,5 @@
         private TextBox txbConfirmarSenha;
         private Label lbCadSenha;
         private Label lbConfirmarSenha;
-        private Label lbCodUsu;
-        private TextBox txbCodUsu;
     }
 }

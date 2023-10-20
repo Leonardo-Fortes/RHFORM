@@ -21,10 +21,10 @@ namespace ProjetoRhForm.Modelo
             }
             return tem;
         }
-        public string cadastrar(string login, string senha, string confSenha, int id)
+        public string cadastrar(string login, string senha, string confSenha)
         {
             LoginDaoComandos loginDao = new LoginDaoComandos();
-            this.msg = loginDao.cadastrarUsuario(login, senha, confSenha, id);
+            this.msg = loginDao.cadastrarUsuario(login, senha, confSenha);
             if (loginDao.tem) 
             {
                 this.tem = true;
