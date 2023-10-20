@@ -33,7 +33,7 @@ namespace ProjetoRhForm.Apresentação
                 if (controle.tem)
                 {
                     MessageBox.Show("Logado com sucesso", "Logado", MessageBoxButtons.OK, MessageBoxIcon.Information);             
-                    BemVindo bv = new BemVindo();
+                    Cadastro bv = new Cadastro();
                     bv.Show();
                     this.Hide();
 

@@ -36,8 +36,8 @@ namespace ProjetoRhForm.Apresentação
                 if (controle.tem)
                 {
                     MessageBox.Show("Cadastrado com sucesso", "Cadastrado!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    BemVindo bv = new BemVindo();
-                    bv.Show();
+                   
+                   
                     this.Close();
                 }
 
