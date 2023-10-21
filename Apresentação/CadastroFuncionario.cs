@@ -23,8 +23,15 @@ namespace ProjetoRhForm.Apresentação
             Controle controle = new Controle();
             string dataDigitada = txbDataFunc.Text;
             if (DateTime.TryParseExact(dataDigitada, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dataInserida))
-            {                          
-                controle.cadastrarFunc(txbNomeFunc.Text, dataInserida, txbTelefoneFunc.Text, txbEmailFunc.Text, txbSexoFunc.Text, txbCPFFunc.Text, txbCargo.Text, txbCNPJ.Text);
+            {
+                // Verifique se a data inserida está acima ou igual à data mínima suportada pelo SQL Server (01/01/1753)
+                if (dataInserida < new DateTime(1753, 1, 1))
+                {
+                    MessageBox.Show("A data inserida está abaixo do limite .", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    controle.cadastrarFunc(txbNomeFunc.Text, dataInserida, txbTelefoneFunc.Text, txbEmailFunc.Text, txbSexoFunc.Text, txbCPFFunc.Text, txbCargo.Text, txbCNPJ.Text);
                     if (controle.msg.Equals(""))
                     {
                         if (controle.tem)
@@ -42,16 +49,15 @@ namespace ProjetoRhForm.Apresentação
                     else
                     {
                         MessageBox.Show(controle.msg);
-
-
-                    }               
+                    }
+                }
             }
             else
             {
-
                 MessageBox.Show("A data inserida não está no formato correto");
             }
-
         }
+
+
     }
 }

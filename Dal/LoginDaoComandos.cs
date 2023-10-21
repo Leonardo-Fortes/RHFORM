@@ -80,12 +80,6 @@ namespace ProjetoRhForm.Dal
             if (dr.HasRows)
             {        
                     dr.Close();
-                if (date < DateTime.MinValue || date > DateTime.Now)
-                {
-                    Console.WriteLine("A data inserida não é válida. Não é possível inserir datas fora do intervalo suportado.");
-                }
-                else
-                {
                     cmd.CommandText = "insert into Funcionario values (@nome,@telefone,@email,@sexo,@cpf,@cargo,@cnpj,@data)";
                     cmd.Parameters.AddWithValue("@nome", nome);
                     cmd.Parameters.AddWithValue("@telefone", telefone);
@@ -95,17 +89,17 @@ namespace ProjetoRhForm.Dal
                     cmd.Parameters.AddWithValue("@cargo", cargo);
                     cmd.Parameters.AddWithValue("@cnpj", cnpj);
                     cmd.Parameters.AddWithValue("@data", SqlDbType.Date).Value = date;
-                    try
-                    {
-                        cmd.ExecuteNonQuery();
-                        con.desconectar();
-                        tem = true;
-                    }
-                    catch (SqlException ex)
-                    {
-                        this.msg = "erro com o banco" + ex;
-                    }
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    con.desconectar();
+                    tem = true;
                 }
+                catch (SqlException ex)
+                {
+                    this.msg = "erro com o banco" + ex;
+                }
+
             }
             else
             {
