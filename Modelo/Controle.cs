@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
 
 namespace ProjetoRhForm.Modelo
 {
@@ -31,12 +32,22 @@ namespace ProjetoRhForm.Modelo
             }
             return msg;
         }
-        public string cadastrarFunc(string nome, DateTime date, string telefone, string email, string sexo, string cpf)
+        public string cadastrarFunc(string nome, DateTime date, string telefone, string email, string sexo, string cpf, string cargo, string cnpj)
         {
             
             LoginDaoComandos loginDao = new LoginDaoComandos ();
-            this.msg = loginDao.cadastrarFuncionario(nome, date, telefone, email, sexo, cpf);
+            this.msg = loginDao.cadastrarFuncionario(nome, date, telefone, email, sexo, cpf, cargo, cnpj );
            
+            if (loginDao.tem)
+            {
+                this.tem = true;
+            }
+            return msg;
+        }
+        public string cadastrarEmp(string nome, string cnpj)
+        {
+            LoginDaoComandos loginDao = new LoginDaoComandos ();
+            this.msg = loginDao.cadastrarEmp(nome, cnpj);
             if (loginDao.tem)
             {
                 this.tem = true;

@@ -1,6 +1,6 @@
 ﻿namespace ProjetoRhForm.Apresentação
 {
-    partial class BemVindo
+    partial class Cadastro
     {
         /// <summary>
         /// Required designer variable.
@@ -30,11 +30,12 @@
         {
             btnUsuario = new Button();
             btnCadFunc = new Button();
+            btnCadEmpresa = new Button();
             SuspendLayout();
             // 
             // btnUsuario
             // 
-            btnUsuario.Location = new Point(-1, 0);
+            btnUsuario.Location = new Point(47, 146);
             btnUsuario.Name = "btnUsuario";
             btnUsuario.Size = new Size(149, 23);
             btnUsuario.TabIndex = 0;
@@ -44,7 +45,7 @@
             // 
             // btnCadFunc
             // 
-            btnCadFunc.Location = new Point(154, 0);
+            btnCadFunc.Location = new Point(47, 89);
             btnCadFunc.Name = "btnCadFunc";
             btnCadFunc.Size = new Size(152, 23);
             btnCadFunc.TabIndex = 1;
@@ -52,15 +53,26 @@
             btnCadFunc.UseVisualStyleBackColor = true;
             btnCadFunc.Click += btnCadFunc_Click;
             // 
-            // BemVindo
+            // btnCadEmpresa
+            // 
+            btnCadEmpresa.Location = new Point(47, 29);
+            btnCadEmpresa.Name = "btnCadEmpresa";
+            btnCadEmpresa.Size = new Size(152, 23);
+            btnCadEmpresa.TabIndex = 2;
+            btnCadEmpresa.Text = "Cadastrar Empresa";
+            btnCadEmpresa.UseVisualStyleBackColor = true;
+            btnCadEmpresa.Click += btnCadEmpresa_Click;
+            // 
+            // Cadastro
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(243, 199);
+            Controls.Add(btnCadEmpresa);
             Controls.Add(btnCadFunc);
             Controls.Add(btnUsuario);
-            Name = "BemVindo";
-            Text = "Inicio";
+            Name = "Cadastro";
+            Text = "Cadastro";
             Load += BemVindo_Load;
             ResumeLayout(false);
         }
@@ -69,5 +81,6 @@
 
         private Button btnUsuario;
         private Button btnCadFunc;
+        private Button btnCadEmpresa;
     }
 }

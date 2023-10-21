@@ -3,6 +3,7 @@ using System;
 using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -69,37 +70,66 @@ namespace ProjetoRhForm.Dal
             }
             return msg;
         }
-        public string cadastrarFuncionario(string nome, DateTime date, string telefone, string email, string sexo, string cpf)
+        public string cadastrarFuncionario(string nome, DateTime date, string telefone, string email, string sexo, string cpf, string cargo, string cnpj )
         {
             tem = false;
-            cmd.CommandText = "select cpf from funcionario where cpf = @c";
-            cmd.Parameters.AddWithValue("@c", cpf);
+            cmd.CommandText = "select cnpj from Empresa where cnpj = @c";
+            cmd.Parameters.AddWithValue("@c", cnpj);
             cmd.Connection = con.conectar();
             dr = cmd.ExecuteReader();
-            if (!dr.HasRows)
-            {         
+            if (dr.HasRows)
+            {        
                     dr.Close();
-                    cmd.CommandText = "insert into Funcionario values (@nome,@data,@telefone,@email,@sexo,@cpf)";
+                if (date < DateTime.MinValue || date > DateTime.Now)
+                {
+                    Console.WriteLine("A data inserida não é válida. Não é possível inserir datas fora do intervalo suportado.");
+                }
+                else
+                {
+                    cmd.CommandText = "insert into Funcionario values (@nome,@telefone,@email,@sexo,@cpf,@cargo,@cnpj,@data)";
                     cmd.Parameters.AddWithValue("@nome", nome);
-                    cmd.Parameters.AddWithValue("@data", date);
                     cmd.Parameters.AddWithValue("@telefone", telefone);
                     cmd.Parameters.AddWithValue("@email", email);
                     cmd.Parameters.AddWithValue("@sexo", sexo);
                     cmd.Parameters.AddWithValue("@cpf", cpf);
-                try 
-                { 
-                    cmd.ExecuteNonQuery();
-                    con.desconectar();
-                    tem = true;
-                }
-                catch (SqlException ex)
-                {
-                    this.msg = "erro com o banco" + ex;
+                    cmd.Parameters.AddWithValue("@cargo", cargo);
+                    cmd.Parameters.AddWithValue("@cnpj", cnpj);
+                    cmd.Parameters.AddWithValue("@data", SqlDbType.Date).Value = date;
+                    try
+                    {
+                        cmd.ExecuteNonQuery();
+                        con.desconectar();
+                        tem = true;
+                    }
+                    catch (SqlException ex)
+                    {
+                        this.msg = "erro com o banco" + ex;
+                    }
                 }
             }
             else
             {
-                this.msg = "CPF JÁ EXISTENTE, TENTE NOVAMENTE";
+                this.msg = "CNPJ INEXISTENTE, TENTE NOVAMENTE";
+            }
+            return msg;
+        }
+        public string cadastrarEmp(string nome, string cnpj)
+        {
+            tem = false;
+            cmd.CommandText = "insert into Empresa values (@nome,@cnpj)";
+            cmd.Parameters.AddWithValue("@nome", nome);
+            cmd.Parameters.AddWithValue("@cnpj", cnpj);
+            try
+            {
+                cmd.Connection = con.conectar();
+                cmd.ExecuteNonQuery();
+                con.desconectar();
+                tem = true;
+            }
+            catch (SqlException e)
+            {
+
+                this.msg = "erro com o banco" + e;
             }
             return msg;
         }

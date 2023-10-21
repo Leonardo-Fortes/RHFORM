@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ProjetoRhForm.Dal;
+using ProjetoRhForm.Modelo;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +17,35 @@ namespace ProjetoRhForm.Apresentação
         public CadastroEmpresa()
         {
             InitializeComponent();
+        }
+
+        private void txtNomeEmp_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCadEmp_Click(object sender, EventArgs e)
+        {
+            Controle controle = new Controle();
+            controle.cadastrarEmp(txtNomeEmp.Text, txtCNPJEmp.Text);
+            if (controle.msg.Equals(""))
+            {
+                if (controle.tem)
+                {
+                    MessageBox.Show("Cadastrado com Sucesso","Empresa Cadastrada!",MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Algo de errado aconteceu, Tente Novamente", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+            }
+            else
+            {
+               MessageBox.Show (controle.msg);
+            }
+
         }
     }
 }

@@ -41,6 +41,10 @@
             txbEmailFunc = new TextBox();
             txbSexoFunc = new TextBox();
             txbCPFFunc = new TextBox();
+            lbCargo = new Label();
+            txbCargo = new TextBox();
+            txbCNPJ = new TextBox();
+            lbEmpresa = new Label();
             SuspendLayout();
             // 
             // btnCadFunc
@@ -156,11 +160,49 @@
             txbCPFFunc.Size = new Size(277, 23);
             txbCPFFunc.TabIndex = 12;
             // 
+            // lbCargo
+            // 
+            lbCargo.AutoSize = true;
+            lbCargo.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbCargo.Location = new Point(476, 9);
+            lbCargo.Name = "lbCargo";
+            lbCargo.Size = new Size(94, 40);
+            lbCargo.TabIndex = 13;
+            lbCargo.Text = "Cargo";
+            // 
+            // txbCargo
+            // 
+            txbCargo.Location = new Point(476, 50);
+            txbCargo.Name = "txbCargo";
+            txbCargo.Size = new Size(277, 23);
+            txbCargo.TabIndex = 14;
+            // 
+            // txbCNPJ
+            // 
+            txbCNPJ.Location = new Point(476, 119);
+            txbCNPJ.Name = "txbCNPJ";
+            txbCNPJ.Size = new Size(277, 23);
+            txbCNPJ.TabIndex = 15;
+            // 
+            // lbEmpresa
+            // 
+            lbEmpresa.AutoSize = true;
+            lbEmpresa.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbEmpresa.Location = new Point(476, 76);
+            lbEmpresa.Name = "lbEmpresa";
+            lbEmpresa.Size = new Size(81, 40);
+            lbEmpresa.TabIndex = 16;
+            lbEmpresa.Text = "CNPJ";
+            // 
             // CadastroFuncionario
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(lbEmpresa);
+            Controls.Add(txbCNPJ);
+            Controls.Add(txbCargo);
+            Controls.Add(lbCargo);
             Controls.Add(txbCPFFunc);
             Controls.Add(txbSexoFunc);
             Controls.Add(txbEmailFunc);
@@ -195,5 +237,9 @@
         private TextBox txbEmailFunc;
         private TextBox txbSexoFunc;
         private TextBox txbCPFFunc;
+        private Label lbCargo;
+        private TextBox txbCargo;
+        private TextBox txbCNPJ;
+        private Label lbEmpresa;
     }
 }

@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace ProjetoRhForm.Apresentação
 {
-    public partial class BemVindo : Form
+    public partial class Cadastro : Form
     {
-        public BemVindo()
+        public Cadastro()
         {
             InitializeComponent();
         }
@@ -39,8 +39,14 @@ namespace ProjetoRhForm.Apresentação
         private void btnCadFunc_Click(object sender, EventArgs e)
         {
             Controle controle = new Controle();
-          CadastroFuncionario cadastroFuncionario = new CadastroFuncionario();
+            CadastroFuncionario cadastroFuncionario = new CadastroFuncionario();
             cadastroFuncionario.Show();
+        }
+
+        private void btnCadEmpresa_Click(object sender, EventArgs e)
+        {
+            CadastroEmpresa cadastroEmpresa = new CadastroEmpresa();
+            cadastroEmpresa.Show();
         }
     }
 }

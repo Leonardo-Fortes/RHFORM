@@ -20,16 +20,11 @@ namespace ProjetoRhForm.Apresentação
 
         private void btnCadFunc_Click(object sender, EventArgs e)
         {
-           
-                Controle controle = new Controle();
-
-                
-                string dataDigitada = txbDataFunc.Text;
-
-                if (DateTime.TryParseExact(dataDigitada, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dataInserida))
-                {
-                
-                    controle.cadastrarFunc(txbNomeFunc.Text, dataInserida, txbTelefoneFunc.Text, txbEmailFunc.Text, txbSexoFunc.Text, txbCPFFunc.Text);
+            Controle controle = new Controle();
+            string dataDigitada = txbDataFunc.Text;
+            if (DateTime.TryParseExact(dataDigitada, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dataInserida))
+            {                          
+                controle.cadastrarFunc(txbNomeFunc.Text, dataInserida, txbTelefoneFunc.Text, txbEmailFunc.Text, txbSexoFunc.Text, txbCPFFunc.Text, txbCargo.Text, txbCNPJ.Text);
                     if (controle.msg.Equals(""))
                     {
                         if (controle.tem)
@@ -37,6 +32,7 @@ namespace ProjetoRhForm.Apresentação
                             MessageBox.Show("Cadastrado com Sucesso", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             Cadastro bv = new Cadastro();
                             bv.Show();
+                            this.Close();
                         }
                         else
                         {
@@ -46,22 +42,15 @@ namespace ProjetoRhForm.Apresentação
                     else
                     {
                         MessageBox.Show(controle.msg);
-                        
-                   
-                    }
-                
-                }
-                else
-                {
-               
-                    MessageBox.Show("A data inserida não está no formato correto");
-                }
-                
-            
 
 
+                    }               
+            }
+            else
+            {
 
-
+                MessageBox.Show("A data inserida não está no formato correto");
+            }
 
         }
     }
