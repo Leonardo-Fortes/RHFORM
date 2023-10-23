@@ -44,10 +44,10 @@ namespace ProjetoRhForm.Modelo
             }
             return msg;
         }
-        public string cadastrarEmp(string nome, string cnpj)
+        public string cadastrarEmp(string nome, string cnpj, string rua, string numero, string bairro, string cidade, string uf, string pais, string cep)
         {
             LoginDaoComandos loginDao = new LoginDaoComandos ();
-            this.msg = loginDao.cadastrarEmp(nome, cnpj);
+            this.msg = loginDao.cadastrarEmp(nome, cnpj, rua, numero, bairro, cidade, uf, pais, cep);
             if (loginDao.tem)
             {
                 this.tem = true;

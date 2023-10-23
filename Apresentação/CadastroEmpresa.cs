@@ -27,12 +27,12 @@ namespace ProjetoRhForm.Apresentação
         private void btnCadEmp_Click(object sender, EventArgs e)
         {
             Controle controle = new Controle();
-            controle.cadastrarEmp(txtNomeEmp.Text, txtCNPJEmp.Text);
+            controle.cadastrarEmp(txtNomeEmp.Text, txtCNPJEmp.Text, txbRua.Text, txbNumero.Text, txbBairro.Text, txbCidade.Text, txbUF.Text, txbPais.Text, txbCep.Text);
             if (controle.msg.Equals(""))
             {
                 if (controle.tem)
                 {
-                    MessageBox.Show("Cadastrado com Sucesso","Empresa Cadastrada!",MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Cadastrado com Sucesso", "Empresa Cadastrada!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }
                 else
@@ -43,7 +43,7 @@ namespace ProjetoRhForm.Apresentação
             }
             else
             {
-               MessageBox.Show (controle.msg);
+                MessageBox.Show(controle.msg);
             }
 
         }

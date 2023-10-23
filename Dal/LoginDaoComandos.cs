@@ -72,47 +72,83 @@ namespace ProjetoRhForm.Dal
         }
         public string cadastrarFuncionario(string nome, DateTime date, string telefone, string email, string sexo, string cpf, string cargo, string cnpj )
         {
+            int empresaId = 0;
             tem = false;
-            cmd.CommandText = "select cnpj from Empresa where cnpj = @c";
-            cmd.Parameters.AddWithValue("@c", cnpj);
-            cmd.Connection = con.conectar();
-            dr = cmd.ExecuteReader();
-            if (dr.HasRows)
-            {        
-                    dr.Close();
-                    cmd.CommandText = "insert into Funcionario values (@nome,@telefone,@email,@sexo,@cpf,@cargo,@cnpj,@data)";
-                    cmd.Parameters.AddWithValue("@nome", nome);
-                    cmd.Parameters.AddWithValue("@telefone", telefone);
-                    cmd.Parameters.AddWithValue("@email", email);
-                    cmd.Parameters.AddWithValue("@sexo", sexo);
-                    cmd.Parameters.AddWithValue("@cpf", cpf);
-                    cmd.Parameters.AddWithValue("@cargo", cargo);
-                    cmd.Parameters.AddWithValue("@cnpj", cnpj);
-                    cmd.Parameters.AddWithValue("@data", SqlDbType.Date).Value = date;
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                    con.desconectar();
-                    tem = true;
-                }
-                catch (SqlException ex)
-                {
-                    this.msg = "erro com o banco" + ex;
-                }
-
-            }
-            else
+            try
             {
-                this.msg = "CNPJ INEXISTENTE, TENTE NOVAMENTE";
+                SqlCommand cpfcommand = new SqlCommand("select count(*) from funcionario where cpf = @cpff");
+                cpfcommand.Parameters.AddWithValue("@cpff", cpf);
+                cpfcommand.Connection = con.conectar();
+                int count = Convert.ToInt32(cpfcommand.ExecuteScalar());
+                con.desconectar();
+                if (count == 0)
+                {
+                    cmd.CommandText = "select idempresa from Empresa where cnpj = @cnpj";
+                    cmd.Parameters.AddWithValue("@cnpj", cnpj);
+                    cmd.Connection = con.conectar();
+                    dr = cmd.ExecuteReader();
+                    if (dr.HasRows)
+                    {
+                        if (dr.Read())
+                        {
+                            empresaId = Convert.ToInt32(dr["idempresa"]);
+                        }
+
+                        dr.Close();
+
+                        cmd.Parameters.Clear();
+                        cmd.CommandText = "insert into Funcionario values (@nomeemp,@telefone,@email,@sexo,@cpf,@cargo,@cnpj,@data,@idempresa)";
+                        cmd.Parameters.AddWithValue("@nomeemp", nome);
+                        cmd.Parameters.AddWithValue("@telefone", telefone);
+                        cmd.Parameters.AddWithValue("@email", email);
+                        cmd.Parameters.AddWithValue("@sexo", sexo);
+                        cmd.Parameters.AddWithValue("@cpf", cpf);
+                        cmd.Parameters.AddWithValue("@cargo", cargo);
+                        cmd.Parameters.AddWithValue("@cnpj", cnpj);
+                        cmd.Parameters.AddWithValue("@data", SqlDbType.Date).Value = date;
+                        cmd.Parameters.AddWithValue("@idempresa", empresaId);
+
+                        try
+                        {
+                            cmd.ExecuteNonQuery();
+                            con.desconectar();
+                            tem = true;
+                        }
+                        catch (SqlException ex)
+                        {
+                            this.msg = "erro com o banco" + ex;
+                        }
+
+                    }
+                    else
+                    {
+                        this.msg = "Empresa inexistente";
+                    }
+                }
+                else
+                {
+                    this.msg = "funcionario já existe";
+                }
+            }
+            catch (SqlException sqlEx) 
+            {
+                this.msg = "erro com banco" + sqlEx;
             }
             return msg;
         }
-        public string cadastrarEmp(string nome, string cnpj)
+        public string cadastrarEmp(string nome, string cnpj, string rua, string numero, string bairro, string cidade, string uf, string pais, string cep)
         {
             tem = false;
-            cmd.CommandText = "insert into Empresa values (@nome,@cnpj)";
+            cmd.CommandText = "insert into Empresa values (@nome,@cnpj,@rua,@numero,@bairro,@cidade,@uf,@pais,@cep)";
             cmd.Parameters.AddWithValue("@nome", nome);
             cmd.Parameters.AddWithValue("@cnpj", cnpj);
+            cmd.Parameters.AddWithValue("@rua", rua);
+            cmd.Parameters.AddWithValue("@numero", numero);
+            cmd.Parameters.AddWithValue("@bairro", bairro);
+            cmd.Parameters.AddWithValue("@cidade", cidade);
+            cmd.Parameters.AddWithValue("@uf", uf);
+            cmd.Parameters.AddWithValue("@pais",pais);
+            cmd.Parameters.AddWithValue("@cep", cep);
             try
             {
                 cmd.Connection = con.conectar();
