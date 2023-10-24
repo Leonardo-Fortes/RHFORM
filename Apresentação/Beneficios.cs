@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace ProjetoRhForm.Apresentação
 {
-    public partial class ConsultarEmpresa : Form
+    public partial class Beneficios : Form
     {
-        public ConsultarEmpresa()
+        public Beneficios()
         {
             InitializeComponent();
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

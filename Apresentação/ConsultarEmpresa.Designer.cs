@@ -28,12 +28,55 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "ConsultarEmpresa";
+            button1 = new Button();
+            panel1 = new Panel();
+            lbConsul = new Label();
+            SuspendLayout();
+            // 
+            // button1
+            // 
+            button1.Location = new Point(642, 301);
+            button1.Name = "button1";
+            button1.Size = new Size(59, 25);
+            button1.TabIndex = 0;
+            button1.Text = "button1";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            panel1.Location = new Point(31, 145);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(539, 271);
+            panel1.TabIndex = 1;
+            // 
+            // lbConsul
+            // 
+            lbConsul.AutoSize = true;
+            lbConsul.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lbConsul.Location = new Point(31, 48);
+            lbConsul.Name = "lbConsul";
+            lbConsul.Size = new Size(321, 50);
+            lbConsul.TabIndex = 2;
+            lbConsul.Text = "Inserir o Nome ou CNPJ da empresa\r\n\r\n";
+            // 
+            // ConsultarEmpresa
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(lbConsul);
+            Controls.Add(panel1);
+            Controls.Add(button1);
+            Name = "ConsultarEmpresa";
+            Text = "ConsultarEmpresa";
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private Button button1;
+        private Panel panel1;
+        private Label lbConsul;
     }
 }
