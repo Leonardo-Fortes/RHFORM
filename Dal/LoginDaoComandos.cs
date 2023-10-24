@@ -33,6 +33,7 @@ namespace ProjetoRhForm.Dal
                 {
                     tem = true;
                 }
+                
                 con.desconectar();
                 dr.Close();
             }
@@ -49,7 +50,7 @@ namespace ProjetoRhForm.Dal
                             cmd.CommandText = "insert into Usuario (nome,senha) values (@l,@s)";
                             cmd.Parameters.AddWithValue("@l", login);
                             cmd.Parameters.AddWithValue("@s", senha);
-                            
+                
                         try
                         {
                             cmd.Connection = con.conectar();
@@ -60,9 +61,7 @@ namespace ProjetoRhForm.Dal
                         catch (SqlException ex)
                         {
                             this.msg = "ERRO AO INSERIR DADOS" +ex;
-                        }
-                    
-                   
+                        }         
             }
             else
             {

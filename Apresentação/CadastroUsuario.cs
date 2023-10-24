@@ -23,33 +23,40 @@ namespace ProjetoRhForm.Apresentação
 
         private void brnCadUsu_Click(object sender, EventArgs e)
         {
+            string Cadusu = txbCadUsu.Text;
+            string CadSenha = txbCadSenha.Text;
+            string ConfSenha = txbConfirmarSenha.Text;
 
-            Controle controle = new Controle();
-
-
-
-            controle.cadastrar(txbCadUsu.Text, txbCadSenha.Text, txbConfirmarSenha.Text);
-
-            if (controle.msg.Equals(""))
+            if (string.IsNullOrEmpty(Cadusu) || string.IsNullOrEmpty(CadSenha) || string.IsNullOrEmpty(ConfSenha))
             {
-
-                if (controle.tem)
-                {
-                    MessageBox.Show("Cadastrado com sucesso", "Cadastrado!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                   
-                   
-                    this.Close();
-                }
-
-                else
-                {
-                    MessageBox.Show("tente novamente!", "ERRO!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
+                MessageBox.Show("Nenhum campo pode estar vazio!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                MessageBox.Show(controle.msg);
+                Controle controle = new Controle();
+                controle.cadastrar(txbCadUsu.Text, txbCadSenha.Text, txbConfirmarSenha.Text);
+
+                if (controle.msg.Equals(""))
+                {
+
+                    if (controle.tem)
+                    {
+                        MessageBox.Show("Cadastrado com sucesso", "Cadastrado!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+                        this.Close();
+                    }
+
+                    else
+                    {
+                        MessageBox.Show("tente novamente!", "ERRO!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show(controle.msg);
+                }
             }
 
 

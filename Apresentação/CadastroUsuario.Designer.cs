@@ -40,7 +40,7 @@
             // brnCadUsu
             // 
             brnCadUsu.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
-            brnCadUsu.Location = new Point(562, 348);
+            brnCadUsu.Location = new Point(359, 215);
             brnCadUsu.Name = "brnCadUsu";
             brnCadUsu.Size = new Size(214, 49);
             brnCadUsu.TabIndex = 0;
@@ -52,7 +52,7 @@
             // 
             lbCadUsu.AutoSize = true;
             lbCadUsu.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lbCadUsu.Location = new Point(227, 97);
+            lbCadUsu.Location = new Point(24, 24);
             lbCadUsu.Name = "lbCadUsu";
             lbCadUsu.Size = new Size(88, 40);
             lbCadUsu.TabIndex = 1;
@@ -61,7 +61,7 @@
             // txbCadUsu
             // 
             txbCadUsu.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txbCadUsu.Location = new Point(337, 109);
+            txbCadUsu.Location = new Point(134, 36);
             txbCadUsu.Name = "txbCadUsu";
             txbCadUsu.Size = new Size(439, 29);
             txbCadUsu.TabIndex = 4;
@@ -69,7 +69,7 @@
             // txbCadSenha
             // 
             txbCadSenha.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txbCadSenha.Location = new Point(337, 167);
+            txbCadSenha.Location = new Point(134, 94);
             txbCadSenha.Name = "txbCadSenha";
             txbCadSenha.PasswordChar = '*';
             txbCadSenha.Size = new Size(439, 29);
@@ -78,7 +78,7 @@
             // txbConfirmarSenha
             // 
             txbConfirmarSenha.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txbConfirmarSenha.Location = new Point(462, 232);
+            txbConfirmarSenha.Location = new Point(259, 159);
             txbConfirmarSenha.Name = "txbConfirmarSenha";
             txbConfirmarSenha.PasswordChar = '*';
             txbConfirmarSenha.Size = new Size(314, 29);
@@ -88,7 +88,7 @@
             // 
             lbCadSenha.AutoSize = true;
             lbCadSenha.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lbCadSenha.Location = new Point(227, 155);
+            lbCadSenha.Location = new Point(24, 82);
             lbCadSenha.Name = "lbCadSenha";
             lbCadSenha.Size = new Size(94, 40);
             lbCadSenha.TabIndex = 7;
@@ -98,7 +98,7 @@
             // 
             lbConfirmarSenha.AutoSize = true;
             lbConfirmarSenha.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lbConfirmarSenha.Location = new Point(227, 221);
+            lbConfirmarSenha.Location = new Point(24, 148);
             lbConfirmarSenha.Name = "lbConfirmarSenha";
             lbConfirmarSenha.Size = new Size(229, 40);
             lbConfirmarSenha.TabIndex = 8;
@@ -108,7 +108,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(591, 286);
             Controls.Add(lbConfirmarSenha);
             Controls.Add(lbCadSenha);
             Controls.Add(txbConfirmarSenha);
@@ -116,6 +116,8 @@
             Controls.Add(txbCadUsu);
             Controls.Add(lbCadUsu);
             Controls.Add(brnCadUsu);
+            MaximumSize = new Size(607, 325);
+            MinimumSize = new Size(607, 325);
             Name = "CadastroUsuario";
             Text = "CadastroUsuario";
             ResumeLayout(false);

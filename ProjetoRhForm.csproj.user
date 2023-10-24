@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Compile Update="Apresentação\Cadastro.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Apresentação\CadastroEmpresa.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -11,6 +8,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Apresentação\CadastroUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Apresentação\ConsultarEmpresa.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Apresentação\inicio.cs">

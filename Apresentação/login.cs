@@ -26,27 +26,45 @@ namespace ProjetoRhForm.Apresentação
 
         private void btnEntrar_Click(object sender, EventArgs e)
         {
-            Controle controle = new Controle();
-            controle.acessar(txbLogin.Text, txbSenha.Text);
-            if (controle.msg.Equals(""))
+            string Login = txbLogin.Text;
+            string Senha = txbSenha.Text;
+
+            if (string.IsNullOrEmpty(Login) || string.IsNullOrEmpty(Senha))
             {
-                if (controle.tem)
+                MessageBox.Show("Nenhum campo pode estar vazio!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+
+
+                Controle controle = new Controle();
+                controle.acessar(txbLogin.Text, txbSenha.Text);
+                if (controle.msg.Equals(""))
                 {
-                    MessageBox.Show("Logado com sucesso", "Logado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    inicio inicio = new inicio();
-                    inicio.Show();
-                    this.Hide();
+                    if (controle.tem)
+                    {
+                        MessageBox.Show("Logado com sucesso", "Logado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        inicio inicio = new inicio();
+                        inicio.Show();
+                        this.Hide();
 
+                    }
+
+                    else
+                    {
+                        MessageBox.Show("Login ou senha incorretos, Verifique!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-
                 else
                 {
-                    MessageBox.Show("Login ou senha incorretos, Verifique!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(controle.msg);
                 }
-            } else
-            {
-                MessageBox.Show(controle.msg);
             }
+
+        }
+
+        private void login_Load(object sender, EventArgs e)
+        {
 
         }
     }

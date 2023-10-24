@@ -22,39 +22,54 @@ namespace ProjetoRhForm.Apresentação
         {
             Controle controle = new Controle();
             string dataDigitada = txbDataFunc.Text;
-            if (DateTime.TryParseExact(dataDigitada, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dataInserida))
+            string nomeFunc = txbNomeFunc.Text;
+            string telefoneFunc = txbTelefoneFunc.Text;
+            string emailFunc = txbEmailFunc.Text;
+            string sexoFunc = txbSexoFunc.Text;
+            string cpfFunc = txbCPFFunc.Text;
+            string cargo = txbCargo.Text;
+            string cnpj = txbCNPJ.Text;
+            if (string.IsNullOrEmpty(nomeFunc) || string.IsNullOrEmpty(telefoneFunc) || string.IsNullOrEmpty(emailFunc) || string.IsNullOrEmpty(sexoFunc) || string.IsNullOrEmpty(cpfFunc) || string.IsNullOrEmpty(cargo) || string.IsNullOrEmpty(cnpj) || string.IsNullOrEmpty(dataDigitada))
             {
-                // Verifique se a data inserida está acima ou igual à data mínima suportada pelo SQL Server (01/01/1753)
-                if (dataInserida < new DateTime(1753, 1, 1))
-                {
-                    MessageBox.Show("A data inserida está abaixo do limite .", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    controle.cadastrarFunc(txbNomeFunc.Text, dataInserida, txbTelefoneFunc.Text, txbEmailFunc.Text, txbSexoFunc.Text, txbCPFFunc.Text, txbCargo.Text, txbCNPJ.Text);
-                    if (controle.msg.Equals(""))
-                    {
-                        if (controle.tem)
-                        {
-                            MessageBox.Show("Cadastrado com Sucesso", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            Cadastro bv = new Cadastro();
-                            bv.Show();
-                            this.Close();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Ocorreu algo de errado, tente novamente", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show(controle.msg);
-                    }
-                }
+                MessageBox.Show("Nenhum campo pode estar vazio!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else
             {
-                MessageBox.Show("A data inserida não está no formato correto");
+
+
+
+                if (DateTime.TryParseExact(dataDigitada, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dataInserida))
+                {
+                    // Verifique se a data inserida está acima ou igual à data mínima suportada pelo SQL Server (01/01/1753)
+                    if (dataInserida < new DateTime(1753, 1, 1))
+                    {
+                        MessageBox.Show("A data inserida está abaixo do limite .", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        controle.cadastrarFunc(txbNomeFunc.Text, dataInserida, txbTelefoneFunc.Text, txbEmailFunc.Text, txbSexoFunc.Text, txbCPFFunc.Text, txbCargo.Text, txbCNPJ.Text);
+                        if (controle.msg.Equals(""))
+                        {
+                            if (controle.tem)
+                            {
+                                MessageBox.Show("Cadastrado com Sucesso", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                this.Close();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Ocorreu algo de errado, tente novamente", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show(controle.msg);
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("A data inserida não está no formato correto");
+                }
             }
         }
 

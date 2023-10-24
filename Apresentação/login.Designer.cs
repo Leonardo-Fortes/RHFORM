@@ -108,6 +108,7 @@
             Controls.Add(btnSair);
             Name = "login";
             Text = "login";
+            Load += login_Load;
             ResumeLayout(false);
             PerformLayout();
         }

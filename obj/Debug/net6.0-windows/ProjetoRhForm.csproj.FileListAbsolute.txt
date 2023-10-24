@@ -24,6 +24,6 @@ C:\Users\Leonardo\source\repos\ProjetoRhForm\ProjetoRhForm\obj\Debug\net6.0-wind
 C:\Users\Leonardo\source\repos\ProjetoRhForm\ProjetoRhForm\obj\Debug\net6.0-windows\ProjetoRhForm.Apresentação.login.resources
 C:\Users\Leonardo\source\repos\ProjetoRhForm\ProjetoRhForm\obj\Debug\net6.0-windows\ProjetoRhForm.Apresentação.CadastroUsuario.resources
 C:\Users\Leonardo\source\repos\ProjetoRhForm\ProjetoRhForm\obj\Debug\net6.0-windows\ProjetoRhForm.Apresentação.CadastroFuncionario.resources
-C:\Users\Leonardo\source\repos\ProjetoRhForm\ProjetoRhForm\obj\Debug\net6.0-windows\ProjetoRhForm.Apresentação.Cadastro.resources
 C:\Users\Leonardo\source\repos\ProjetoRhForm\ProjetoRhForm\obj\Debug\net6.0-windows\ProjetoRhForm.Apresentação.CadastroEmpresa.resources
 C:\Users\Leonardo\source\repos\ProjetoRhForm\ProjetoRhForm\obj\Debug\net6.0-windows\ProjetoRhForm.Apresentação.inicio.resources
+C:\Users\Leonardo\source\repos\ProjetoRhForm\ProjetoRhForm\obj\Debug\net6.0-windows\ProjetoRhForm.Properties.Resources.resources
