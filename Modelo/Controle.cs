@@ -32,11 +32,11 @@ namespace ProjetoRhForm.Modelo
             }
             return msg;
         }
-        public string cadastrarFunc(string nome, DateTime date, string telefone, string email, string sexo, string cpf, string cargo, string cnpj)
+        public string cadastrarFunc(string nome, DateTime date, string telefone, string email, string sexo, string cpf, string cargo, string cnpj, DateTime dataadmissao)
         {
             
             LoginDaoComandos loginDao = new LoginDaoComandos ();
-            this.msg = loginDao.cadastrarFuncionario(nome, date, telefone, email, sexo, cpf, cargo, cnpj );
+            this.msg = loginDao.cadastrarFuncionario(nome, date, telefone, email, sexo, cpf, cargo, cnpj, dataadmissao );
            
             if (loginDao.tem)
             {

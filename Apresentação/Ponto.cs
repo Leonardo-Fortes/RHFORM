@@ -10,20 +10,16 @@ using System.Windows.Forms;
 
 namespace ProjetoRhForm.Apresentação
 {
-    public partial class Beneficios : Form
+    public partial class Ponto : Form
     {
-        public Beneficios()
+        public Ponto()
         {
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void Ponto_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
         }
     }
 }

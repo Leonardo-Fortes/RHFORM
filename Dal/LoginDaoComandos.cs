@@ -69,13 +69,13 @@ namespace ProjetoRhForm.Dal
             }
             return msg;
         }
-        public string cadastrarFuncionario(string nome, DateTime date, string telefone, string email, string sexo, string cpf, string cargo, string cnpj )
+        public string cadastrarFuncionario(string nome, DateTime date, string telefone, string email, string sexo, string cpf, string cargo, string cnpj, DateTime dateadmissao )
         {
             int empresaId = 0;
             tem = false;
             try
             {
-                SqlCommand cpfcommand = new SqlCommand("select count(*) from funcionario where cpf = @cpff");
+                SqlCommand cpfcommand = new SqlCommand("select count(*) from funcionario where cpf = @cpff");//verificar se ja existe cpf
                 cpfcommand.Parameters.AddWithValue("@cpff", cpf);
                 cpfcommand.Connection = con.conectar();
                 int count = Convert.ToInt32(cpfcommand.ExecuteScalar());
@@ -96,7 +96,7 @@ namespace ProjetoRhForm.Dal
                         dr.Close();
 
                         cmd.Parameters.Clear();
-                        cmd.CommandText = "insert into Funcionario values (@nomeemp,@telefone,@email,@sexo,@cpf,@cargo,@cnpj,@data,@idempresa)";
+                        cmd.CommandText = "insert into Funcionario values (@nomeemp,@telefone,@email,@sexo,@cpf,@cargo,@cnpj,@data,@idempresa,@dataadmissao)";
                         cmd.Parameters.AddWithValue("@nomeemp", nome);
                         cmd.Parameters.AddWithValue("@telefone", telefone);
                         cmd.Parameters.AddWithValue("@email", email);
@@ -106,6 +106,7 @@ namespace ProjetoRhForm.Dal
                         cmd.Parameters.AddWithValue("@cnpj", cnpj);
                         cmd.Parameters.AddWithValue("@data", SqlDbType.Date).Value = date;
                         cmd.Parameters.AddWithValue("@idempresa", empresaId);
+                        cmd.Parameters.AddWithValue("@dataadmissao", SqlDbType.Date).Value = dateadmissao;
 
                         try
                         {

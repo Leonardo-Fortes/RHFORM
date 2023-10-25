@@ -29,6 +29,7 @@ namespace ProjetoRhForm.Apresentação
             string cpfFunc = txbCPFFunc.Text;
             string cargo = txbCargo.Text;
             string cnpj = txbCNPJ.Text;
+            string dataAdmissao = txbAdmissao.Text;
             if (string.IsNullOrEmpty(nomeFunc) || string.IsNullOrEmpty(telefoneFunc) || string.IsNullOrEmpty(emailFunc) || string.IsNullOrEmpty(sexoFunc) || string.IsNullOrEmpty(cpfFunc) || string.IsNullOrEmpty(cargo) || string.IsNullOrEmpty(cnpj) || string.IsNullOrEmpty(dataDigitada))
             {
                 MessageBox.Show("Nenhum campo pode estar vazio!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -36,18 +37,21 @@ namespace ProjetoRhForm.Apresentação
             else
             {
 
-
-
-                if (DateTime.TryParseExact(dataDigitada, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dataInserida))
+                if (DateTime.TryParseExact(dataDigitada, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dataInserida) && DateTime.TryParseExact(dataAdmissao,"dd-MM-yyyy",null,System.Globalization.DateTimeStyles.None, out DateTime dataadmissao)
+                   )
                 {
                     // Verifique se a data inserida está acima ou igual à data mínima suportada pelo SQL Server (01/01/1753)
-                    if (dataInserida < new DateTime(1753, 1, 1))
+                    if (dataInserida < new DateTime (1753, 1, 1) || dataadmissao < new DateTime(1753,1,1)) 
+                    {                      
+                            MessageBox.Show("A data inserida está abaixo do limite .", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);         
+                    }
+                    if (dataadmissao > DateTime.Now || dataInserida > DateTime.Now)
                     {
-                        MessageBox.Show("A data inserida está abaixo do limite .", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("A data inserida está acima do limite .", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     else
                     {
-                        controle.cadastrarFunc(txbNomeFunc.Text, dataInserida, txbTelefoneFunc.Text, txbEmailFunc.Text, txbSexoFunc.Text, txbCPFFunc.Text, txbCargo.Text, txbCNPJ.Text);
+                        controle.cadastrarFunc(txbNomeFunc.Text, dataInserida, txbTelefoneFunc.Text, txbEmailFunc.Text, txbSexoFunc.Text, txbCPFFunc.Text, txbCargo.Text, txbCNPJ.Text, dataadmissao);
                         if (controle.msg.Equals(""))
                         {
                             if (controle.tem)

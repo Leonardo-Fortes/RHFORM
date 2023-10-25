@@ -45,6 +45,8 @@
             txbCargo = new TextBox();
             txbCNPJ = new TextBox();
             lbEmpresa = new Label();
+            lbAdmissao = new Label();
+            txbAdmissao = new TextBox();
             SuspendLayout();
             // 
             // btnCadFunc
@@ -194,11 +196,30 @@
             lbEmpresa.TabIndex = 16;
             lbEmpresa.Text = "CNPJ";
             // 
+            // lbAdmissao
+            // 
+            lbAdmissao.AutoSize = true;
+            lbAdmissao.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbAdmissao.Location = new Point(476, 159);
+            lbAdmissao.Name = "lbAdmissao";
+            lbAdmissao.Size = new Size(249, 40);
+            lbAdmissao.TabIndex = 17;
+            lbAdmissao.Text = "Data de Admissão";
+            // 
+            // txbAdmissao
+            // 
+            txbAdmissao.Location = new Point(476, 202);
+            txbAdmissao.Name = "txbAdmissao";
+            txbAdmissao.Size = new Size(277, 23);
+            txbAdmissao.TabIndex = 18;
+            // 
             // CadastroFuncionario
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(txbAdmissao);
+            Controls.Add(lbAdmissao);
             Controls.Add(lbEmpresa);
             Controls.Add(txbCNPJ);
             Controls.Add(txbCargo);
@@ -241,5 +262,7 @@
         private TextBox txbCargo;
         private TextBox txbCNPJ;
         private Label lbEmpresa;
+        private Label lbAdmissao;
+        private TextBox txbAdmissao;
     }
 }
