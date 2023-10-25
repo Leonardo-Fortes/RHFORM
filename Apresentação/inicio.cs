@@ -89,5 +89,28 @@ namespace ProjetoRhForm.Apresentação
                 }
             }
         }
+
+        private void beneficiosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void beneficiosToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            BeneficioInicio beneficio = new BeneficioInicio();
+            beneficio.Show();
+        }
+
+        private void descontosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CadastroFuncionario cadastroFuncionario = new CadastroFuncionario();
+            cadastroFuncionario.Show();
+        }
+
+        private void adicionarToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            CadastroEmpresa cadastroEmpresa = new CadastroEmpresa();
+            cadastroEmpresa.Show();
+        }
     }
 }

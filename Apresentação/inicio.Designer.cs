@@ -30,23 +30,24 @@
         {
             components = new System.ComponentModel.Container();
             contextMenuStrip1 = new ContextMenuStrip(components);
-            cadasToolStripMenuItem = new ToolStripMenuItem();
-            cadastrarEmpresaToolStripMenuItem = new ToolStripMenuItem();
-            alterarToolStripMenuItem = new ToolStripMenuItem();
-            alterarToolStripMenuItem1 = new ToolStripMenuItem();
-            adicionarToolStripMenuItem = new ToolStripMenuItem();
-            deletarToolStripMenuItem = new ToolStripMenuItem();
-            cadastrarFuncionarioToolStripMenuItem = new ToolStripMenuItem();
-            consultarToolStripMenuItem = new ToolStripMenuItem();
-            alterarToolStripMenuItem2 = new ToolStripMenuItem();
-            adicionarToolStripMenuItem1 = new ToolStripMenuItem();
-            removerToolStripMenuItem = new ToolStripMenuItem();
-            cadastrarUsuárioToolStripMenuItem = new ToolStripMenuItem();
-            consultarToolStripMenuItem1 = new ToolStripMenuItem();
-            adiToolStripMenuItem = new ToolStripMenuItem();
-            adicionarToolStripMenuItem2 = new ToolStripMenuItem();
-            removerToolStripMenuItem1 = new ToolStripMenuItem();
             menuStrip1 = new MenuStrip();
+            ínicioToolStripMenuItem = new ToolStripMenuItem();
+            trocarUsuárioToolStripMenuItem = new ToolStripMenuItem();
+            saírToolStripMenuItem = new ToolStripMenuItem();
+            funcionárioToolStripMenuItem = new ToolStripMenuItem();
+            beneficiosToolStripMenuItem = new ToolStripMenuItem();
+            descontosToolStripMenuItem = new ToolStripMenuItem();
+            alterarToolStripMenuItem = new ToolStripMenuItem();
+            removerToolStripMenuItem = new ToolStripMenuItem();
+            empresaToolStripMenuItem = new ToolStripMenuItem();
+            consultarToolStripMenuItem = new ToolStripMenuItem();
+            adicionarToolStripMenuItem = new ToolStripMenuItem();
+            alterarToolStripMenuItem1 = new ToolStripMenuItem();
+            removerToolStripMenuItem1 = new ToolStripMenuItem();
+            folhaToolStripMenuItem = new ToolStripMenuItem();
+            beneficiosToolStripMenuItem1 = new ToolStripMenuItem();
+            descontosToolStripMenuItem1 = new ToolStripMenuItem();
+            gerarFolhaToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -55,125 +56,126 @@
             contextMenuStrip1.Name = "contextMenuStrip1";
             contextMenuStrip1.Size = new Size(61, 4);
             // 
-            // cadasToolStripMenuItem
+            // menuStrip1
             // 
-            cadasToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { cadastrarEmpresaToolStripMenuItem, cadastrarFuncionarioToolStripMenuItem, cadastrarUsuárioToolStripMenuItem });
-            cadasToolStripMenuItem.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            cadasToolStripMenuItem.Name = "cadasToolStripMenuItem";
-            cadasToolStripMenuItem.Size = new Size(62, 25);
-            cadasToolStripMenuItem.Text = "Exibir";
-            cadasToolStripMenuItem.Click += cadasToolStripMenuItem_Click;
+            menuStrip1.BackColor = SystemColors.ButtonShadow;
+            menuStrip1.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            menuStrip1.Items.AddRange(new ToolStripItem[] { ínicioToolStripMenuItem, funcionárioToolStripMenuItem, empresaToolStripMenuItem, folhaToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(800, 33);
+            menuStrip1.TabIndex = 2;
+            menuStrip1.Text = "menuStrip1";
             // 
-            // cadastrarEmpresaToolStripMenuItem
+            // ínicioToolStripMenuItem
             // 
-            cadastrarEmpresaToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { alterarToolStripMenuItem, alterarToolStripMenuItem1, adicionarToolStripMenuItem, deletarToolStripMenuItem });
-            cadastrarEmpresaToolStripMenuItem.Name = "cadastrarEmpresaToolStripMenuItem";
-            cadastrarEmpresaToolStripMenuItem.Size = new Size(165, 26);
-            cadastrarEmpresaToolStripMenuItem.Text = "Empresa";
-            cadastrarEmpresaToolStripMenuItem.Click += cadastrarEmpresaToolStripMenuItem_Click;
+            ínicioToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { trocarUsuárioToolStripMenuItem, saírToolStripMenuItem });
+            ínicioToolStripMenuItem.Name = "ínicioToolStripMenuItem";
+            ínicioToolStripMenuItem.Size = new Size(70, 29);
+            ínicioToolStripMenuItem.Text = "ínicio";
+            // 
+            // trocarUsuárioToolStripMenuItem
+            // 
+            trocarUsuárioToolStripMenuItem.Name = "trocarUsuárioToolStripMenuItem";
+            trocarUsuárioToolStripMenuItem.Size = new Size(204, 30);
+            trocarUsuárioToolStripMenuItem.Text = "Trocar usuário";
+            // 
+            // saírToolStripMenuItem
+            // 
+            saírToolStripMenuItem.Name = "saírToolStripMenuItem";
+            saírToolStripMenuItem.Size = new Size(204, 30);
+            saírToolStripMenuItem.Text = "Saír";
+            // 
+            // funcionárioToolStripMenuItem
+            // 
+            funcionárioToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { beneficiosToolStripMenuItem, descontosToolStripMenuItem, alterarToolStripMenuItem, removerToolStripMenuItem });
+            funcionárioToolStripMenuItem.Name = "funcionárioToolStripMenuItem";
+            funcionárioToolStripMenuItem.Size = new Size(125, 29);
+            funcionárioToolStripMenuItem.Text = "Funcionário";
+            // 
+            // beneficiosToolStripMenuItem
+            // 
+            beneficiosToolStripMenuItem.Name = "beneficiosToolStripMenuItem";
+            beneficiosToolStripMenuItem.Size = new Size(180, 30);
+            beneficiosToolStripMenuItem.Text = "Consultar";
+            beneficiosToolStripMenuItem.Click += beneficiosToolStripMenuItem_Click;
+            // 
+            // descontosToolStripMenuItem
+            // 
+            descontosToolStripMenuItem.Name = "descontosToolStripMenuItem";
+            descontosToolStripMenuItem.Size = new Size(180, 30);
+            descontosToolStripMenuItem.Text = "Adicionar";
+            descontosToolStripMenuItem.Click += descontosToolStripMenuItem_Click;
             // 
             // alterarToolStripMenuItem
             // 
             alterarToolStripMenuItem.Name = "alterarToolStripMenuItem";
-            alterarToolStripMenuItem.Size = new Size(150, 26);
-            alterarToolStripMenuItem.Text = "Consultar";
-            alterarToolStripMenuItem.Click += alterarToolStripMenuItem_Click;
-            // 
-            // alterarToolStripMenuItem1
-            // 
-            alterarToolStripMenuItem1.Name = "alterarToolStripMenuItem1";
-            alterarToolStripMenuItem1.Size = new Size(150, 26);
-            alterarToolStripMenuItem1.Text = "Alterar";
-            // 
-            // adicionarToolStripMenuItem
-            // 
-            adicionarToolStripMenuItem.Name = "adicionarToolStripMenuItem";
-            adicionarToolStripMenuItem.Size = new Size(150, 26);
-            adicionarToolStripMenuItem.Text = "Adicionar";
-            adicionarToolStripMenuItem.Click += adicionarToolStripMenuItem_Click;
-            // 
-            // deletarToolStripMenuItem
-            // 
-            deletarToolStripMenuItem.Name = "deletarToolStripMenuItem";
-            deletarToolStripMenuItem.Size = new Size(150, 26);
-            deletarToolStripMenuItem.Text = "Remover";
-            // 
-            // cadastrarFuncionarioToolStripMenuItem
-            // 
-            cadastrarFuncionarioToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { consultarToolStripMenuItem, alterarToolStripMenuItem2, adicionarToolStripMenuItem1, removerToolStripMenuItem });
-            cadastrarFuncionarioToolStripMenuItem.Name = "cadastrarFuncionarioToolStripMenuItem";
-            cadastrarFuncionarioToolStripMenuItem.Size = new Size(165, 26);
-            cadastrarFuncionarioToolStripMenuItem.Text = "Funcionário";
-            cadastrarFuncionarioToolStripMenuItem.Click += cadastrarFuncionarioToolStripMenuItem_Click;
-            // 
-            // consultarToolStripMenuItem
-            // 
-            consultarToolStripMenuItem.Name = "consultarToolStripMenuItem";
-            consultarToolStripMenuItem.Size = new Size(150, 26);
-            consultarToolStripMenuItem.Text = "Consultar";
-            // 
-            // alterarToolStripMenuItem2
-            // 
-            alterarToolStripMenuItem2.Name = "alterarToolStripMenuItem2";
-            alterarToolStripMenuItem2.Size = new Size(150, 26);
-            alterarToolStripMenuItem2.Text = "Alterar";
-            // 
-            // adicionarToolStripMenuItem1
-            // 
-            adicionarToolStripMenuItem1.Name = "adicionarToolStripMenuItem1";
-            adicionarToolStripMenuItem1.Size = new Size(150, 26);
-            adicionarToolStripMenuItem1.Text = "Adicionar";
-            adicionarToolStripMenuItem1.Click += adicionarToolStripMenuItem1_Click;
+            alterarToolStripMenuItem.Size = new Size(180, 30);
+            alterarToolStripMenuItem.Text = "Alterar";
             // 
             // removerToolStripMenuItem
             // 
             removerToolStripMenuItem.Name = "removerToolStripMenuItem";
-            removerToolStripMenuItem.Size = new Size(150, 26);
+            removerToolStripMenuItem.Size = new Size(180, 30);
             removerToolStripMenuItem.Text = "Remover";
             // 
-            // cadastrarUsuárioToolStripMenuItem
+            // empresaToolStripMenuItem
             // 
-            cadastrarUsuárioToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { consultarToolStripMenuItem1, adiToolStripMenuItem, adicionarToolStripMenuItem2, removerToolStripMenuItem1 });
-            cadastrarUsuárioToolStripMenuItem.Name = "cadastrarUsuárioToolStripMenuItem";
-            cadastrarUsuárioToolStripMenuItem.Size = new Size(165, 26);
-            cadastrarUsuárioToolStripMenuItem.Text = "Usuário";
-            cadastrarUsuárioToolStripMenuItem.Click += cadastrarUsuárioToolStripMenuItem_Click;
+            empresaToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { consultarToolStripMenuItem, adicionarToolStripMenuItem, alterarToolStripMenuItem1, removerToolStripMenuItem1 });
+            empresaToolStripMenuItem.Name = "empresaToolStripMenuItem";
+            empresaToolStripMenuItem.Size = new Size(97, 29);
+            empresaToolStripMenuItem.Text = "Empresa";
             // 
-            // consultarToolStripMenuItem1
+            // consultarToolStripMenuItem
             // 
-            consultarToolStripMenuItem1.Name = "consultarToolStripMenuItem1";
-            consultarToolStripMenuItem1.Size = new Size(150, 26);
-            consultarToolStripMenuItem1.Text = "Consultar";
+            consultarToolStripMenuItem.Name = "consultarToolStripMenuItem";
+            consultarToolStripMenuItem.Size = new Size(180, 30);
+            consultarToolStripMenuItem.Text = "Consultar";
             // 
-            // adiToolStripMenuItem
+            // adicionarToolStripMenuItem
             // 
-            adiToolStripMenuItem.Name = "adiToolStripMenuItem";
-            adiToolStripMenuItem.Size = new Size(150, 26);
-            adiToolStripMenuItem.Text = "Alterar";
+            adicionarToolStripMenuItem.Name = "adicionarToolStripMenuItem";
+            adicionarToolStripMenuItem.Size = new Size(180, 30);
+            adicionarToolStripMenuItem.Text = "Adicionar";
+            adicionarToolStripMenuItem.Click += adicionarToolStripMenuItem_Click_1;
             // 
-            // adicionarToolStripMenuItem2
+            // alterarToolStripMenuItem1
             // 
-            adicionarToolStripMenuItem2.Name = "adicionarToolStripMenuItem2";
-            adicionarToolStripMenuItem2.Size = new Size(150, 26);
-            adicionarToolStripMenuItem2.Text = "Adicionar";
-            adicionarToolStripMenuItem2.Click += adicionarToolStripMenuItem2_Click;
+            alterarToolStripMenuItem1.Name = "alterarToolStripMenuItem1";
+            alterarToolStripMenuItem1.Size = new Size(180, 30);
+            alterarToolStripMenuItem1.Text = "Alterar";
             // 
             // removerToolStripMenuItem1
             // 
             removerToolStripMenuItem1.Name = "removerToolStripMenuItem1";
-            removerToolStripMenuItem1.Size = new Size(150, 26);
+            removerToolStripMenuItem1.Size = new Size(180, 30);
             removerToolStripMenuItem1.Text = "Remover";
             // 
-            // menuStrip1
+            // folhaToolStripMenuItem
             // 
-            menuStrip1.BackColor = SystemColors.ButtonShadow;
-            menuStrip1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { cadasToolStripMenuItem });
-            menuStrip1.Location = new Point(0, 0);
-            menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 29);
-            menuStrip1.TabIndex = 2;
-            menuStrip1.Text = "menuStrip1";
+            folhaToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { beneficiosToolStripMenuItem1, descontosToolStripMenuItem1, gerarFolhaToolStripMenuItem });
+            folhaToolStripMenuItem.Name = "folhaToolStripMenuItem";
+            folhaToolStripMenuItem.Size = new Size(71, 29);
+            folhaToolStripMenuItem.Text = "Folha";
+            // 
+            // beneficiosToolStripMenuItem1
+            // 
+            beneficiosToolStripMenuItem1.Name = "beneficiosToolStripMenuItem1";
+            beneficiosToolStripMenuItem1.Size = new Size(183, 30);
+            beneficiosToolStripMenuItem1.Text = "Beneficios";
+            beneficiosToolStripMenuItem1.Click += beneficiosToolStripMenuItem1_Click;
+            // 
+            // descontosToolStripMenuItem1
+            // 
+            descontosToolStripMenuItem1.Name = "descontosToolStripMenuItem1";
+            descontosToolStripMenuItem1.Size = new Size(183, 30);
+            descontosToolStripMenuItem1.Text = "Descontos";
+            // 
+            // gerarFolhaToolStripMenuItem
+            // 
+            gerarFolhaToolStripMenuItem.Name = "gerarFolhaToolStripMenuItem";
+            gerarFolhaToolStripMenuItem.Size = new Size(183, 30);
+            gerarFolhaToolStripMenuItem.Text = "Gerar Folha";
             // 
             // inicio
             // 
@@ -196,22 +198,23 @@
 
         #endregion
         private ContextMenuStrip contextMenuStrip1;
-        private ToolStripMenuItem cadasToolStripMenuItem;
-        private ToolStripMenuItem cadastrarEmpresaToolStripMenuItem;
-        private ToolStripMenuItem cadastrarFuncionarioToolStripMenuItem;
-        private ToolStripMenuItem cadastrarUsuárioToolStripMenuItem;
         private MenuStrip menuStrip1;
+        private ToolStripMenuItem ínicioToolStripMenuItem;
+        private ToolStripMenuItem trocarUsuárioToolStripMenuItem;
+        private ToolStripMenuItem saírToolStripMenuItem;
+        private ToolStripMenuItem funcionárioToolStripMenuItem;
+        private ToolStripMenuItem beneficiosToolStripMenuItem;
+        private ToolStripMenuItem descontosToolStripMenuItem;
+        private ToolStripMenuItem empresaToolStripMenuItem;
+        private ToolStripMenuItem folhaToolStripMenuItem;
         private ToolStripMenuItem alterarToolStripMenuItem;
-        private ToolStripMenuItem alterarToolStripMenuItem1;
-        private ToolStripMenuItem adicionarToolStripMenuItem;
-        private ToolStripMenuItem deletarToolStripMenuItem;
-        private ToolStripMenuItem consultarToolStripMenuItem;
-        private ToolStripMenuItem alterarToolStripMenuItem2;
-        private ToolStripMenuItem adicionarToolStripMenuItem1;
         private ToolStripMenuItem removerToolStripMenuItem;
-        private ToolStripMenuItem consultarToolStripMenuItem1;
-        private ToolStripMenuItem adiToolStripMenuItem;
-        private ToolStripMenuItem adicionarToolStripMenuItem2;
+        private ToolStripMenuItem consultarToolStripMenuItem;
+        private ToolStripMenuItem adicionarToolStripMenuItem;
+        private ToolStripMenuItem alterarToolStripMenuItem1;
         private ToolStripMenuItem removerToolStripMenuItem1;
+        private ToolStripMenuItem beneficiosToolStripMenuItem1;
+        private ToolStripMenuItem descontosToolStripMenuItem1;
+        private ToolStripMenuItem gerarFolhaToolStripMenuItem;
     }
 }
