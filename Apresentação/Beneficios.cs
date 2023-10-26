@@ -15,12 +15,10 @@ namespace ProjetoRhForm.Apresentação
     public partial class Beneficios : Form
     {
         private string cpf;
-        public Beneficios()
-        {
-            InitializeComponent();
-        }
+
         public Beneficios(string cpf)
         {
+            InitializeComponent();
             this.cpf = cpf;
         }
 
@@ -36,6 +34,7 @@ namespace ProjetoRhForm.Apresentação
 
         private void btnBeneficio_Click(object sender, EventArgs e)
         {
+
             Controle controle = new Controle();
             string convenioStr = txbConvenio.Text;
             string valeTransporteStr = txbValeTransporte.Text;
@@ -50,9 +49,16 @@ namespace ProjetoRhForm.Apresentação
             double valeRefeicao;
             double ferias;
             double decimo;
-        
+
             try
             {
+
+                if (string.IsNullOrWhiteSpace(this.cpf))
+                {
+                    MessageBox.Show("Por favor, insira um CPF válido.");
+                    return;
+                }
+
                 convenio = Double.Parse(convenioStr);
                 valeTransporte = Double.Parse(valeTransporteStr);
                 alimentacao = Double.Parse(alimentacaoStr);
@@ -61,7 +67,7 @@ namespace ProjetoRhForm.Apresentação
                 decimo = Double.Parse(decimoStr);
 
                 // Agora você pode chamar o método de controle com os valores do tipo double
-                controle.cadastrarBeneficios(cpf, convenio, valeTransporte, alimentacao, valeRefeicao, ferias, decimo);
+                controle.cadastrarBeneficios(this.cpf, convenio, valeTransporte, alimentacao, valeRefeicao, ferias, decimo);
                 if (controle.msg.Equals(""))
                 {
                     if (controle.tem)
@@ -82,9 +88,6 @@ namespace ProjetoRhForm.Apresentação
             {
                 MessageBox.Show("Valores inválidos. Certifique-se de inserir números válidos.");
             }
-
-
-
         }
     }
 }

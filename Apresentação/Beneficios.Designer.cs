@@ -47,7 +47,7 @@
             // 
             lbConvenio.AutoSize = true;
             lbConvenio.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
-            lbConvenio.Location = new Point(409, 74);
+            lbConvenio.Location = new Point(77, 26);
             lbConvenio.Name = "lbConvenio";
             lbConvenio.Size = new Size(108, 30);
             lbConvenio.TabIndex = 0;
@@ -55,14 +55,14 @@
             // 
             // txbConvenio
             // 
-            txbConvenio.Location = new Point(523, 81);
+            txbConvenio.Location = new Point(209, 33);
             txbConvenio.Name = "txbConvenio";
             txbConvenio.Size = new Size(94, 23);
             txbConvenio.TabIndex = 1;
             // 
             // txbValeTransporte
             // 
-            txbValeTransporte.Location = new Point(184, 40);
+            txbValeTransporte.Location = new Point(514, 33);
             txbValeTransporte.Name = "txbValeTransporte";
             txbValeTransporte.Size = new Size(111, 23);
             txbValeTransporte.TabIndex = 3;
@@ -72,7 +72,7 @@
             // 
             lbValeTransporte.AutoSize = true;
             lbValeTransporte.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
-            lbValeTransporte.Location = new Point(12, 33);
+            lbValeTransporte.Location = new Point(342, 26);
             lbValeTransporte.Name = "lbValeTransporte";
             lbValeTransporte.Size = new Size(166, 30);
             lbValeTransporte.TabIndex = 2;
@@ -81,7 +81,7 @@
             // 
             // txbValeRefeicao
             // 
-            txbValeRefeicao.Location = new Point(184, 83);
+            txbValeRefeicao.Location = new Point(514, 77);
             txbValeRefeicao.Name = "txbValeRefeicao";
             txbValeRefeicao.Size = new Size(111, 23);
             txbValeRefeicao.TabIndex = 5;
@@ -90,7 +90,7 @@
             // 
             lbValeRefeicao.AutoSize = true;
             lbValeRefeicao.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
-            lbValeRefeicao.Location = new Point(12, 74);
+            lbValeRefeicao.Location = new Point(342, 70);
             lbValeRefeicao.Name = "lbValeRefeicao";
             lbValeRefeicao.Size = new Size(145, 30);
             lbValeRefeicao.TabIndex = 4;
@@ -98,7 +98,7 @@
             // 
             // txbAlimentacao
             // 
-            txbAlimentacao.Location = new Point(523, 40);
+            txbAlimentacao.Location = new Point(209, 79);
             txbAlimentacao.Name = "txbAlimentacao";
             txbAlimentacao.Size = new Size(94, 23);
             txbAlimentacao.TabIndex = 7;
@@ -107,7 +107,7 @@
             // 
             lbValeAlimentacao.AutoSize = true;
             lbValeAlimentacao.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
-            lbValeAlimentacao.Location = new Point(333, 33);
+            lbValeAlimentacao.Location = new Point(19, 70);
             lbValeAlimentacao.Name = "lbValeAlimentacao";
             lbValeAlimentacao.Size = new Size(184, 30);
             lbValeAlimentacao.TabIndex = 6;
@@ -115,7 +115,7 @@
             // 
             // txbFerias
             // 
-            txbFerias.Location = new Point(523, 122);
+            txbFerias.Location = new Point(209, 122);
             txbFerias.Name = "txbFerias";
             txbFerias.Size = new Size(94, 23);
             txbFerias.TabIndex = 9;
@@ -124,7 +124,7 @@
             // 
             lbferias.AutoSize = true;
             lbferias.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
-            lbferias.Location = new Point(431, 113);
+            lbferias.Location = new Point(115, 117);
             lbferias.Name = "lbferias";
             lbferias.Size = new Size(70, 30);
             lbferias.TabIndex = 8;
@@ -132,7 +132,7 @@
             // 
             // txbDecimo
             // 
-            txbDecimo.Location = new Point(184, 129);
+            txbDecimo.Location = new Point(514, 124);
             txbDecimo.Name = "txbDecimo";
             txbDecimo.Size = new Size(111, 23);
             txbDecimo.TabIndex = 11;
@@ -141,7 +141,7 @@
             // 
             lbDecimo.AutoSize = true;
             lbDecimo.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
-            lbDecimo.Location = new Point(12, 122);
+            lbDecimo.Location = new Point(342, 117);
             lbDecimo.Name = "lbDecimo";
             lbDecimo.Size = new Size(174, 30);
             lbDecimo.TabIndex = 10;
@@ -152,7 +152,7 @@
             btnBeneficio.BackColor = SystemColors.ButtonHighlight;
             btnBeneficio.BackgroundImageLayout = ImageLayout.Center;
             btnBeneficio.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btnBeneficio.Location = new Point(535, 156);
+            btnBeneficio.Location = new Point(543, 162);
             btnBeneficio.Name = "btnBeneficio";
             btnBeneficio.Size = new Size(82, 37);
             btnBeneficio.TabIndex = 12;

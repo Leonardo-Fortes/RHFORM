@@ -28,21 +28,28 @@ namespace ProjetoRhForm.Apresentação
         private void btnAdicionar_Click(object sender, EventArgs e)
         {
             string cpf = txbCPFINSERIDO.Text;
-            Beneficios beneficios1 = new Beneficios(cpf);
 
+            Beneficios beneficios1 = new Beneficios(cpf);
+            
             Controle controle = new Controle();
-            int idfuncionario = controle.verificaCPF(cpf);
-            if (idfuncionario != -1) 
+            controle.verificaCPF(cpf);
+            if (controle.msg.Equals(""))
             {
-                Beneficios beneficios = new Beneficios();
-                beneficios.Show();
+                if (controle.tem)
+                {
+                    beneficios1.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Cpf não foi encontrado!","ERROR",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                }
             }
             else
             {
-                MessageBox.Show("Funcionario não encontrado");
+                MessageBox.Show(controle.msg);
             }
-        }      
+
+        }     
      
-        
     }
 }

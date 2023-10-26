@@ -37,7 +37,6 @@ namespace ProjetoRhForm.Dal
                 {
                     tem = true;
                 }
-
                 con.desconectar();
                 dr.Close();
             }
@@ -95,9 +94,7 @@ namespace ProjetoRhForm.Dal
                         {
                             empresaId = Convert.ToInt32(dr["idempresa"]);
                         }
-
                         dr.Close();
-
                         cmd.Parameters.Clear();
                         cmd.CommandText = "insert into Funcionario values (@nomeemp,@telefone,@email,@sexo,@cpf,@cargo,@cnpj,@data,@idempresa,@dataadmissao)";
                         cmd.Parameters.AddWithValue("@nomeemp", nome);
@@ -121,7 +118,6 @@ namespace ProjetoRhForm.Dal
                         {
                             this.msg = "erro com o banco" + ex;
                         }
-
                     }
                     else
                     {
@@ -166,34 +162,28 @@ namespace ProjetoRhForm.Dal
             }
             return msg;
         }
-        public int VerificarCPF(string cpf)
+        public string VerificarCPF(string cpf)
         {
-            int idfuncionario = -1;
-            cmd.CommandText = "select idfuncionario from Funcionario where cpf = @cpf";
+            tem = false;
+            cmd.CommandText = "select cpf from Funcionario where cpf = @cpf";
             cmd.Parameters.AddWithValue("@cpf", cpf);
             cmd.Connection = con.conectar();
             dr = cmd.ExecuteReader();
             if (dr.HasRows)
             {
-                if (dr.Read())
-                {
-                   idfuncionario = Convert.ToInt32(dr["idfuncionario"]);
-                }
-                dr.Close();
+                tem = true;              
             }
             else 
             {
                 this.msg = "cpf não encontrado" ;
             }
-
-            return idfuncionario;
+            return msg;
+            
         }
         public string CadastrarBeneficio(string cpf, double convenio, double valetransporte, double valealimentacao, double valerefeicao, double ferias, double decimoterceiro)
         { 
             int idfuncionario = -1;
             tem = false;
-            BeneficioInicio inicio = new BeneficioInicio();
-
             try
             {
                 cmd.Parameters.Clear();

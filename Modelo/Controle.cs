@@ -55,16 +55,15 @@ namespace ProjetoRhForm.Modelo
             return msg;
         }
 
-        public int verificaCPF(string cpf)
+        public string verificaCPF(string cpf)
         {
             LoginDaoComandos loginDAO = new LoginDaoComandos(); 
-            int idfuncionaro = loginDAO.VerificarCPF(cpf);
-            if(idfuncionaro != -1)
+            this.msg = loginDAO.VerificarCPF(cpf);
+            if (loginDAO.tem)
             {
-                return idfuncionaro;
-            } 
-            
-            return -1;
+                this.tem = true;
+            }        
+            return msg;
         }
         public string cadastrarBeneficios(string cpf,double convenio, double valetransporte, double valealimentacao, double valerefeicao, double ferias, double decimoterceiro)
         {
