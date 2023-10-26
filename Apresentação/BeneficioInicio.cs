@@ -13,9 +13,11 @@ namespace ProjetoRhForm.Apresentação
 {
     public partial class BeneficioInicio : Form
     {
+  
         public BeneficioInicio()
         {
             InitializeComponent();
+
         }
 
         public void txbCPFINSERIDO_TextChanged(object sender, EventArgs e)
@@ -25,31 +27,22 @@ namespace ProjetoRhForm.Apresentação
 
         private void btnAdicionar_Click(object sender, EventArgs e)
         {
+            string cpf = txbCPFINSERIDO.Text;
+            Beneficios beneficios1 = new Beneficios(cpf);
+
             Controle controle = new Controle();
-            controle.validarFuncBeneficio(txbCPFINSERIDO.Text);
-            if (controle.Equals(""))
+            int idfuncionario = controle.verificaCPF(cpf);
+            if (idfuncionario != -1) 
             {
-                if (controle.tem)
-                {
-                    MessageBox.Show("deu certo");
-                }
-                else
-                {
-                    MessageBox.Show("deu errado");
-                }
+                Beneficios beneficios = new Beneficios();
+                beneficios.Show();
             }
             else
             {
-                MessageBox.Show(controle.msg);
+                MessageBox.Show("Funcionario não encontrado");
             }
-        }
-
-        public string CPFINSERIDO
-        {
-            get
-            {
-                return txbCPFINSERIDO.Text;
-            }
-        }
+        }      
+     
+        
     }
 }

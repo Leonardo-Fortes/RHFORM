@@ -54,18 +54,26 @@ namespace ProjetoRhForm.Modelo
             }
             return msg;
         }
-        public bool validarFuncBeneficio(string cpf)
+
+        public int verificaCPF(string cpf)
         {
-            LoginDaoComandos loginDao = new LoginDaoComandos ();
-            tem = loginDao.validarBeneficioFunc(cpf);
-            if (!loginDao.Equals(""))
+            LoginDaoComandos loginDAO = new LoginDaoComandos(); 
+            int idfuncionaro = loginDAO.VerificarCPF(cpf);
+            if(idfuncionaro != -1)
             {
-                this.msg = msg;
-            }
-            return tem;
+                return idfuncionaro;
+            } 
+            
+            return -1;
         }
-        public string cadastrarBeneficios(double convenio, double valetransporte, double valealimentacao, double valerefeicao, double ferias, double decimoterceiro)
+        public string cadastrarBeneficios(string cpf,double convenio, double valetransporte, double valealimentacao, double valerefeicao, double ferias, double decimoterceiro)
         {
+            LoginDaoComandos loginDao = new LoginDaoComandos();
+            this.msg = loginDao.CadastrarBeneficio(cpf, convenio, valetransporte,valealimentacao, valerefeicao, ferias, decimoterceiro);
+            if(loginDao.tem)
+            {
+                this.tem = true;
+            }
             return msg;
         }
      

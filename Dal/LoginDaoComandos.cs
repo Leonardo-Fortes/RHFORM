@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics.Eventing.Reader;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +17,7 @@ namespace ProjetoRhForm.Dal
     internal class LoginDaoComandos
 
     {
+        public int num = 0;
         SqlDataReader dr; // leitor do banco
         SqlCommand cmd = new SqlCommand();
         public bool tem = false;
@@ -34,7 +37,7 @@ namespace ProjetoRhForm.Dal
                 {
                     tem = true;
                 }
-                
+
                 con.desconectar();
                 dr.Close();
             }
@@ -47,22 +50,21 @@ namespace ProjetoRhForm.Dal
         public string cadastrarUsuario(string login, string senha, string confSenha) //cadastro usuario
         {
             if (senha.Equals(confSenha)) // verificação de senha
-            {           
-                            cmd.CommandText = "insert into Usuario (nome,senha) values (@l,@s)";
-                            cmd.Parameters.AddWithValue("@l", login);
-                            cmd.Parameters.AddWithValue("@s", senha);
-                
-                        try
-                        {
-                            cmd.Connection = con.conectar();
-                            cmd.ExecuteNonQuery(); // executando dados 
-                            con.desconectar();
-                            tem = true;
-                        }
-                        catch (SqlException ex)
-                        {
-                            this.msg = "ERRO AO INSERIR DADOS" +ex;
-                        }         
+            {
+                cmd.CommandText = "insert into Usuario (nome,senha) values (@l,@s)";
+                cmd.Parameters.AddWithValue("@l", login);
+                cmd.Parameters.AddWithValue("@s", senha);
+                try
+                {
+                    cmd.Connection = con.conectar();
+                    cmd.ExecuteNonQuery(); // executando dados 
+                    con.desconectar();
+                    tem = true;
+                }
+                catch (SqlException ex)
+                {
+                    this.msg = "ERRO AO INSERIR DADOS" + ex;
+                }
             }
             else
             {
@@ -70,7 +72,7 @@ namespace ProjetoRhForm.Dal
             }
             return msg;
         }
-        public string cadastrarFuncionario(string nome, DateTime date, string telefone, string email, string sexo, string cpf, string cargo, string cnpj, DateTime dateadmissao )
+        public string cadastrarFuncionario(string nome, DateTime date, string telefone, string email, string sexo, string cpf, string cargo, string cnpj, DateTime dateadmissao)
         {
             int empresaId = 0;
             tem = false;
@@ -131,7 +133,7 @@ namespace ProjetoRhForm.Dal
                     this.msg = "funcionario já existe";
                 }
             }
-            catch (SqlException sqlEx) 
+            catch (SqlException sqlEx)
             {
                 this.msg = "erro com banco" + sqlEx;
             }
@@ -148,7 +150,7 @@ namespace ProjetoRhForm.Dal
             cmd.Parameters.AddWithValue("@bairro", bairro);
             cmd.Parameters.AddWithValue("@cidade", cidade);
             cmd.Parameters.AddWithValue("@uf", uf);
-            cmd.Parameters.AddWithValue("@pais",pais);
+            cmd.Parameters.AddWithValue("@pais", pais);
             cmd.Parameters.AddWithValue("@cep", cep);
             try
             {
@@ -164,74 +166,88 @@ namespace ProjetoRhForm.Dal
             }
             return msg;
         }
-
-        public bool validarBeneficioFunc(string cpf)
+        public int VerificarCPF(string cpf)
         {
-            cmd.CommandText = "select * from Funcionario where cpf = @cpf";
+            int idfuncionario = -1;
+            cmd.CommandText = "select idfuncionario from Funcionario where cpf = @cpf";
             cmd.Parameters.AddWithValue("@cpf", cpf);
-            try
-            {
-                cmd.Connection = con.conectar();
-                dr = cmd.ExecuteReader();
-                if(dr.HasRows)
-                {
-                    tem = true;
-                }
-                con.desconectar();
-                dr.Close();
-            }
-            catch (SqlException ex)
-            {
-                this.msg = "Erro com o bando" + ex;
-            }
-           
-            return tem;
-        }
-        public string cadastrarBenef(double convenio, double valetransporte, double valealimentacao, double valerefeicao, double ferias, double decimoterceiro)
-        {
-            tem = false;
-            BeneficioInicio inicio = new BeneficioInicio();
-            
-            string cpfinserido = inicio.CPFINSERIDO;
-            int idfuncionario = 0;
-            cmd.CommandText = "select idfuncionario from funcionario where cpf = @cpfinserido";
-            cmd.Parameters.AddWithValue("@cpfinserido", cpfinserido);
             cmd.Connection = con.conectar();
             dr = cmd.ExecuteReader();
-            if(dr.HasRows)
+            if (dr.HasRows)
             {
-                if(dr.Read())
+                if (dr.Read())
                 {
-                    idfuncionario = Convert.ToInt32(dr["idfuncionario"]);
+                   idfuncionario = Convert.ToInt32(dr["idfuncionario"]);
                 }
                 dr.Close();
+            }
+            else 
+            {
+                this.msg = "cpf não encontrado" ;
+            }
+
+            return idfuncionario;
+        }
+        public string CadastrarBeneficio(string cpf, double convenio, double valetransporte, double valealimentacao, double valerefeicao, double ferias, double decimoterceiro)
+        { 
+            int idfuncionario = -1;
+            tem = false;
+            BeneficioInicio inicio = new BeneficioInicio();
+
+            try
+            {
                 cmd.Parameters.Clear();
-                cmd.CommandText = "insert into Beneficios (convenio,valetransporte,valealimentacao,valerefeicao,ferias,decimoterceiro) values @convenio, @valetransporte, @valealimentacao, @valerefeicao, @ferias, @decimoterceiro";
-                cmd.Parameters.AddWithValue("@convenio", convenio);
-                cmd.Parameters.AddWithValue("@valetransporte", valetransporte);
-                cmd.Parameters.AddWithValue("@valealimentacao", valealimentacao);
-                cmd.Parameters.AddWithValue("@valerefeicao", valerefeicao);
-                cmd.Parameters.AddWithValue("@ferias", ferias);
-                cmd.Parameters.AddWithValue("@decimoterceiro", decimoterceiro);
-                try
+                if (!string.IsNullOrEmpty(cpf))
                 {
-                    cmd.ExecuteNonQuery();
-                    con.desconectar();
-                    tem = true;
+                    cmd.CommandText = "SELECT idfuncionario FROM Funcionario WHERE cpf = @cpfinserido";
+                    cmd.Parameters.AddWithValue("@cpfinserido", cpf);
+                    cmd.Connection = con.conectar();
+                    dr = cmd.ExecuteReader();
+
+                    if (dr.HasRows)
+                    {
+                        if (dr.Read())
+                        {
+                            idfuncionario = Convert.ToInt32(dr["idfuncionario"]);
+                        }
+                        dr.Close();
+                        cmd.CommandText = "INSERT INTO Beneficios (convenio, valetransporte, valealimentacao, valerefeicao, ferias, decimoterceiro, id_funcionario) VALUES (@convenio, @valetransporte, @valealimentacao, @valerefeicao, @ferias, @decimoterceiro, @id_funcionario)";
+                        cmd.Parameters.AddWithValue("@convenio", convenio);
+                        cmd.Parameters.AddWithValue("@valetransporte", valetransporte);
+                        cmd.Parameters.AddWithValue("@valealimentacao", valealimentacao);
+                        cmd.Parameters.AddWithValue("@valerefeicao", valerefeicao);
+                        cmd.Parameters.AddWithValue("@ferias", ferias);
+                        cmd.Parameters.AddWithValue("@decimoterceiro", decimoterceiro);
+                        cmd.Parameters.AddWithValue("@id_funcionario", idfuncionario);
+                        try
+                        {
+                            cmd.ExecuteNonQuery();
+                            con.desconectar();
+                            tem = true;
+                        }
+                        catch (SqlException ex)
+                        {
+                            this.msg = "Erro com o banco " + ex;
+                        }
+                    }
+                    else
+                    {
+                        this.msg = "Funcionário inexistente";
+                    }
                 }
-                catch (SqlException ex)
+                else
                 {
-                    this.msg = "erro com o bando " + ex;
+                    this.msg = "valor vazio";
                 }
             }
-            else
+            catch (SqlException exe)
             {
-                this.msg = "Funcionario inexistente";
+                this.msg = "erro" + exe;
             }
 
             return msg;
         }
-
     }
 }
+
 

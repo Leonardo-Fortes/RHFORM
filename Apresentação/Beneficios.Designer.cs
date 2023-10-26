@@ -158,6 +158,7 @@
             btnBeneficio.TabIndex = 12;
             btnBeneficio.Text = "OK";
             btnBeneficio.UseVisualStyleBackColor = false;
+            btnBeneficio.Click += btnBeneficio_Click;
             // 
             // Beneficios
             // 

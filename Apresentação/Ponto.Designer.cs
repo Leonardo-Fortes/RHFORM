@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
+            btnPonto = new Button();
             lbHoraEntrada = new Label();
             txbEntrada = new TextBox();
             txbSaída = new TextBox();
@@ -37,20 +37,21 @@
             lbCPF = new Label();
             SuspendLayout();
             // 
-            // button1
+            // btnPonto
             // 
-            button1.Location = new Point(319, 87);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 0;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            btnPonto.Location = new Point(319, 87);
+            btnPonto.Name = "btnPonto";
+            btnPonto.Size = new Size(75, 23);
+            btnPonto.TabIndex = 0;
+            btnPonto.Text = "OK";
+            btnPonto.UseVisualStyleBackColor = true;
+            btnPonto.Click += button1_Click;
             // 
             // lbHoraEntrada
             // 
             lbHoraEntrada.AutoSize = true;
             lbHoraEntrada.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold, GraphicsUnit.Point);
-            lbHoraEntrada.Location = new Point(22, 40);
+            lbHoraEntrada.Location = new Point(22, 46);
             lbHoraEntrada.Name = "lbHoraEntrada";
             lbHoraEntrada.Size = new Size(83, 25);
             lbHoraEntrada.TabIndex = 1;
@@ -58,7 +59,7 @@
             // 
             // txbEntrada
             // 
-            txbEntrada.Location = new Point(99, 45);
+            txbEntrada.Location = new Point(99, 48);
             txbEntrada.Name = "txbEntrada";
             txbEntrada.Size = new Size(100, 23);
             txbEntrada.TabIndex = 2;
@@ -108,7 +109,7 @@
             Controls.Add(lbSaida);
             Controls.Add(txbEntrada);
             Controls.Add(lbHoraEntrada);
-            Controls.Add(button1);
+            Controls.Add(btnPonto);
             Name = "Ponto";
             Text = "Ponto";
             Load += Ponto_Load;
@@ -118,7 +119,7 @@
 
         #endregion
 
-        private Button button1;
+        private Button btnPonto;
         private Label lbHoraEntrada;
         private TextBox txbEntrada;
         private TextBox txbSaída;

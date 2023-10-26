@@ -44,9 +44,9 @@
             // 
             // panel1
             // 
-            panel1.Location = new Point(31, 145);
+            panel1.Location = new Point(31, 130);
             panel1.Name = "panel1";
-            panel1.Size = new Size(539, 271);
+            panel1.Size = new Size(539, 286);
             panel1.TabIndex = 1;
             // 
             // lbConsul

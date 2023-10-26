@@ -17,7 +17,6 @@ namespace ProjetoRhForm.Apresentação
         {
             InitializeComponent();
         }
-
         private void btnCadFunc_Click(object sender, EventArgs e)
         {
             Controle controle = new Controle();
@@ -36,9 +35,7 @@ namespace ProjetoRhForm.Apresentação
             }
             else
             {
-
-                if (DateTime.TryParseExact(dataDigitada, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dataInserida) && DateTime.TryParseExact(dataAdmissao,"dd-MM-yyyy",null,System.Globalization.DateTimeStyles.None, out DateTime dataadmissao)
-                   )
+                if (DateTime.TryParseExact(dataDigitada, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dataInserida) && DateTime.TryParseExact(dataAdmissao,"dd-MM-yyyy",null,System.Globalization.DateTimeStyles.None, out DateTime dataadmissao))
                 {
                     // Verifique se a data inserida está acima ou igual à data mínima suportada pelo SQL Server (01/01/1753)
                     if (dataInserida < new DateTime (1753, 1, 1) || dataadmissao < new DateTime(1753,1,1)) 
@@ -76,7 +73,5 @@ namespace ProjetoRhForm.Apresentação
                 }
             }
         }
-
-
     }
 }

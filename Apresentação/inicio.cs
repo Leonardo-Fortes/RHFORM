@@ -112,5 +112,11 @@ namespace ProjetoRhForm.Apresentação
             CadastroEmpresa cadastroEmpresa = new CadastroEmpresa();
             cadastroEmpresa.Show();
         }
+
+        private void saírToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CadastroUsuario cadastroUsuario = new CadastroUsuario();
+            cadastroUsuario.Show();
+        }
     }
 }

@@ -35,8 +35,6 @@ namespace ProjetoRhForm.Apresentação
             }
             else
             {
-
-
                 Controle controle = new Controle();
                 controle.acessar(txbLogin.Text, txbSenha.Text);
                 if (controle.msg.Equals(""))
@@ -47,9 +45,7 @@ namespace ProjetoRhForm.Apresentação
                         inicio inicio = new inicio();
                         inicio.Show();
                         this.Hide();
-
                     }
-
                     else
                     {
                         MessageBox.Show("Login ou senha incorretos, Verifique!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -60,9 +56,7 @@ namespace ProjetoRhForm.Apresentação
                     MessageBox.Show(controle.msg);
                 }
             }
-
         }
-
         private void login_Load(object sender, EventArgs e)
         {
 

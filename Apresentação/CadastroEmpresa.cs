@@ -58,16 +58,13 @@ namespace ProjetoRhForm.Apresentação
                     else
                     {
                         MessageBox.Show("Algo de errado aconteceu, Tente Novamente", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
                     }
                 }
                 else
                 {
                     MessageBox.Show(controle.msg);
                 }
-            }
-            
-
+            }          
         }
     }
 }
