@@ -180,7 +180,7 @@ namespace ProjetoRhForm.Dal
             return msg;
             
         }
-        public string CadastrarBeneficio(string cpf, double convenio, double valetransporte, double valealimentacao, double valerefeicao, double ferias, double decimoterceiro)
+        public string CadastrarBeneficio(string cpf, double convenio, double valetransporte, double valealimentacao, double valerefeicao, double ferias, double decimoterceiro, DateTime data)
         { 
             int idfuncionario = -1;
             tem = false;
@@ -201,7 +201,7 @@ namespace ProjetoRhForm.Dal
                             idfuncionario = Convert.ToInt32(dr["idfuncionario"]);
                         }
                         dr.Close();
-                        cmd.CommandText = "INSERT INTO Beneficios (convenio, valetransporte, valealimentacao, valerefeicao, ferias, decimoterceiro, id_funcionario) VALUES (@convenio, @valetransporte, @valealimentacao, @valerefeicao, @ferias, @decimoterceiro, @id_funcionario)";
+                        cmd.CommandText = "INSERT INTO Beneficios (convenio, valetransporte, valealimentacao, valerefeicao, ferias, decimoterceiro, id_funcionario, mes_ano) VALUES (@convenio, @valetransporte, @valealimentacao, @valerefeicao, @ferias, @decimoterceiro, @id_funcionario, @mes_ano)";
                         cmd.Parameters.AddWithValue("@convenio", convenio);
                         cmd.Parameters.AddWithValue("@valetransporte", valetransporte);
                         cmd.Parameters.AddWithValue("@valealimentacao", valealimentacao);
@@ -209,6 +209,7 @@ namespace ProjetoRhForm.Dal
                         cmd.Parameters.AddWithValue("@ferias", ferias);
                         cmd.Parameters.AddWithValue("@decimoterceiro", decimoterceiro);
                         cmd.Parameters.AddWithValue("@id_funcionario", idfuncionario);
+                        cmd.Parameters.AddWithValue("@mes_ano", data);
                         try
                         {
                             cmd.ExecuteNonQuery();

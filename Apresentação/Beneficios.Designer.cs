@@ -41,6 +41,8 @@
             txbDecimo = new TextBox();
             lbDecimo = new Label();
             btnBeneficio = new Button();
+            txbData = new TextBox();
+            lbData = new Label();
             SuspendLayout();
             // 
             // lbConvenio
@@ -160,11 +162,30 @@
             btnBeneficio.UseVisualStyleBackColor = false;
             btnBeneficio.Click += btnBeneficio_Click;
             // 
+            // txbData
+            // 
+            txbData.Location = new Point(209, 162);
+            txbData.Name = "txbData";
+            txbData.Size = new Size(94, 23);
+            txbData.TabIndex = 14;
+            // 
+            // lbData
+            // 
+            lbData.AutoSize = true;
+            lbData.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
+            lbData.Location = new Point(99, 155);
+            lbData.Name = "lbData";
+            lbData.Size = new Size(104, 30);
+            lbData.TabIndex = 13;
+            lbData.Text = "Mês/Ano";
+            // 
             // Beneficios
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(652, 205);
+            Controls.Add(txbData);
+            Controls.Add(lbData);
             Controls.Add(btnBeneficio);
             Controls.Add(txbDecimo);
             Controls.Add(lbDecimo);
@@ -199,5 +220,7 @@
         private TextBox txbDecimo;
         private Label lbDecimo;
         private Button btnBeneficio;
+        private TextBox txbData;
+        private Label lbData;
     }
 }

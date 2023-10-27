@@ -42,6 +42,7 @@ namespace ProjetoRhForm.Apresentação
             string valeRefeicaoStr = txbValeRefeicao.Text;
             string feriasStr = txbFerias.Text;
             string decimoStr = txbDecimo.Text;
+            string data = txbData.Text;
 
             double convenio;
             double valeTransporte;
@@ -49,7 +50,7 @@ namespace ProjetoRhForm.Apresentação
             double valeRefeicao;
             double ferias;
             double decimo;
-
+            
             try
             {
 
@@ -65,29 +66,44 @@ namespace ProjetoRhForm.Apresentação
                 valeRefeicao = Double.Parse(valeRefeicaoStr);
                 ferias = Double.Parse(feriasStr);
                 decimo = Double.Parse(decimoStr);
-
-                // Agora você pode chamar o método de controle com os valores do tipo double
-                controle.cadastrarBeneficios(this.cpf, convenio, valeTransporte, alimentacao, valeRefeicao, ferias, decimo);
-                if (controle.msg.Equals(""))
+                if (DateTime.TryParseExact(data, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dataInserida))
                 {
-                    if (controle.tem)
+
+
+
+
+                    // Agora você pode chamar o método de controle com os valores do tipo double
+                    controle.cadastrarBeneficios(this.cpf, convenio, valeTransporte, alimentacao, valeRefeicao, ferias, decimo, dataInserida);
+                    if (controle.msg.Equals(""))
                     {
-                        MessageBox.Show("Benefícios adicionados com sucesso", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if (controle.tem)
+                        {
+                            MessageBox.Show("Benefícios adicionados com sucesso", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Erro, tente novamente", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Erro, tente novamente", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(controle.msg);
                     }
-                }
-                else
-                {
-                    MessageBox.Show(controle.msg);
-                }
+                }             
+                     else
+                    {
+                        MessageBox.Show("A data inserida não está no formato correto");
+                    }               
             }
             catch (FormatException)
             {
                 MessageBox.Show("Valores inválidos. Certifique-se de inserir números válidos.");
             }
+        }
+
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -65,10 +65,10 @@ namespace ProjetoRhForm.Modelo
             }        
             return msg;
         }
-        public string cadastrarBeneficios(string cpf,double convenio, double valetransporte, double valealimentacao, double valerefeicao, double ferias, double decimoterceiro)
+        public string cadastrarBeneficios(string cpf,double convenio, double valetransporte, double valealimentacao, double valerefeicao, double ferias, double decimoterceiro, DateTime data)
         {
             LoginDaoComandos loginDao = new LoginDaoComandos();
-            this.msg = loginDao.CadastrarBeneficio(cpf, convenio, valetransporte,valealimentacao, valerefeicao, ferias, decimoterceiro);
+            this.msg = loginDao.CadastrarBeneficio(cpf, convenio, valetransporte,valealimentacao, valerefeicao, ferias, decimoterceiro, data);
             if(loginDao.tem)
             {
                 this.tem = true;
