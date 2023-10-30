@@ -122,7 +122,7 @@ namespace ProjetoRhForm.Apresentação
 
         private void btnInicio_Click(object sender, EventArgs e)
         {
-            txbInicio.Text = DateTime.Now.ToString("HH:mm:ss");
+            lbInicio.Text = DateTime.Now.ToString("HH:mm:ss");
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -132,17 +132,17 @@ namespace ProjetoRhForm.Apresentação
 
         private void btnEntrada_Click(object sender, EventArgs e)
         {
-            lbteste.Text = DateTime.Now.ToString("HH:mm:ss");
+            lbEntrada.Text = DateTime.Now.ToString("HH:mm:ss");
         }
 
         private void btnFIm_Click(object sender, EventArgs e)
         {
-            txbFim.Text = DateTime.Now.ToString("HH:mm:ss");
+            lbFim.Text = DateTime.Now.ToString("HH:mm:ss");
         }
 
         private void btnSaida_Click(object sender, EventArgs e)
         {
-            txbSaida.Text = DateTime.Now.ToString("HH:mm:ss");
+            lbSaida.Text = DateTime.Now.ToString("HH:mm:ss");
         }
 
         private void txbData_TextChanged(object sender, EventArgs e)
@@ -153,13 +153,28 @@ namespace ProjetoRhForm.Apresentação
 
         private void timer1_Tick_1(object sender, EventArgs e)
         {
-            txbData.Text = DateTime.Now.ToString("dd-mm-yyyy");
+            lbDataInicio.Text = DateTime.Now.ToString("dd/MM/yy");
 
         }
 
         private void lbteste_Click(object sender, EventArgs e)
         {
-            lbteste.Text = DateTime.Now.ToString("HH:mm:ss");
+            lbEntrada.Text = DateTime.Now.ToString("HH:mm:ss");
+        }
+
+        private void lbDataInicio_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void lbCPF_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
