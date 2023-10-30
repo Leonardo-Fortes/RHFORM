@@ -209,7 +209,7 @@ namespace ProjetoRhForm.Dal
                         cmd.Parameters.AddWithValue("@ferias", ferias);
                         cmd.Parameters.AddWithValue("@decimoterceiro", decimoterceiro);
                         cmd.Parameters.AddWithValue("@id_funcionario", idfuncionario);
-                        cmd.Parameters.AddWithValue("@mes_ano", data);
+                        cmd.Parameters.AddWithValue("@mes_ano", SqlDbType.Date).Value = data;
                         try
                         {
                             cmd.ExecuteNonQuery();

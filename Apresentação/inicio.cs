@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Timer = System.Windows.Forms.Timer;
 
 namespace ProjetoRhForm.Apresentação
 {
@@ -117,6 +118,48 @@ namespace ProjetoRhForm.Apresentação
         {
             CadastroUsuario cadastroUsuario = new CadastroUsuario();
             cadastroUsuario.Show();
+        }
+
+        private void btnInicio_Click(object sender, EventArgs e)
+        {
+            txbInicio.Text = DateTime.Now.ToString("HH:mm:ss");
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEntrada_Click(object sender, EventArgs e)
+        {
+            lbteste.Text = DateTime.Now.ToString("HH:mm:ss");
+        }
+
+        private void btnFIm_Click(object sender, EventArgs e)
+        {
+            txbFim.Text = DateTime.Now.ToString("HH:mm:ss");
+        }
+
+        private void btnSaida_Click(object sender, EventArgs e)
+        {
+            txbSaida.Text = DateTime.Now.ToString("HH:mm:ss");
+        }
+
+        private void txbData_TextChanged(object sender, EventArgs e)
+        {
+            Timer timer = new Timer();
+            timer.Start();
+        }
+
+        private void timer1_Tick_1(object sender, EventArgs e)
+        {
+            txbData.Text = DateTime.Now.ToString("dd-mm-yyyy");
+
+        }
+
+        private void lbteste_Click(object sender, EventArgs e)
+        {
+            lbteste.Text = DateTime.Now.ToString("HH:mm:ss");
         }
     }
 }

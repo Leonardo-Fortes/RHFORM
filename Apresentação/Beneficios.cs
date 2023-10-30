@@ -66,12 +66,8 @@ namespace ProjetoRhForm.Apresentação
                 valeRefeicao = Double.Parse(valeRefeicaoStr);
                 ferias = Double.Parse(feriasStr);
                 decimo = Double.Parse(decimoStr);
-                if (DateTime.TryParseExact(data, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dataInserida))
+                if (DateTime.TryParseExact(data, "MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dataInserida))
                 {
-
-
-
-
                     // Agora você pode chamar o método de controle com os valores do tipo double
                     controle.cadastrarBeneficios(this.cpf, convenio, valeTransporte, alimentacao, valeRefeicao, ferias, decimo, dataInserida);
                     if (controle.msg.Equals(""))
@@ -90,7 +86,7 @@ namespace ProjetoRhForm.Apresentação
                         MessageBox.Show(controle.msg);
                     }
                 }             
-                     else
+                    else
                     {
                         MessageBox.Show("A data inserida não está no formato correto");
                     }               
