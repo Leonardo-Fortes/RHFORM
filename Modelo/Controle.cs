@@ -75,6 +75,26 @@ namespace ProjetoRhForm.Modelo
             }
             return msg;
         }
+        public string verificaCPFPONTO(string cpf)
+        {
+            LoginDaoComandos LoginDAO = new LoginDaoComandos();
+            this.msg = LoginDAO.verificaCpfPonto(cpf);
+            if (LoginDAO.tem)
+            {
+                this.tem = true;
+            }
+            return msg;
+        }
+        public string cadPontoFolha(string cpf, DateTime entrada, DateTime inicioIntervalo, DateTime fimIntervalo, DateTime saida)
+        {
+            LoginDaoComandos loginDao = new LoginDaoComandos();
+            this.msg = loginDao.cadPonto(cpf, entrada, inicioIntervalo, fimIntervalo, saida);
+            if(loginDao.tem)
+            {
+                this.tem = true;
+            }
+            return msg;
+        }
      
     }
 }

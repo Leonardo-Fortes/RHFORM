@@ -190,15 +190,15 @@ namespace ProjetoRhForm.Dal
                 if (!string.IsNullOrEmpty(cpf))
                 {
                     cmd.CommandText = "SELECT idfuncionario FROM Funcionario WHERE cpf = @cpfinserido";
-                    cmd.Parameters.AddWithValue("@cpfinserido", cpf);
+                    cmd.Parameters.AddWithValue("@cpfinserido", cpf);                 
                     cmd.Connection = con.conectar();
                     dr = cmd.ExecuteReader();
-
                     if (dr.HasRows)
                     {
                         if (dr.Read())
                         {
                             idfuncionario = Convert.ToInt32(dr["idfuncionario"]);
+                                                   
                         }
                         dr.Close();
                         cmd.CommandText = "INSERT INTO Beneficios (convenio, valetransporte, valealimentacao, valerefeicao, ferias, decimoterceiro, id_funcionario, mes_ano) VALUES (@convenio, @valetransporte, @valealimentacao, @valerefeicao, @ferias, @decimoterceiro, @id_funcionario, @mes_ano)";
@@ -236,6 +236,78 @@ namespace ProjetoRhForm.Dal
                 this.msg = "erro" + exe;
             }
 
+            return msg;
+        }
+        public string verificaCpfPonto(string cpf)
+        {
+            tem = false;
+            string nomeFunc = "";
+            cmd.CommandText = "SELECT nome from funcionario where cpf = @cpf";
+            cmd.Parameters.AddWithValue("@cpf", cpf);
+            try
+            {
+                cmd.Connection = con.conectar();
+                dr = cmd.ExecuteReader();  
+                if (dr.HasRows)
+                {
+                    if (dr.Read())
+                    {
+                        nomeFunc = dr["nome"].ToString();
+                    }
+                    tem = true;
+                }            
+                else
+                {
+                    this.msg = "Usuário não foi encontrado";
+                }
+                dr.Close();
+                con.desconectar();
+            }
+            catch (SqlException ex)
+            {
+                this.msg = "";
+                this.msg = "Erro com o banco " + ex;
+            }
+            return nomeFunc;
+        }
+        public string cadPonto(string cpf, DateTime entrada, DateTime inicioIntervalo, DateTime fimIntervalo, DateTime saida)
+        {
+            tem = false;
+            int id_funcionario = -1;
+            
+            cmd.CommandText = "SELECT idfuncionario FROM Funcionario WHERE cpf = @cpfinserido";
+            cmd.Parameters.AddWithValue("@cpfinserido", cpf);  
+            cmd.Connection = con.conectar();
+            dr = cmd.ExecuteReader();
+            if (dr.HasRows)
+            {
+                if (dr.Read())
+                {
+                  id_funcionario = Convert.ToInt32(dr["idfuncionario"]);
+                   
+                }
+                dr.Close();
+                cmd.CommandText = "INSERT INTO FolhaPonto values (@id_funcionario,@entrada,@inicioIntervalo,@fimIntervalo,@saida) ";
+                cmd.Parameters.AddWithValue("@id_funcionario", id_funcionario);
+                cmd.Parameters.AddWithValue("@entrada", SqlDbType.Time).Value = entrada;
+                cmd.Parameters.AddWithValue("@inicioIntervalo", SqlDbType.Time).Value = inicioIntervalo;
+                cmd.Parameters.AddWithValue("@fimIntervalo", SqlDbType.Time).Value = fimIntervalo;
+                cmd.Parameters.AddWithValue("@saida", SqlDbType.Time).Value = saida;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    con.desconectar();
+                    tem = true;
+                }
+                catch (SqlException ex)
+                {
+                    this.msg = "Erro com o banco " + ex;
+                }
+            }           
+            else
+            {
+                this.msg = "cpf invalido!";
+            }
             return msg;
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjetoRhForm.Modelo;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -173,6 +174,45 @@ namespace ProjetoRhForm.Apresentação
         }
 
         private void lbCPF_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void trocarUsuárioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            login login = new login();
+            login.Show();
+            this.Hide();
+
+
+        }
+
+        private void lvUsu_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            Controle controle = new Controle();
+
+            string nome = controle.verificaCPFPONTO(mtxbCPF.Text);
+            string vazio = "";
+
+            if (controle.tem)
+            {
+                lbUsu.Text = vazio;
+                lbUsu.Text = nome;
+
+                MessageBox.Show("Funcionário selecionado", "Ok", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Funcionário não foi encontrado. Tente novamente!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void lbUsu_Click(object sender, EventArgs e)
         {
 
         }

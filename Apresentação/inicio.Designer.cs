@@ -54,7 +54,6 @@
             btnInicio = new Button();
             btnFIm = new Button();
             btnSaida = new Button();
-            txbCPF = new TextBox();
             lbCPF = new Label();
             lbData = new Label();
             lbEntrada = new Label();
@@ -62,6 +61,9 @@
             lbFim = new Label();
             lbSaida = new Label();
             lbDataInicio = new Label();
+            mtxbCPF = new MaskedTextBox();
+            btnBuscar = new Button();
+            lbUsu = new Label();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -93,6 +95,7 @@
             trocarUsuárioToolStripMenuItem.Name = "trocarUsuárioToolStripMenuItem";
             trocarUsuárioToolStripMenuItem.Size = new Size(234, 30);
             trocarUsuárioToolStripMenuItem.Text = "Trocar usuário";
+            trocarUsuárioToolStripMenuItem.Click += trocarUsuárioToolStripMenuItem_Click;
             // 
             // saírToolStripMenuItem
             // 
@@ -247,14 +250,6 @@
             btnSaida.UseVisualStyleBackColor = true;
             btnSaida.Click += btnSaida_Click;
             // 
-            // txbCPF
-            // 
-            txbCPF.Font = new Font("Segoe UI Semibold", 10.25F, FontStyle.Bold, GraphicsUnit.Point);
-            txbCPF.Location = new Point(62, 50);
-            txbCPF.Name = "txbCPF";
-            txbCPF.Size = new Size(201, 26);
-            txbCPF.TabIndex = 9;
-            // 
             // lbCPF
             // 
             lbCPF.AutoSize = true;
@@ -328,12 +323,43 @@
             lbDataInicio.Text = "-------";
             lbDataInicio.Click += lbDataInicio_Click;
             // 
+            // mtxbCPF
+            // 
+            mtxbCPF.Location = new Point(60, 54);
+            mtxbCPF.Name = "mtxbCPF";
+            mtxbCPF.Size = new Size(185, 25);
+            mtxbCPF.TabIndex = 19;
+            // 
+            // btnBuscar
+            // 
+            btnBuscar.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            btnBuscar.Location = new Point(251, 54);
+            btnBuscar.Name = "btnBuscar";
+            btnBuscar.Size = new Size(75, 25);
+            btnBuscar.TabIndex = 21;
+            btnBuscar.Text = "Buscar";
+            btnBuscar.UseVisualStyleBackColor = true;
+            btnBuscar.Click += btnBuscar_Click;
+            // 
+            // lbUsu
+            // 
+            lbUsu.AutoSize = true;
+            lbUsu.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lbUsu.Location = new Point(60, 82);
+            lbUsu.Name = "lbUsu";
+            lbUsu.Size = new Size(0, 25);
+            lbUsu.TabIndex = 22;
+            lbUsu.Click += lbUsu_Click;
+            // 
             // inicio
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Control;
             ClientSize = new Size(519, 222);
+            Controls.Add(lbUsu);
+            Controls.Add(btnBuscar);
+            Controls.Add(mtxbCPF);
             Controls.Add(lbSaida);
             Controls.Add(lbFim);
             Controls.Add(btnSaida);
@@ -343,13 +369,15 @@
             Controls.Add(lbEntrada);
             Controls.Add(btnInicio);
             Controls.Add(menuStrip1);
-            Controls.Add(txbCPF);
             Controls.Add(btnEntrada);
             Controls.Add(lbCPF);
             Controls.Add(lbData);
             Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             MainMenuStrip = menuStrip1;
+            MaximumSize = new Size(535, 261);
+            MinimumSize = new Size(535, 261);
             Name = "inicio";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "inicio";
             FormClosing += inicio_FormClosing;
             Load += inicio_Load;
@@ -385,7 +413,6 @@
         private Button btnInicio;
         private Button btnFIm;
         private Button btnSaida;
-        private TextBox txbCPF;
         private Label lbCPF;
         private Label lbData;
         private Label lbEntrada;
@@ -393,5 +420,8 @@
         private Label lbFim;
         private Label lbSaida;
         private Label lbDataInicio;
+        private MaskedTextBox mtxbCPF;
+        private Button btnBuscar;
+        private Label lbUsu;
     }
 }
