@@ -133,12 +133,13 @@ namespace ProjetoRhForm.Apresentação
 
         private void btnEntrada_Click(object sender, EventArgs e)
         {
+            string cpfUsu = UsuarioLogado.CPF;
             string dataInserida = DateTime.Now.ToString("dd-MM-yyyy");
             string dataEntrada = DateTime.Now.ToString("HH:mm:ss");
             if (DateTime.TryParseExact(dataInserida, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dataHoje) && DateTime.TryParseExact(dataEntrada, "HH:mm:ss", null, System.Globalization.DateTimeStyles.None, out DateTime dataDeEntrada))
             {
                 Controle controle = new Controle();
-                controle.cadPontoEntradaFolha(dataDeEntrada, mtxbCPF.Text, dataHoje);
+                controle.cadPontoEntradaFolha(dataDeEntrada,cpfUsu, dataHoje);
                 if (controle.msg.Equals(""))
                 {
                     if (controle.tem)

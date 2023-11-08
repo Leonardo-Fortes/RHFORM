@@ -50,19 +50,25 @@ namespace ProjetoRhForm.Dal
         {
             if (senha.Equals(confSenha)) // verificação de senha
             {
-                cmd.CommandText = "insert into Usuario (nome,senha) values (@l,@s)";
-                cmd.Parameters.AddWithValue("@l", login);
-                cmd.Parameters.AddWithValue("@s", senha);
+                cmd.CommandText = "Select cpf from Funcionario where cpf = @login";
+                cmd.Parameters.AddWithValue("@login", login);
                 try
                 {
                     cmd.Connection = con.conectar();
-                    cmd.ExecuteNonQuery(); // executando dados 
-                    con.desconectar();
-                    tem = true;
+                    dr = cmd.ExecuteReader();
+                    if (dr.HasRows)
+                    {
+                        dr.Close();
+                        cmd.CommandText = "insert into Usuario (nome,senha) values (@l,@s)";
+                        cmd.Parameters.AddWithValue("@l", login);
+                        cmd.Parameters.AddWithValue("@s", senha);
+                        cmd.ExecuteNonQuery(); // executando dados 
+                        con.desconectar();
+                    }  
                 }
                 catch (SqlException ex)
                 {
-                    this.msg = "ERRO AO INSERIR DADOS" + ex;
+                    this.msg = "Funcionário inexistente" + ex;
                 }
             }
             else
@@ -274,7 +280,7 @@ namespace ProjetoRhForm.Dal
             tem = false;
             int id_funcionario = -1;
             cmd.CommandText = "SELECT idfuncionario FROM Funcionario WHERE cpf = @cpfinserido";
-            cmd.Parameters.AddWithValue("@cpfinserido", cpf);
+            cmd.Parameters.AddWithValue("@cpfinserido", cpf);         
             cmd.Connection = con.conectar();
             dr = cmd.ExecuteReader();
             if (dr.HasRows)
@@ -305,12 +311,12 @@ namespace ProjetoRhForm.Dal
             }
                 return msg;
         }
-        public string cadPonto(string cpf, DateTime entrada, DateTime inicioIntervalo, DateTime fimIntervalo, DateTime saida)
+        public string cadPontoInicio(string cpf, DateTime inicioIntervalo, DateTime data)
         {
             tem = false;
             int id_funcionario = -1;            
             cmd.CommandText = "SELECT idfuncionario FROM Funcionario WHERE cpf = @cpfinserido";
-            cmd.Parameters.AddWithValue("@cpfinserido", cpf);  
+            cmd.Parameters.AddWithValue("@cpfinserido", cpf);
             cmd.Connection = con.conectar();
             dr = cmd.ExecuteReader();
             if (dr.HasRows)
@@ -321,12 +327,11 @@ namespace ProjetoRhForm.Dal
             
                 }
                 dr.Close();
-                cmd.CommandText = "INSERT INTO FolhaPonto values (@id_funcionario,@entrada,@inicioIntervalo,@fimIntervalo,@saida) ";
-                cmd.Parameters.AddWithValue("@id_funcionario", id_funcionario);
-                cmd.Parameters.AddWithValue("@entrada", SqlDbType.Time).Value = entrada;
-                cmd.Parameters.AddWithValue("@inicioIntervalo", SqlDbType.Time).Value = inicioIntervalo;
-                cmd.Parameters.AddWithValue("@fimIntervalo", SqlDbType.Time).Value = fimIntervalo;
-                cmd.Parameters.AddWithValue("@saida", SqlDbType.Time).Value = saida;
+                cmd.CommandText = "UPDATE FolhaPonto SET InicioIntervalo = @HoraInicioIntervalo" +
+                                 "WHERE id_funcionario = @IdFuncionario AND data = @DataDesejada";
+                cmd.Parameters.AddWithValue("@HoraInicioIntervalo", SqlDbType.Time).Value = inicioIntervalo;              
+                cmd.Parameters.AddWithValue("@IdFuncionario", id_funcionario);
+                cmd.Parameters.AddWithValue("@DataDesejada", SqlDbType.Date).Value = data;
                 try
                 {
                     cmd.ExecuteNonQuery();

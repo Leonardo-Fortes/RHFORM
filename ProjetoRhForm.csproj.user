@@ -22,7 +22,7 @@
     <Compile Update="Apresentação\inicio.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Apresentação\login.cs">
+    <Compile Update="Apresentação\SenhaInicio.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

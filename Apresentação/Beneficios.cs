@@ -1,14 +1,4 @@
 ﻿using ProjetoRhForm.Modelo;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace ProjetoRhForm.Apresentação
 {
@@ -25,7 +15,7 @@ namespace ProjetoRhForm.Apresentação
 
         private void label1_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)

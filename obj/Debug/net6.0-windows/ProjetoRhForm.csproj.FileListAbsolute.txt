@@ -21,7 +21,6 @@ C:\Users\Leonardo\source\repos\ProjetoRhForm\ProjetoRhForm\bin\Debug\net6.0-wind
 C:\Users\Leonardo\source\repos\ProjetoRhForm\ProjetoRhForm\bin\Debug\net6.0-windows\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\Leonardo\source\repos\ProjetoRhForm\ProjetoRhForm\obj\Debug\net6.0-windows\ProjetoRhForm.csproj.AssemblyReference.cache
 C:\Users\Leonardo\source\repos\ProjetoRhForm\ProjetoRhForm\obj\Debug\net6.0-windows\ProjetoRhForm.csproj.CopyComplete
-C:\Users\Leonardo\source\repos\ProjetoRhForm\ProjetoRhForm\obj\Debug\net6.0-windows\ProjetoRhForm.Apresentação.login.resources
 C:\Users\Leonardo\source\repos\ProjetoRhForm\ProjetoRhForm\obj\Debug\net6.0-windows\ProjetoRhForm.Apresentação.CadastroUsuario.resources
 C:\Users\Leonardo\source\repos\ProjetoRhForm\ProjetoRhForm\obj\Debug\net6.0-windows\ProjetoRhForm.Apresentação.CadastroFuncionario.resources
 C:\Users\Leonardo\source\repos\ProjetoRhForm\ProjetoRhForm\obj\Debug\net6.0-windows\ProjetoRhForm.Apresentação.CadastroEmpresa.resources
@@ -30,3 +29,5 @@ C:\Users\Leonardo\source\repos\ProjetoRhForm\ProjetoRhForm\obj\Debug\net6.0-wind
 C:\Users\Leonardo\source\repos\ProjetoRhForm\ProjetoRhForm\obj\Debug\net6.0-windows\ProjetoRhForm.Apresentação.ConsultarEmpresa.resources
 C:\Users\Leonardo\source\repos\ProjetoRhForm\ProjetoRhForm\obj\Debug\net6.0-windows\ProjetoRhForm.Apresentação.Beneficios.resources
 C:\Users\Leonardo\source\repos\ProjetoRhForm\ProjetoRhForm\obj\Debug\net6.0-windows\ProjetoRhForm.Apresentação.BeneficioInicio.resources
+C:\Users\Leonardo\source\repos\ProjetoRhForm\ProjetoRhForm\obj\Debug\net6.0-windows\ProjetoRhForm.Apresentação.UsuarioLogado.resources
+C:\Users\Leonardo\source\repos\ProjetoRhForm\ProjetoRhForm\obj\Debug\net6.0-windows\ProjetoRhForm.Apresentação.SenhaInicio.resources

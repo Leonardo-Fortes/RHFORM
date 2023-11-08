@@ -85,16 +85,16 @@ namespace ProjetoRhForm.Modelo
             }
             return msg;
         }
-        public string cadPontoFolha(string cpf, DateTime entrada, DateTime inicioIntervalo, DateTime fimIntervalo, DateTime saida)
+      /*  public string cadPontoFolha(string cpf, DateTime inicioIntervalo, DateTime fimIntervalo, DateTime saida)
         {
             LoginDaoComandos loginDao = new LoginDaoComandos();
-            this.msg = loginDao.cadPonto(cpf, entrada, inicioIntervalo, fimIntervalo, saida);
+            this.msg = loginDao.cadPontoInicio(cpf, entrada, inicioIntervalo, fimIntervalo, saida);
             if(loginDao.tem)
             {
                 this.tem = true;
             }
             return msg;
-        }
+        }*/
         public string cadPontoEntradaFolha(DateTime entrada, string cpf, DateTime data)
         {
             LoginDaoComandos loginDao = new LoginDaoComandos();

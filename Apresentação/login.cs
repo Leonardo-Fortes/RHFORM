@@ -1,23 +1,21 @@
 ﻿using ProjetoRhForm.Modelo;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
 namespace ProjetoRhForm.Apresentação
 {
+
+    public static class UsuarioLogado
+    {
+        public static string CPF
+        {
+            get; set;
+        } // ou int ID, dependendo de como você armazena o ID do usuário
+    }
     public partial class login : Form
     {
         public login()
         {
             InitializeComponent();
         }
-
+        
         private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -45,6 +43,7 @@ namespace ProjetoRhForm.Apresentação
                         inicio inicio = new inicio();
                         inicio.Show();
                         this.Hide();
+                        UsuarioLogado.CPF = Login;
                     }
                     else
                     {
