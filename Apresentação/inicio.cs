@@ -133,8 +133,31 @@ namespace ProjetoRhForm.Apresentação
 
         private void btnEntrada_Click(object sender, EventArgs e)
         {
-            lbEntrada.Text = DateTime.Now.ToString("HH:mm:ss");
+            string dataInserida = DateTime.Now.ToString("dd-MM-yyyy");
+            string dataEntrada = DateTime.Now.ToString("HH:mm:ss");
+            if (DateTime.TryParseExact(dataInserida, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dataHoje) && DateTime.TryParseExact(dataEntrada, "HH:mm:ss", null, System.Globalization.DateTimeStyles.None, out DateTime dataDeEntrada))
+            {
+                Controle controle = new Controle();
+                controle.cadPontoEntradaFolha(dataDeEntrada, mtxbCPF.Text, dataHoje);
+                if (controle.msg.Equals(""))
+                {
+                    if (controle.tem)
+                    {
+                        MessageBox.Show("Ponto cadastrado " + dataDeEntrada, "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        lbEntrada.Text = dataEntrada;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ponto não cadastrado, Tente novamente!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(controle.msg);
+                }
+            }
         }
+
 
         private void btnFIm_Click(object sender, EventArgs e)
         {

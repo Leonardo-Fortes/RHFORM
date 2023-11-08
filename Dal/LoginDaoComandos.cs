@@ -187,7 +187,7 @@ namespace ProjetoRhForm.Dal
             try
             {
                 cmd.Parameters.Clear();
-                if (!string.IsNullOrEmpty(cpf))
+                if (!string.IsNullOrEmpty(cpf)) 
                 {
                     cmd.CommandText = "SELECT idfuncionario FROM Funcionario WHERE cpf = @cpfinserido";
                     cmd.Parameters.AddWithValue("@cpfinserido", cpf);                 
@@ -197,8 +197,7 @@ namespace ProjetoRhForm.Dal
                     {
                         if (dr.Read())
                         {
-                            idfuncionario = Convert.ToInt32(dr["idfuncionario"]);
-                                                   
+                            idfuncionario = Convert.ToInt32(dr["idfuncionario"]);                                                  
                         }
                         dr.Close();
                         cmd.CommandText = "INSERT INTO Beneficios (convenio, valetransporte, valealimentacao, valerefeicao, ferias, decimoterceiro, id_funcionario, mes_ano) VALUES (@convenio, @valetransporte, @valealimentacao, @valerefeicao, @ferias, @decimoterceiro, @id_funcionario, @mes_ano)";
@@ -270,11 +269,46 @@ namespace ProjetoRhForm.Dal
             }
             return nomeFunc;
         }
-        public string cadPonto(string cpf, DateTime entrada, DateTime inicioIntervalo, DateTime fimIntervalo, DateTime saida)
+        public string cadPontoEntrada(DateTime entrada, string cpf, DateTime data)
         {
             tem = false;
             int id_funcionario = -1;
-            
+            cmd.CommandText = "SELECT idfuncionario FROM Funcionario WHERE cpf = @cpfinserido";
+            cmd.Parameters.AddWithValue("@cpfinserido", cpf);
+            cmd.Connection = con.conectar();
+            dr = cmd.ExecuteReader();
+            if (dr.HasRows)
+            {
+                if (dr.Read())
+                {
+                    id_funcionario = Convert.ToInt32(dr["idfuncionario"]);
+                }
+                cmd.CommandText = "INSERT INTO FolhaPonto (entrada,id_funcionario,data) values (@entrada,@id_funcionario,@data)";
+                cmd.Parameters.AddWithValue("@entrada", SqlDbType.Time).Value = entrada;
+                cmd.Parameters.AddWithValue("@id_funcionario", id_funcionario);
+                cmd.Parameters.AddWithValue("@data", SqlDbType.Date).Value = data;
+                dr.Close();
+                try
+                {
+                    cmd.ExecuteNonQuery();
+                    con.desconectar();
+                    tem = true;
+                }
+                catch (SqlException ex)
+                {
+                    this.msg = "Erro com o banco" + ex;
+                }
+            }
+            else
+            {
+                this.msg = "Funcionário inexistente!";
+            }
+                return msg;
+        }
+        public string cadPonto(string cpf, DateTime entrada, DateTime inicioIntervalo, DateTime fimIntervalo, DateTime saida)
+        {
+            tem = false;
+            int id_funcionario = -1;            
             cmd.CommandText = "SELECT idfuncionario FROM Funcionario WHERE cpf = @cpfinserido";
             cmd.Parameters.AddWithValue("@cpfinserido", cpf);  
             cmd.Connection = con.conectar();
@@ -284,7 +318,7 @@ namespace ProjetoRhForm.Dal
                 if (dr.Read())
                 {
                   id_funcionario = Convert.ToInt32(dr["idfuncionario"]);
-                   
+            
                 }
                 dr.Close();
                 cmd.CommandText = "INSERT INTO FolhaPonto values (@id_funcionario,@entrada,@inicioIntervalo,@fimIntervalo,@saida) ";

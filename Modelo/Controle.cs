@@ -95,6 +95,15 @@ namespace ProjetoRhForm.Modelo
             }
             return msg;
         }
-     
+        public string cadPontoEntradaFolha(DateTime entrada, string cpf, DateTime data)
+        {
+            LoginDaoComandos loginDao = new LoginDaoComandos();
+            this.msg = loginDao.cadPontoEntrada(entrada,cpf, data);
+            if (loginDao.tem)
+            {
+                this.tem = true;
+            }
+            return msg;
+        }
     }
 }
