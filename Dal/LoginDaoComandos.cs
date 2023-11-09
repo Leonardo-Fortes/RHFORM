@@ -327,19 +327,26 @@ namespace ProjetoRhForm.Dal
             
                 }
                 dr.Close();
-                cmd.CommandText = "UPDATE FolhaPonto SET inicioIntervalo = @horainicio " +
-                  "WHERE id_funcionario = @IdFuncionario AND data = @DataDesejada " +
-                  "AND inicioIntervalo IS NULL";
-
-                cmd.Parameters.AddWithValue("@horainicio", SqlDbType.Time).Value = inicioIntervalo;
-                cmd.Parameters.AddWithValue("@IdFuncionario", id_funcionario);
-                cmd.Parameters.AddWithValue("@DataDesejada", SqlDbType.Date).Value = data;
-
+                
+                    cmd.CommandText = "UPDATE FolhaPonto SET inicioIntervalo = @horainicio " +
+                      "WHERE id_funcionario = @IdFuncionario AND data = @DataDesejada " +
+                      "AND inicioIntervalo IS NULL";
+                    cmd.Parameters.AddWithValue("@horainicio", SqlDbType.Time).Value = inicioIntervalo;
+                    cmd.Parameters.AddWithValue("@IdFuncionario", id_funcionario);
+                    cmd.Parameters.AddWithValue("@DataDesejada", SqlDbType.Date).Value = data;
                 try
                 {
-                    cmd.ExecuteNonQuery();
+                    int rowsAffected = cmd.ExecuteNonQuery();
                     con.desconectar();
-                    tem = true;
+
+                    if (rowsAffected == 0)
+                    {
+                        this.msg = "Nenhum registro atualizado, Funcionário fora de serviço.";
+                    }
+                    else
+                    {
+                        tem = true;
+                    }
                 }
                 catch (SqlException ex)
                 {
