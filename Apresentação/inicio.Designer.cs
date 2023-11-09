@@ -54,15 +54,12 @@
             btnInicio = new Button();
             btnFIm = new Button();
             btnSaida = new Button();
-            lbCPF = new Label();
             lbData = new Label();
             lbEntrada = new Label();
             lbInicio = new Label();
             lbFim = new Label();
             lbSaida = new Label();
             lbDataInicio = new Label();
-            mtxbCPF = new MaskedTextBox();
-            btnBuscar = new Button();
             lbUsu = new Label();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -250,17 +247,6 @@
             btnSaida.UseVisualStyleBackColor = true;
             btnSaida.Click += btnSaida_Click;
             // 
-            // lbCPF
-            // 
-            lbCPF.AutoSize = true;
-            lbCPF.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lbCPF.Location = new Point(9, 48);
-            lbCPF.Name = "lbCPF";
-            lbCPF.Size = new Size(45, 25);
-            lbCPF.TabIndex = 10;
-            lbCPF.Text = "CPF";
-            lbCPF.Click += lbCPF_Click;
-            // 
             // lbData
             // 
             lbData.AutoSize = true;
@@ -323,29 +309,11 @@
             lbDataInicio.Text = "-------";
             lbDataInicio.Click += lbDataInicio_Click;
             // 
-            // mtxbCPF
-            // 
-            mtxbCPF.Location = new Point(60, 54);
-            mtxbCPF.Name = "mtxbCPF";
-            mtxbCPF.Size = new Size(185, 25);
-            mtxbCPF.TabIndex = 19;
-            // 
-            // btnBuscar
-            // 
-            btnBuscar.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            btnBuscar.Location = new Point(251, 54);
-            btnBuscar.Name = "btnBuscar";
-            btnBuscar.Size = new Size(75, 25);
-            btnBuscar.TabIndex = 21;
-            btnBuscar.Text = "Buscar";
-            btnBuscar.UseVisualStyleBackColor = true;
-            btnBuscar.Click += btnBuscar_Click;
-            // 
             // lbUsu
             // 
             lbUsu.AutoSize = true;
             lbUsu.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lbUsu.Location = new Point(60, 82);
+            lbUsu.Location = new Point(35, 48);
             lbUsu.Name = "lbUsu";
             lbUsu.Size = new Size(0, 25);
             lbUsu.TabIndex = 22;
@@ -358,8 +326,6 @@
             BackColor = SystemColors.Control;
             ClientSize = new Size(519, 222);
             Controls.Add(lbUsu);
-            Controls.Add(btnBuscar);
-            Controls.Add(mtxbCPF);
             Controls.Add(lbSaida);
             Controls.Add(lbFim);
             Controls.Add(btnSaida);
@@ -370,7 +336,6 @@
             Controls.Add(btnInicio);
             Controls.Add(menuStrip1);
             Controls.Add(btnEntrada);
-            Controls.Add(lbCPF);
             Controls.Add(lbData);
             Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             MainMenuStrip = menuStrip1;
@@ -413,15 +378,12 @@
         private Button btnInicio;
         private Button btnFIm;
         private Button btnSaida;
-        private Label lbCPF;
         private Label lbData;
         private Label lbEntrada;
         private Label lbInicio;
         private Label lbFim;
         private Label lbSaida;
         private Label lbDataInicio;
-        private MaskedTextBox mtxbCPF;
-        private Button btnBuscar;
         private Label lbUsu;
     }
 }

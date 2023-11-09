@@ -123,7 +123,31 @@ namespace ProjetoRhForm.Apresentação
 
         private void btnInicio_Click(object sender, EventArgs e)
         {
-            lbInicio.Text = DateTime.Now.ToString("HH:mm:ss");
+            string horaInserida = DateTime.Now.ToString("HH:mm:ss");
+            string cpfUsu = UsuarioLogado.CPF;
+            string dataInserida = DateTime.Now.ToString("dd:MM:yyyy");
+            if(DateTime.TryParseExact(horaInserida,"HH:mm:ss", null, System.Globalization.DateTimeStyles.None, out DateTime horaIntervalo ) && DateTime.TryParseExact(dataInserida,"dd:MM:yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dataInvervalo))
+            {
+                Controle controle = new Controle();
+                controle.cadPontoInicioIntervalo(cpfUsu,horaIntervalo,dataInvervalo);
+                if (controle.msg.Equals(""))
+                {
+                    if (controle.tem)
+                    {
+                        MessageBox.Show("Ponto Cadastrado" + horaIntervalo, "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        lbInicio.Text = horaInserida;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ponto não cadastrado, Tente novamente!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(controle.msg);
+                }
+            }
+
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -139,7 +163,7 @@ namespace ProjetoRhForm.Apresentação
             if (DateTime.TryParseExact(dataInserida, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dataHoje) && DateTime.TryParseExact(dataEntrada, "HH:mm:ss", null, System.Globalization.DateTimeStyles.None, out DateTime dataDeEntrada))
             {
                 Controle controle = new Controle();
-                controle.cadPontoEntradaFolha(dataDeEntrada,cpfUsu, dataHoje);
+                controle.cadPontoEntradaFolha(dataDeEntrada, cpfUsu, dataHoje);
                 if (controle.msg.Equals(""))
                 {
                     if (controle.tem)
@@ -207,38 +231,16 @@ namespace ProjetoRhForm.Apresentação
             login login = new login();
             login.Show();
             this.Hide();
-
-
         }
 
         private void lvUsu_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
-
-        private void btnBuscar_Click(object sender, EventArgs e)
-        {
-            Controle controle = new Controle();
-
-            string nome = controle.verificaCPFPONTO(mtxbCPF.Text);
-            string vazio = "";
-
-            if (controle.tem)
-            {
-                lbUsu.Text = vazio;
-                lbUsu.Text = nome;
-
-                MessageBox.Show("Funcionário selecionado", "Ok", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show("Funcionário não foi encontrado. Tente novamente!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private void lbUsu_Click(object sender, EventArgs e)
         {
-
+            string cpfUsu = UsuarioLogado.CPF;
+            lbUsu.Text = cpfUsu;
         }
     }
 }

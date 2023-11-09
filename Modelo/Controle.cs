@@ -75,7 +75,7 @@ namespace ProjetoRhForm.Modelo
             }
             return msg;
         }
-        public string verificaCPFPONTO(string cpf)
+       /* public string verificaCPFPONTO(string cpf)
         {
             LoginDaoComandos LoginDAO = new LoginDaoComandos();
             this.msg = LoginDAO.verificaCpfPonto(cpf);
@@ -84,17 +84,17 @@ namespace ProjetoRhForm.Modelo
                 this.tem = true;
             }
             return msg;
-        }
-      /*  public string cadPontoFolha(string cpf, DateTime inicioIntervalo, DateTime fimIntervalo, DateTime saida)
+        } */
+       public string cadPontoInicioIntervalo(string cpf, DateTime inicioIntervalo, DateTime data)
         {
             LoginDaoComandos loginDao = new LoginDaoComandos();
-            this.msg = loginDao.cadPontoInicio(cpf, entrada, inicioIntervalo, fimIntervalo, saida);
+            this.msg = loginDao.cadPontoInicio(cpf, inicioIntervalo, data );
             if(loginDao.tem)
             {
                 this.tem = true;
             }
             return msg;
-        }*/
+        }
         public string cadPontoEntradaFolha(DateTime entrada, string cpf, DateTime data)
         {
             LoginDaoComandos loginDao = new LoginDaoComandos();

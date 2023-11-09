@@ -243,7 +243,7 @@ namespace ProjetoRhForm.Dal
 
             return msg;
         }
-        public string verificaCpfPonto(string cpf)
+       /* public string verificaCpfPonto(string cpf)
         {
             tem = false;
             string nomeFunc = "";
@@ -274,7 +274,7 @@ namespace ProjetoRhForm.Dal
                 this.msg = "Erro com o banco " + ex;
             }
             return nomeFunc;
-        }
+        }*/
         public string cadPontoEntrada(DateTime entrada, string cpf, DateTime data)
         {
             tem = false;
@@ -327,11 +327,14 @@ namespace ProjetoRhForm.Dal
             
                 }
                 dr.Close();
-                cmd.CommandText = "UPDATE FolhaPonto SET InicioIntervalo = @HoraInicioIntervalo" +
-                                 "WHERE id_funcionario = @IdFuncionario AND data = @DataDesejada";
-                cmd.Parameters.AddWithValue("@HoraInicioIntervalo", SqlDbType.Time).Value = inicioIntervalo;              
+                cmd.CommandText = "UPDATE FolhaPonto SET inicioIntervalo = @horainicio " +
+                  "WHERE id_funcionario = @IdFuncionario AND data = @DataDesejada " +
+                  "AND inicioIntervalo IS NULL";
+
+                cmd.Parameters.AddWithValue("@horainicio", SqlDbType.Time).Value = inicioIntervalo;
                 cmd.Parameters.AddWithValue("@IdFuncionario", id_funcionario);
                 cmd.Parameters.AddWithValue("@DataDesejada", SqlDbType.Date).Value = data;
+
                 try
                 {
                     cmd.ExecuteNonQuery();
