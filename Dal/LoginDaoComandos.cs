@@ -243,62 +243,88 @@ namespace ProjetoRhForm.Dal
 
             return msg;
         }
-       /* public string verificaCpfPonto(string cpf)
-        {
-            tem = false;
-            string nomeFunc = "";
-            cmd.CommandText = "SELECT nome from funcionario where cpf = @cpf";
-            cmd.Parameters.AddWithValue("@cpf", cpf);
-            try
-            {
-                cmd.Connection = con.conectar();
-                dr = cmd.ExecuteReader();  
-                if (dr.HasRows)
-                {
-                    if (dr.Read())
-                    {
-                        nomeFunc = dr["nome"].ToString();
-                    }
-                    tem = true;
-                }            
-                else
-                {
-                    this.msg = "Usuário não foi encontrado";
-                }
-                dr.Close();
-                con.desconectar();
-            }
-            catch (SqlException ex)
-            {
-                this.msg = "";
-                this.msg = "Erro com o banco " + ex;
-            }
-            return nomeFunc;
-        }*/
+        /* public string verificaCpfPonto(string cpf)
+         {
+             tem = false;
+             string nomeFunc = "";
+             cmd.CommandText = "SELECT nome from funcionario where cpf = @cpf";
+             cmd.Parameters.AddWithValue("@cpf", cpf);
+             try
+             {
+                 cmd.Connection = con.conectar();
+                 dr = cmd.ExecuteReader();  
+                 if (dr.HasRows)
+                 {
+                     if (dr.Read())
+                     {
+                         nomeFunc = dr["nome"].ToString();
+                     }
+                     tem = true;
+                 }            
+                 else
+                 {
+                     this.msg = "Usuário não foi encontrado";
+                 }
+                 dr.Close();
+                 con.desconectar();
+             }
+             catch (SqlException ex)
+             {
+                 this.msg = "";
+                 this.msg = "Erro com o banco " + ex;
+             }
+             return nomeFunc;
+         }*/
         public string cadPontoEntrada(DateTime entrada, string cpf, DateTime data)
         {
             tem = false;
             int id_funcionario = -1;
+
             cmd.CommandText = "SELECT idfuncionario FROM Funcionario WHERE cpf = @cpfinserido";
-            cmd.Parameters.AddWithValue("@cpfinserido", cpf);         
+            cmd.Parameters.AddWithValue("@cpfinserido", cpf);
             cmd.Connection = con.conectar();
             dr = cmd.ExecuteReader();
+
             if (dr.HasRows)
             {
                 if (dr.Read())
                 {
                     id_funcionario = Convert.ToInt32(dr["idfuncionario"]);
                 }
-                cmd.CommandText = "INSERT INTO FolhaPonto (entrada,id_funcionario,data) values (@entrada,@id_funcionario,@data)";
-                cmd.Parameters.AddWithValue("@entrada", SqlDbType.Time).Value = entrada;
-                cmd.Parameters.AddWithValue("@id_funcionario", id_funcionario);
-                cmd.Parameters.AddWithValue("@data", SqlDbType.Date).Value = data;
+
                 dr.Close();
+
+                // Verifica se já existe uma entrada para o mesmo dia sem a saída correspondente
+                cmd.CommandText = "SELECT COUNT(*) FROM FolhaPonto " +
+                                 "WHERE id_funcionario = @IdFuncionario " +
+                                 "AND data = @DataDesejada " +
+                                 "AND entrada IS NOT NULL " + // Verifica se a entrada já foi registrada
+                                 "AND saida IS NULL"; // Verifica se a saída ainda não foi registrada
+
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@IdFuncionario", id_funcionario);
+                cmd.Parameters.AddWithValue("@DataDesejada", SqlDbType.Date).Value = data;
+
                 try
                 {
-                    cmd.ExecuteNonQuery();
-                    con.desconectar();
-                    tem = true;
+                    int count = (int)cmd.ExecuteScalar(); // Obtém o número de registros encontrados
+
+                    if (count > 0)
+                    {
+                        this.msg = "Não é permitido registrar uma nova entrada no mesmo dia sem ter registrado a saída anterior.";
+                    }
+                    else
+                    {
+                        // Prossiga para registrar a entrada
+                        cmd.CommandText = "INSERT INTO FolhaPonto (entrada,id_funcionario,data) values (@entrada,@id_funcionario,@data)";
+                        cmd.Parameters.AddWithValue("@entrada", SqlDbType.Time).Value = entrada;
+                        cmd.Parameters.AddWithValue("@id_funcionario", id_funcionario);
+                        cmd.Parameters.AddWithValue("@data", SqlDbType.Date).Value = data;
+
+                        cmd.ExecuteNonQuery();
+                        con.desconectar();
+                        tem = true;
+                    }
                 }
                 catch (SqlException ex)
                 {
@@ -309,8 +335,10 @@ namespace ProjetoRhForm.Dal
             {
                 this.msg = "Funcionário inexistente!";
             }
-                return msg;
+
+            return msg;
         }
+
         public string cadPontoInicio(string cpf, DateTime inicioIntervalo, DateTime data)
         {
             tem = false;
@@ -326,8 +354,7 @@ namespace ProjetoRhForm.Dal
                   id_funcionario = Convert.ToInt32(dr["idfuncionario"]);
             
                 }
-                dr.Close();
-                
+                dr.Close();          
                     cmd.CommandText = "UPDATE FolhaPonto SET inicioIntervalo = @horainicio " +
                       "WHERE id_funcionario = @IdFuncionario AND data = @DataDesejada " +
                       "AND inicioIntervalo IS NULL";
