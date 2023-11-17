@@ -1,10 +1,4 @@
 ﻿using ProjetoRhForm.Dal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data;
 
 namespace ProjetoRhForm.Modelo
 {
@@ -75,21 +69,12 @@ namespace ProjetoRhForm.Modelo
             }
             return msg;
         }
-       /* public string verificaCPFPONTO(string cpf)
-        {
-            LoginDaoComandos LoginDAO = new LoginDaoComandos();
-            this.msg = LoginDAO.verificaCpfPonto(cpf);
-            if (LoginDAO.tem)
-            {
-                this.tem = true;
-            }
-            return msg;
-        } */
+ 
        public string cadPontoInicioIntervalo(string cpf, DateTime inicioIntervalo, DateTime data)
         {
-            LoginDaoComandos loginDao = new LoginDaoComandos();
-            this.msg = loginDao.cadPontoInicio(cpf, inicioIntervalo, data );
-            if(loginDao.tem)
+            PontoDaoComandos pontoDao = new PontoDaoComandos();
+            this.msg = pontoDao.cadPontoInicio(cpf, inicioIntervalo, data );
+            if(pontoDao.tem)
             {
                 this.tem = true;
             }
@@ -97,9 +82,20 @@ namespace ProjetoRhForm.Modelo
         }
         public string cadPontoEntradaFolha(DateTime entrada, string cpf, DateTime data)
         {
-            LoginDaoComandos loginDao = new LoginDaoComandos();
-            this.msg = loginDao.cadPontoEntrada(entrada,cpf, data);
-            if (loginDao.tem)
+            PontoDaoComandos pontoDao = new PontoDaoComandos();
+            this.msg = pontoDao.cadPontoEntrada(entrada,cpf, data);
+            if (pontoDao.tem)
+            {
+                this.tem = true;
+            }
+            return msg;
+        }
+
+        public string cadFimIntervalo(string cpf, DateTime fimIntervalo, DateTime data)
+        {
+            PontoDaoComandos pontoDao =new PontoDaoComandos();
+            this.msg = pontoDao.cadFimIntervalo(cpf, fimIntervalo, data);
+            if (pontoDao.tem)
             {
                 this.tem = true;
             }

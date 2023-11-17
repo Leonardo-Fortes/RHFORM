@@ -287,6 +287,7 @@
             lbFim.Size = new Size(76, 30);
             lbFim.TabIndex = 16;
             lbFim.Text = "-------";
+            lbFim.Click += lbFim_Click;
             // 
             // lbSaida
             // 
