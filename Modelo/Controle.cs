@@ -29,10 +29,10 @@ namespace ProjetoRhForm.Modelo
         public string cadastrarFunc(string nome, DateTime date, string telefone, string email, string sexo, string cpf, string cargo, string cnpj, DateTime dataadmissao)
         {
             
-            LoginDaoComandos loginDao = new LoginDaoComandos ();
-            this.msg = loginDao.cadastrarFuncionario(nome, date, telefone, email, sexo, cpf, cargo, cnpj, dataadmissao );
+            FuncionarioDaoComandos funcDao = new FuncionarioDaoComandos ();
+            this.msg = funcDao.cadastrarFuncionario(nome, date, telefone, email, sexo, cpf, cargo, cnpj, dataadmissao );
            
-            if (loginDao.tem)
+            if (funcDao.tem)
             {
                 this.tem = true;
             }
@@ -40,9 +40,9 @@ namespace ProjetoRhForm.Modelo
         }
         public string cadastrarEmp(string nome, string cnpj, string rua, string numero, string bairro, string cidade, string uf, string pais, string cep)
         {
-            LoginDaoComandos loginDao = new LoginDaoComandos ();
-            this.msg = loginDao.cadastrarEmp(nome, cnpj, rua, numero, bairro, cidade, uf, pais, cep);
-            if (loginDao.tem)
+            EmpresaDaoComandos empresaDao = new EmpresaDaoComandos ();
+            this.msg = empresaDao.cadastrarEmp(nome, cnpj, rua, numero, bairro, cidade, uf, pais, cep);
+            if (empresaDao.tem)
             {
                 this.tem = true;
             }
@@ -61,9 +61,9 @@ namespace ProjetoRhForm.Modelo
         }
         public string cadastrarBeneficios(string cpf,double convenio, double valetransporte, double valealimentacao, double valerefeicao, double ferias, double decimoterceiro, DateTime data)
         {
-            LoginDaoComandos loginDao = new LoginDaoComandos();
-            this.msg = loginDao.CadastrarBeneficio(cpf, convenio, valetransporte,valealimentacao, valerefeicao, ferias, decimoterceiro, data);
-            if(loginDao.tem)
+            BeneficiosDaoComandos beneficiosDao = new BeneficiosDaoComandos ();
+            this.msg = beneficiosDao.CadastrarBeneficio(cpf, convenio, valetransporte,valealimentacao, valerefeicao, ferias, decimoterceiro, data);
+            if(beneficiosDao.tem)
             {
                 this.tem = true;
             }
