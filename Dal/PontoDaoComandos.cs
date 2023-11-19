@@ -175,8 +175,57 @@ namespace ProjetoRhForm.Dal
                 this.msg = "Usuário inexistente";
             }
 
-                return msg;
+            return msg;
         }
+        public string saidaPonto(string cpf, DateTime saidaPonto, DateTime date)
+        {
+            tem = false;
+            int id_funcionario = -1;
+            cmd.CommandText = "SELECT idfuncionario FROM Funcionario WHERE cpf = @cpfinserido";
+            cmd.Parameters.AddWithValue("@cpfinserido", cpf);
+            cmd.Connection = con.conectar();
+            dr = cmd.ExecuteReader();
+            if (dr.HasRows)
+            {
+                if (dr.Read())
+                {
+                    id_funcionario = Convert.ToInt32(dr["idfuncionario"]);
+                }
+                dr.Close();
+                cmd.CommandText = "UPDATE FolhaPonto SET saida = @saidaPonto " +
+                  " WHERE id_funcionario = @IdFuncionario AND data = @data " +
+                  " AND entrada IS NOT NULL" +
+                  " AND saida IS NULL";
+                cmd.Parameters.AddWithValue("@saidaPonto", SqlDbType.Time).Value = saidaPonto;
+                cmd.Parameters.AddWithValue("@IdFuncionario", id_funcionario);
+                cmd.Parameters.AddWithValue("@data", SqlDbType.Date).Value = date;
+                try
+                {
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    con.desconectar();
 
+                    if (rowsAffected == 0)
+                    {
+                        this.msg = "É Preciso estar no horário de trabalho!!";
+                    }
+                    else
+                    {
+                        tem = true;
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    this.msg = "Erro com o banco " + ex;
+                }
+            }
+            else
+            {
+                this.msg = "Usuário inexistente";
+            }
+            return msg;
+
+        }
     }
+
+    
 }

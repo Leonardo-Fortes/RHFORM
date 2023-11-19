@@ -205,7 +205,31 @@ namespace ProjetoRhForm.Apresentação
         }
         private void btnSaida_Click(object sender, EventArgs e)
         {
-            lbSaida.Text = DateTime.Now.ToString("HH:mm:ss");
+            string hora = DateTime.Now.ToString("HH:mm:ss");
+            string data= DateTime.Now.ToString("dd:MM:yyyy");
+            string cpfUsu = UsuarioLogado.CPF;
+           if (DateTime.TryParseExact(data,"dd:MM:yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dataHoje)&& DateTime.TryParseExact(hora, "HH:mm:ss", null, System.Globalization.DateTimeStyles.None, out DateTime horaInserida))
+            {
+                Controle controle = new Controle();
+                controle.saidaPonto(cpfUsu, horaInserida, dataHoje);
+                if (controle.msg.Equals(""))
+                {
+                    if (controle.tem)
+                    {
+                        MessageBox.Show("Ponto cadastrado " + data, "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        lbSaida.Text = hora;
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ponto não cadastrado, Tente novamente!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(controle.msg);
+                }
+            }
         }
 
         private void txbData_TextChanged(object sender, EventArgs e)

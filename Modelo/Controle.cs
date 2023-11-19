@@ -101,5 +101,16 @@ namespace ProjetoRhForm.Modelo
             }
             return msg;
         }
+        public string saidaPonto(string cpf, DateTime saida, DateTime data)
+        {
+            PontoDaoComandos pontoDao = new PontoDaoComandos();
+            this.msg = pontoDao.saidaPonto(cpf, saida, data);
+            if (pontoDao.tem)
+            {
+                this.tem = true;
+            }
+            return msg;
+        }
+        
     }
 }
