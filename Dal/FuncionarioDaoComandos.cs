@@ -17,7 +17,7 @@ namespace ProjetoRhForm.Dal
         public string msg = "";
         Conexao con = new Conexao();
 
-        public string cadastrarFuncionario(string nome, DateTime date, string telefone, string email, string sexo, string cpf, string cargo, string cnpj, DateTime dateadmissao)
+        public string cadastrarFuncionario(string nome, DateTime date, string telefone, string email, string sexo, string cpf, string cargo, string cnpj, DateTime dateadmissao, int salarioHr)
         {
             int empresaId = 0;
             tem = false;
@@ -42,7 +42,7 @@ namespace ProjetoRhForm.Dal
                         }
                         dr.Close();
                         cmd.Parameters.Clear();
-                        cmd.CommandText = "insert into Funcionario values (@nomeemp,@telefone,@email,@sexo,@cpf,@cargo,@cnpj,@data,@idempresa,@dataadmissao)";
+                        cmd.CommandText = "insert into Funcionario values (@nomeemp,@telefone,@email,@sexo,@cpf,@cargo,@cnpj,@data,@idempresa,@dataadmissao,@salarioHr)";
                         cmd.Parameters.AddWithValue("@nomeemp", nome);
                         cmd.Parameters.AddWithValue("@telefone", telefone);
                         cmd.Parameters.AddWithValue("@email", email);
@@ -53,6 +53,7 @@ namespace ProjetoRhForm.Dal
                         cmd.Parameters.AddWithValue("@data", SqlDbType.Date).Value = date;
                         cmd.Parameters.AddWithValue("@idempresa", empresaId);
                         cmd.Parameters.AddWithValue("@dataadmissao", SqlDbType.Date).Value = dateadmissao;
+                        cmd.Parameters.AddWithValue("@salarioHr", salarioHr);
 
                         try
                         {

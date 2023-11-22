@@ -26,11 +26,11 @@ namespace ProjetoRhForm.Modelo
             }
             return msg;
         }
-        public string cadastrarFunc(string nome, DateTime date, string telefone, string email, string sexo, string cpf, string cargo, string cnpj, DateTime dataadmissao)
+        public string cadastrarFunc(string nome, DateTime date, string telefone, string email, string sexo, string cpf, string cargo, string cnpj, DateTime dataadmissao, int salarioHr)
         {
             
             FuncionarioDaoComandos funcDao = new FuncionarioDaoComandos ();
-            this.msg = funcDao.cadastrarFuncionario(nome, date, telefone, email, sexo, cpf, cargo, cnpj, dataadmissao );
+            this.msg = funcDao.cadastrarFuncionario(nome, date, telefone, email, sexo, cpf, cargo, cnpj, dataadmissao, salarioHr );
            
             if (funcDao.tem)
             {
@@ -111,6 +111,17 @@ namespace ProjetoRhForm.Modelo
             }
             return msg;
         }
+        public string calcHorasTrabalhadas (string cpf, string mesAno, int cnpj)
+        {
+            FolhaDaoComandos folha = new FolhaDaoComandos ();
+            this.msg = folha.CalcHorasFolha(cpf, mesAno, cnpj);
+            if (folha.tem)
+            {
+                this.tem = true;
+            }
+            return msg;
+        }
+       
         
     }
 }

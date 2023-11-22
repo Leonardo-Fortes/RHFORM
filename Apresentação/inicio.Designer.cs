@@ -197,6 +197,7 @@
             gerarFolhaToolStripMenuItem.Name = "gerarFolhaToolStripMenuItem";
             gerarFolhaToolStripMenuItem.Size = new Size(183, 30);
             gerarFolhaToolStripMenuItem.Text = "Gerar Folha";
+            gerarFolhaToolStripMenuItem.Click += gerarFolhaToolStripMenuItem_Click;
             // 
             // timer1
             // 

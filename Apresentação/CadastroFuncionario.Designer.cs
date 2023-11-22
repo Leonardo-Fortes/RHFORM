@@ -47,6 +47,8 @@
             lbEmpresa = new Label();
             lbAdmissao = new Label();
             txbAdmissao = new TextBox();
+            lbSalarioHr = new Label();
+            txbHorista = new TextBox();
             SuspendLayout();
             // 
             // btnCadFunc
@@ -213,11 +215,31 @@
             txbAdmissao.Size = new Size(277, 23);
             txbAdmissao.TabIndex = 18;
             // 
+            // lbSalarioHr
+            // 
+            lbSalarioHr.AutoSize = true;
+            lbSalarioHr.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lbSalarioHr.Location = new Point(476, 239);
+            lbSalarioHr.Name = "lbSalarioHr";
+            lbSalarioHr.Size = new Size(203, 40);
+            lbSalarioHr.TabIndex = 19;
+            lbSalarioHr.Text = "Sálario Horista";
+            // 
+            // txbHorista
+            // 
+            txbHorista.Location = new Point(476, 282);
+            txbHorista.Name = "txbHorista";
+            txbHorista.Size = new Size(277, 23);
+            txbHorista.TabIndex = 20;
+            txbHorista.TextChanged += txbHorista_TextChanged;
+            // 
             // CadastroFuncionario
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(txbHorista);
+            Controls.Add(lbSalarioHr);
             Controls.Add(txbAdmissao);
             Controls.Add(lbAdmissao);
             Controls.Add(lbEmpresa);
@@ -264,5 +286,7 @@
         private Label lbEmpresa;
         private Label lbAdmissao;
         private TextBox txbAdmissao;
+        private Label lbSalarioHr;
+        private TextBox txbHorista;
     }
 }

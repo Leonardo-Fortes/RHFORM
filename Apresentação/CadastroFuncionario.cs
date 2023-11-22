@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -29,49 +30,67 @@ namespace ProjetoRhForm.Apresentação
             string cargo = txbCargo.Text;
             string cnpj = txbCNPJ.Text;
             string dataAdmissao = txbAdmissao.Text;
-            if (string.IsNullOrEmpty(nomeFunc) || string.IsNullOrEmpty(telefoneFunc) || string.IsNullOrEmpty(emailFunc) || string.IsNullOrEmpty(sexoFunc) || string.IsNullOrEmpty(cpfFunc) || string.IsNullOrEmpty(cargo) || string.IsNullOrEmpty(cnpj) || string.IsNullOrEmpty(dataDigitada))
+            int salarioHr;
+            if (int.TryParse(txbHorista.Text, out salarioHr))
             {
-                MessageBox.Show("Nenhum campo pode estar vazio!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                if (DateTime.TryParseExact(dataDigitada, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dataInserida) && DateTime.TryParseExact(dataAdmissao,"dd-MM-yyyy",null,System.Globalization.DateTimeStyles.None, out DateTime dataadmissao))
+                if (string.IsNullOrEmpty(nomeFunc) || string.IsNullOrEmpty(telefoneFunc) || string.IsNullOrEmpty(emailFunc) || string.IsNullOrEmpty(sexoFunc) || string.IsNullOrEmpty(cpfFunc) || string.IsNullOrEmpty(cargo) || string.IsNullOrEmpty(cnpj) || string.IsNullOrEmpty(dataDigitada))
                 {
-                    // Verifique se a data inserida está acima ou igual à data mínima suportada pelo SQL Server (01/01/1753)
-                    if (dataInserida < new DateTime (1753, 1, 1) || dataadmissao < new DateTime(1753,1,1)) 
-                    {                      
-                            MessageBox.Show("A data inserida está abaixo do limite .", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);         
-                    }
-                    if (dataadmissao > DateTime.Now || dataInserida > DateTime.Now)
-                    {
-                        MessageBox.Show("A data inserida está acima do limite .", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else
-                    {
-                        controle.cadastrarFunc(txbNomeFunc.Text, dataInserida, txbTelefoneFunc.Text, txbEmailFunc.Text, txbSexoFunc.Text, txbCPFFunc.Text, txbCargo.Text, txbCNPJ.Text, dataadmissao);
-                        if (controle.msg.Equals(""))
-                        {
-                            if (controle.tem)
-                            {
-                                MessageBox.Show("Cadastrado com Sucesso", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                this.Close();
-                            }
-                            else
-                            {
-                                MessageBox.Show("Ocorreu algo de errado, tente novamente", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show(controle.msg);
-                        }
-                    }
+                    MessageBox.Show("Nenhum campo pode estar vazio!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    MessageBox.Show("A data inserida não está no formato correto");
+                    if (DateTime.TryParseExact(dataDigitada, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dataInserida) && DateTime.TryParseExact(dataAdmissao, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dataadmissao))
+                    {
+                        // Verifique se a data inserida está acima ou igual à data mínima suportada pelo SQL Server (01/01/1753)
+                        if (dataInserida < new DateTime(1753, 1, 1) || dataadmissao < new DateTime(1753, 1, 1))
+                        {
+                            MessageBox.Show("A data inserida está abaixo do limite .", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        if (dataadmissao > DateTime.Now || dataInserida > DateTime.Now)
+                        {
+                            MessageBox.Show("A data inserida está acima do limite .", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else
+                        {
+                            controle.cadastrarFunc(txbNomeFunc.Text, dataInserida, txbTelefoneFunc.Text, txbEmailFunc.Text, txbSexoFunc.Text, txbCPFFunc.Text, txbCargo.Text, txbCNPJ.Text, dataadmissao, salarioHr);
+                            if (controle.msg.Equals(""))
+                            {
+                                if (controle.tem)
+                                {
+                                    MessageBox.Show("Cadastrado com Sucesso", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    this.Close();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Ocorreu algo de errado, tente novamente", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show(controle.msg);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("A data inserida não está no formato correto");
+                    }
                 }
             }
+            else
+            {
+                MessageBox.Show("Salário hora deve ser númerico");
+            }
+               
+                
+                
+                
+            
+        }
+
+        private void txbHorista_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

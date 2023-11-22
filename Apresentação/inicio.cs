@@ -206,9 +206,9 @@ namespace ProjetoRhForm.Apresentação
         private void btnSaida_Click(object sender, EventArgs e)
         {
             string hora = DateTime.Now.ToString("HH:mm:ss");
-            string data= DateTime.Now.ToString("dd:MM:yyyy");
+            string data = DateTime.Now.ToString("dd:MM:yyyy");
             string cpfUsu = UsuarioLogado.CPF;
-           if (DateTime.TryParseExact(data,"dd:MM:yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dataHoje)&& DateTime.TryParseExact(hora, "HH:mm:ss", null, System.Globalization.DateTimeStyles.None, out DateTime horaInserida))
+            if (DateTime.TryParseExact(data, "dd:MM:yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dataHoje) && DateTime.TryParseExact(hora, "HH:mm:ss", null, System.Globalization.DateTimeStyles.None, out DateTime horaInserida))
             {
                 Controle controle = new Controle();
                 controle.saidaPonto(cpfUsu, horaInserida, dataHoje);
@@ -284,6 +284,12 @@ namespace ProjetoRhForm.Apresentação
         private void lbFim_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void gerarFolhaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FolhaPagamento folhaPagamento = new FolhaPagamento();
+            folhaPagamento.Show();
         }
     }
 }
