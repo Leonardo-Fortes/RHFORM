@@ -38,7 +38,7 @@ namespace ProjetoRhForm.Dal
                     int idFuncionario = BuscarIdFuncionarioPorCpf(cpf);
 
 
-                    if (idFuncionario != -1)
+                    if (idFuncionario != -1 )
                     {
                         // Verifique se o funcionário pertence à empresa especificada
                         if (FuncionarioPertenceAEmpresa(idFuncionario, idEmpresa))
@@ -46,7 +46,8 @@ namespace ProjetoRhForm.Dal
                             // Se encontrou o ID e o funcionário pertence à empresa, execute a stored procedure para esse funcionário
                             ExecutarStoredProcedure(idFuncionario, mes_ano);
                             ExecutarStoredProcedureSalarioBase(idFuncionario, mes_ano);
-                            ExecutarStoredProcedureCalcularDesconto(idFuncionario);
+                            ExecutarStoredProcedureCalcularDesconto(idFuncionario, mes_ano);
+                            ExecutarStoredProcedureSalarioLiquido(idFuncionario, mes_ano);
                             this.tem = true;
                         }
                         else
@@ -69,7 +70,8 @@ namespace ProjetoRhForm.Dal
                     {
                         ExecutarStoredProcedure(idFuncionario, mes_ano);
                         ExecutarStoredProcedureSalarioBase(idFuncionario, mes_ano);
-                        ExecutarStoredProcedureCalcularDesconto(idFuncionario);
+                        ExecutarStoredProcedureCalcularDesconto(idFuncionario, mes_ano);
+                        ExecutarStoredProcedureSalarioLiquido(idFuncionario, mes_ano);
                         this.tem = true;
                     }
 
@@ -180,8 +182,17 @@ namespace ProjetoRhForm.Dal
                 cmd.Parameters.AddWithValue("@mes_ano", mes_ano);
                 cmd.Connection = con.conectar();
                 cmd.ExecuteNonQuery();
+                int rowsAffected = cmd.ExecuteNonQuery();
                 con.desconectar();
 
+                if (rowsAffected == 0)
+                {
+                    this.msg = "Nenhum registro atualizado, Funcionário fora de serviço.";
+                }
+                else
+                {
+                    tem = true;
+                }
             }
             catch (SqlException ex)
             {
@@ -207,7 +218,7 @@ namespace ProjetoRhForm.Dal
             }
             catch (SqlException ex)
             {
-                if (ex.Number == 50000)
+                if (ex.Number == 50001)
                 {
                     this.msg = ex.Message;
                 }
@@ -215,13 +226,14 @@ namespace ProjetoRhForm.Dal
 
         }
 
-        private void ExecutarStoredProcedureCalcularDesconto(int idFuncionario)
+        private void ExecutarStoredProcedureCalcularDesconto(int idFuncionario, string mesAno)
         {
             try
             {
-                cmd.CommandText = "execute CalcularDescontos @id";
+                cmd.CommandText = "execute CalcularDescontos @id, @mesAno";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@id", idFuncionario);
+                cmd.Parameters.AddWithValue("@mesAno", mesAno);
                 cmd.Connection = con.conectar();
                 cmd.ExecuteNonQuery();
                 con.desconectar();
@@ -229,9 +241,76 @@ namespace ProjetoRhForm.Dal
             }
             catch (SqlException ex)
             {
-                this.msg = "Erro" + ex;
+                if (ex.Number == 50001)
+                {
+                    this.msg = ex.Message;
+                }
             }
 
+        }
+
+        public DataRow ExibirFolha(string cpf, string data)
+        {
+            DataTable tabelaFolha = new DataTable();
+            tem = false;
+            int id_funcionario = 0;
+
+            try
+            {
+                // Consulta para obter o ID do funcionário com base no CPF
+                cmd.CommandText = "SELECT idfuncionario FROM Funcionario WHERE cpf = @cpf";
+                cmd.Parameters.Clear();  // Limpa os parâmetros anteriores
+                cmd.Parameters.AddWithValue("@cpf", cpf);
+
+                cmd.Connection = con.conectar();
+                dr = cmd.ExecuteReader();
+
+                if (dr.HasRows && dr.Read())
+                {
+                    id_funcionario = Convert.ToInt32(dr["idfuncionario"]);
+                }
+
+                dr.Close();
+
+                // Consulta para obter os dados da folha com base no ID do funcionário e na data
+                string columnNames = "qtd_hora, hora_extra, salario_base, salario_liquido, inss, irrf, fgts, data";
+                cmd.CommandText = $"SELECT {columnNames} FROM Folha WHERE id_funcionario = @idfunc AND mes_ano = @data";
+                cmd.Parameters.Clear();  // Limpa os parâmetros anteriores
+                cmd.Parameters.AddWithValue("@idfunc", id_funcionario);
+                cmd.Parameters.AddWithValue("@data", data);
+
+                dr = cmd.ExecuteReader();
+
+                while (dr.Read())
+                {
+                    // Adicione os valores das colunas à tabela
+                    DataRow linha = tabelaFolha.NewRow();
+                    linha["qtd_hora"] = dr["qtd_hora"];
+                    linha["hora_extra"] = dr["hora_extra"];
+                    linha["salario_base"] = dr["salario_base"];
+                    linha["salario_liquido"] = dr["salario_liquido"];
+                    linha["inss"] = dr["inss"];
+                    linha["irrf"] = dr["irrf"];
+                    linha["fgts"] = dr["fgts"];
+                    linha["data"] = dr["data"];
+                    tabelaFolha.Rows.Add(linha);
+                }
+
+                tem = true;
+                dr.Close();
+                con.desconectar();
+
+                if (tabelaFolha.Rows.Count > 0)
+                {
+                    return tabelaFolha.Rows[0]; // Retorna a primeira linha da tabela (se houver)
+                }
+            }
+            catch (SqlException ex)
+            {
+                msg = "Erro: " + ex.Message;
+            }
+
+            return null; // Retorna null se não houver dados
         }
     }
 

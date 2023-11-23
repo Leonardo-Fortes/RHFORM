@@ -1,4 +1,6 @@
-﻿using ProjetoRhForm.Dal;
+﻿using ProjetoRhForm.Apresentação;
+using ProjetoRhForm.Dal;
+using System.Data;
 
 namespace ProjetoRhForm.Modelo
 {
@@ -51,15 +53,15 @@ namespace ProjetoRhForm.Modelo
 
         public string verificaCPF(string cpf)
         {
-            LoginDaoComandos loginDAO = new LoginDaoComandos(); 
-            this.msg = loginDAO.VerificarCPF(cpf);
-            if (loginDAO.tem)
+            BeneficiosDaoComandos beneficiosDao = new BeneficiosDaoComandos(); 
+            this.msg = beneficiosDao.VerificarCPF(cpf);
+            if (beneficiosDao.tem)
             {
                 this.tem = true;
             }        
             return msg;
         }
-        public string cadastrarBeneficios(string cpf,double convenio, double valetransporte, double valealimentacao, double valerefeicao, double ferias, double decimoterceiro, DateTime data)
+        public string cadastrarBeneficios(string cpf,double convenio, double valetransporte, double valealimentacao, double valerefeicao, double ferias, double decimoterceiro, string data)
         {
             BeneficiosDaoComandos beneficiosDao = new BeneficiosDaoComandos ();
             this.msg = beneficiosDao.CadastrarBeneficio(cpf, convenio, valetransporte,valealimentacao, valerefeicao, ferias, decimoterceiro, data);
@@ -121,7 +123,13 @@ namespace ProjetoRhForm.Modelo
             }
             return msg;
         }
-       
-        
+        public DataRow ExibirFolha(string cpf, string data)
+        {
+            FolhaDaoComandos folhaDao = new FolhaDaoComandos();
+            return folhaDao.ExibirFolha(cpf, data);
+        }
+
+
+
     }
 }

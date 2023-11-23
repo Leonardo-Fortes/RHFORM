@@ -61,6 +61,7 @@
             lbSaida = new Label();
             lbDataInicio = new Label();
             lbUsu = new Label();
+            consultarFolhaToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -174,7 +175,7 @@
             // 
             // folhaToolStripMenuItem
             // 
-            folhaToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { beneficiosToolStripMenuItem1, descontosToolStripMenuItem1, gerarFolhaToolStripMenuItem });
+            folhaToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { beneficiosToolStripMenuItem1, descontosToolStripMenuItem1, gerarFolhaToolStripMenuItem, consultarFolhaToolStripMenuItem });
             folhaToolStripMenuItem.Name = "folhaToolStripMenuItem";
             folhaToolStripMenuItem.Size = new Size(71, 29);
             folhaToolStripMenuItem.Text = "Folha";
@@ -182,20 +183,20 @@
             // beneficiosToolStripMenuItem1
             // 
             beneficiosToolStripMenuItem1.Name = "beneficiosToolStripMenuItem1";
-            beneficiosToolStripMenuItem1.Size = new Size(183, 30);
+            beneficiosToolStripMenuItem1.Size = new Size(218, 30);
             beneficiosToolStripMenuItem1.Text = "Beneficios";
             beneficiosToolStripMenuItem1.Click += beneficiosToolStripMenuItem1_Click;
             // 
             // descontosToolStripMenuItem1
             // 
             descontosToolStripMenuItem1.Name = "descontosToolStripMenuItem1";
-            descontosToolStripMenuItem1.Size = new Size(183, 30);
+            descontosToolStripMenuItem1.Size = new Size(218, 30);
             descontosToolStripMenuItem1.Text = "Descontos";
             // 
             // gerarFolhaToolStripMenuItem
             // 
             gerarFolhaToolStripMenuItem.Name = "gerarFolhaToolStripMenuItem";
-            gerarFolhaToolStripMenuItem.Size = new Size(183, 30);
+            gerarFolhaToolStripMenuItem.Size = new Size(218, 30);
             gerarFolhaToolStripMenuItem.Text = "Gerar Folha";
             gerarFolhaToolStripMenuItem.Click += gerarFolhaToolStripMenuItem_Click;
             // 
@@ -321,6 +322,13 @@
             lbUsu.TabIndex = 22;
             lbUsu.Click += lbUsu_Click;
             // 
+            // consultarFolhaToolStripMenuItem
+            // 
+            consultarFolhaToolStripMenuItem.Name = "consultarFolhaToolStripMenuItem";
+            consultarFolhaToolStripMenuItem.Size = new Size(218, 30);
+            consultarFolhaToolStripMenuItem.Text = "Consultar Folha";
+            consultarFolhaToolStripMenuItem.Click += consultarFolhaToolStripMenuItem_Click;
+            // 
             // inicio
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
@@ -387,5 +395,6 @@
         private Label lbSaida;
         private Label lbDataInicio;
         private Label lbUsu;
+        private ToolStripMenuItem consultarFolhaToolStripMenuItem;
     }
 }

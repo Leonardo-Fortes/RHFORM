@@ -32,34 +32,74 @@ namespace ProjetoRhForm.Apresentação
             string valeRefeicaoStr = txbValeRefeicao.Text;
             string feriasStr = txbFerias.Text;
             string decimoStr = txbDecimo.Text;
-            string data = txbData.Text;
 
-            double convenio;
-            double valeTransporte;
-            double alimentacao;
-            double valeRefeicao;
-            double ferias;
-            double decimo;
-            
-            try
+            double? convenio = null;
+            double? valeTransporte = null;
+            double? alimentacao = null;
+            double? valeRefeicao = null;
+            double? ferias = null;
+            double? decimo = null;
+
+            if (string.IsNullOrWhiteSpace(convenioStr))
             {
+                MessageBox.Show("Por favor, insira um valor válido para Convênio.");
+                return;
+            }
 
-                if (string.IsNullOrWhiteSpace(this.cpf))
+            if (Double.TryParse(convenioStr, out double convenioValue))
+            {
+                convenio = convenioValue;
+            }
+
+            if (string.IsNullOrWhiteSpace(valeTransporteStr))
+            {
+                MessageBox.Show("Por favor, insira um valor válido para Vale Transporte.");
+                return;
+            }
+
+            if (Double.TryParse(valeTransporteStr, out double valeTransporteValue))
+            {
+                valeTransporte = valeTransporteValue;
+            }
+            if (Double.TryParse(alimentacaoStr, out double alimentacaoValue))
+            {
+                alimentacao = alimentacaoValue;
+            }
+            if (Double.TryParse(valeRefeicaoStr, out double valeRefeicaoValue))
+            {
+                valeRefeicao = valeRefeicaoValue;
+            }
+            if (Double.TryParse(feriasStr, out double feriasValue))
+            {
+                ferias = feriasValue;
+            }
+            if (Double.TryParse(decimoStr, out double decimoValue))
+            {
+                decimo = decimoValue;
+            }
+
+            // Repita para as outras variáveis...
+
+            // Agora você tem as variáveis 'convenio', 'valeTransporte', etc., que podem ser null se a conversão falhar.
+
+
+
+            if (string.IsNullOrWhiteSpace(this.cpf))
                 {
                     MessageBox.Show("Por favor, insira um CPF válido.");
                     return;
                 }
 
-                convenio = Double.Parse(convenioStr);
-                valeTransporte = Double.Parse(valeTransporteStr);
-                alimentacao = Double.Parse(alimentacaoStr);
-                valeRefeicao = Double.Parse(valeRefeicaoStr);
-                ferias = Double.Parse(feriasStr);
-                decimo = Double.Parse(decimoStr);
-                if (DateTime.TryParseExact(data, "MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dataInserida))
+                
+               
+                string dataInserida = txbData.Text;
+                string formatoAtual = "MM-yyyy";
+                string formatoDesejado = "yyyy-MM";
+           
+            if (TryFormatarData(dataInserida, formatoAtual, formatoDesejado, out string dataFormatada))
                 {
                     // Agora você pode chamar o método de controle com os valores do tipo double
-                    controle.cadastrarBeneficios(this.cpf, convenio, valeTransporte, alimentacao, valeRefeicao, ferias, decimo, dataInserida);
+                    controle.cadastrarBeneficios(this.cpf, convenioValue, valeTransporteValue, alimentacaoValue, valeRefeicaoValue, feriasValue, decimoValue, dataFormatada);
                     if (controle.msg.Equals(""))
                     {
                         if (controle.tem)
@@ -80,16 +120,24 @@ namespace ProjetoRhForm.Apresentação
                     {
                         MessageBox.Show("A data inserida não está no formato correto");
                     }               
-            }
-            catch (FormatException)
-            {
-                MessageBox.Show("Valores inválidos. Certifique-se de inserir números válidos.");
-            }
+           
         }
 
         private void label1_Click_1(object sender, EventArgs e)
         {
 
+        }
+        static bool TryFormatarData(string dataInserida, string formatoAtual, string formatoDesejado, out string dataFormatada)
+        {
+            if (DateTime.TryParseExact(dataInserida, formatoAtual, null, System.Globalization.DateTimeStyles.None, out DateTime dataConvertida))
+            {
+                // Se a conversão for bem-sucedida, você pode agora formatar a data no novo formato desejado
+                dataFormatada = dataConvertida.ToString(formatoDesejado);
+                return true;
+            }
+
+            dataFormatada = null;
+            return false;
         }
     }
 }

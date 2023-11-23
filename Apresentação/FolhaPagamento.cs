@@ -36,7 +36,7 @@ namespace ProjetoRhForm.Apresentação
                     {
                         if (controle.tem)
                         {
-                            
+                            MessageBox.Show("Folha Gerada Com Sucesso!!","Sucesso!",MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         else
                         {
@@ -48,7 +48,7 @@ namespace ProjetoRhForm.Apresentação
                         MessageBox.Show(controle.msg);
                     }
                 }
-                catch(SqlException ex)
+                catch (SqlException ex)
                 {
                     MessageBox.Show("Erro" + ex);
                 }

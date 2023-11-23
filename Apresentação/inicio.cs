@@ -291,5 +291,11 @@ namespace ProjetoRhForm.Apresentação
             FolhaPagamento folhaPagamento = new FolhaPagamento();
             folhaPagamento.Show();
         }
+
+        private void consultarFolhaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExibirFolha exibir = new ExibirFolha();
+            exibir.Show();
+        }
     }
 }

@@ -70,24 +70,7 @@ namespace ProjetoRhForm.Dal
         }
 
 
-        public string VerificarCPF(string cpf)
-        {
-            tem = false;
-            cmd.CommandText = "select cpf from Funcionario where cpf = @cpf";
-            cmd.Parameters.AddWithValue("@cpf", cpf);
-            cmd.Connection = con.conectar();
-            dr = cmd.ExecuteReader();
-            if (dr.HasRows)
-            {
-                tem = true;
-            }
-            else
-            {
-                this.msg = "cpf não encontrado";
-            }
-            return msg;
-
-        }
+     
 
     }
 
