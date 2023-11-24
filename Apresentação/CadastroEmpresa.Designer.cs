@@ -32,7 +32,6 @@
             lbNomeEmp = new Label();
             txtNomeEmp = new TextBox();
             lbCNPJ = new Label();
-            txtCNPJEmp = new TextBox();
             lbRua = new Label();
             txbRua = new TextBox();
             txbNumero = new TextBox();
@@ -45,8 +44,9 @@
             txbUF = new TextBox();
             lbPais = new Label();
             txbPais = new TextBox();
-            txbCep = new TextBox();
             lbCEP = new Label();
+            MtxtCNPJEmp = new MaskedTextBox();
+            MtxbCEP = new MaskedTextBox();
             SuspendLayout();
             // 
             // btnCadEmp
@@ -88,14 +88,6 @@
             lbCNPJ.TabIndex = 3;
             lbCNPJ.Text = "CNPJ";
             // 
-            // txtCNPJEmp
-            // 
-            txtCNPJEmp.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            txtCNPJEmp.Location = new Point(139, 64);
-            txtCNPJEmp.Name = "txtCNPJEmp";
-            txtCNPJEmp.Size = new Size(315, 25);
-            txtCNPJEmp.TabIndex = 4;
-            // 
             // lbRua
             // 
             lbRua.AutoSize = true;
@@ -121,6 +113,8 @@
             txbNumero.Name = "txbNumero";
             txbNumero.Size = new Size(90, 25);
             txbNumero.TabIndex = 7;
+            txbNumero.TextChanged += txbNumero_TextChanged;
+            txbNumero.KeyPress += txbNumero_KeyPress;
             // 
             // lbNumero
             // 
@@ -185,6 +179,7 @@
             txbUF.Name = "txbUF";
             txbUF.Size = new Size(115, 25);
             txbUF.TabIndex = 14;
+            txbUF.KeyPress += txbUF_KeyPress;
             // 
             // lbPais
             // 
@@ -204,14 +199,6 @@
             txbPais.Size = new Size(660, 25);
             txbPais.TabIndex = 16;
             // 
-            // txbCep
-            // 
-            txbCep.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            txbCep.Location = new Point(139, 270);
-            txbCep.Name = "txbCep";
-            txbCep.Size = new Size(300, 25);
-            txbCep.TabIndex = 17;
-            // 
             // lbCEP
             // 
             lbCEP.AutoSize = true;
@@ -222,13 +209,37 @@
             lbCEP.TabIndex = 18;
             lbCEP.Text = "CEP";
             // 
+            // MtxtCNPJEmp
+            // 
+            MtxtCNPJEmp.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            MtxtCNPJEmp.Location = new Point(139, 60);
+            MtxtCNPJEmp.Mask = "00.000.000/0000-00";
+            MtxtCNPJEmp.Name = "MtxtCNPJEmp";
+            MtxtCNPJEmp.Size = new Size(100, 29);
+            MtxtCNPJEmp.TabIndex = 19;
+            MtxtCNPJEmp.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            MtxtCNPJEmp.MaskInputRejected += MtxtCNPJEmp_MaskInputRejected;
+            MtxtCNPJEmp.KeyPress += MtxtCNPJEmp_KeyPress;
+            // 
+            // MtxbCEP
+            // 
+            MtxbCEP.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            MtxbCEP.Location = new Point(139, 266);
+            MtxbCEP.Mask = "00000-000";
+            MtxbCEP.Name = "MtxbCEP";
+            MtxbCEP.Size = new Size(70, 29);
+            MtxbCEP.TabIndex = 20;
+            MtxbCEP.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            MtxbCEP.KeyPress += MtxbCEP_KeyPress;
+            // 
             // CadastroEmpresa
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(820, 323);
+            Controls.Add(MtxbCEP);
+            Controls.Add(MtxtCNPJEmp);
             Controls.Add(lbCEP);
-            Controls.Add(txbCep);
             Controls.Add(txbPais);
             Controls.Add(lbPais);
             Controls.Add(txbUF);
@@ -241,7 +252,6 @@
             Controls.Add(txbNumero);
             Controls.Add(txbRua);
             Controls.Add(lbRua);
-            Controls.Add(txtCNPJEmp);
             Controls.Add(lbCNPJ);
             Controls.Add(txtNomeEmp);
             Controls.Add(lbNomeEmp);
@@ -250,6 +260,7 @@
             MdiChildrenMinimizedAnchorBottom = false;
             MinimumSize = new Size(836, 362);
             Name = "CadastroEmpresa";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "CadastroEmpresa";
             ResumeLayout(false);
             PerformLayout();
@@ -261,7 +272,6 @@
         private Label lbNomeEmp;
         private TextBox txtNomeEmp;
         private Label lbCNPJ;
-        private TextBox txtCNPJEmp;
         private Label lbRua;
         private TextBox txbRua;
         private TextBox txbNumero;
@@ -274,7 +284,8 @@
         private TextBox txbUF;
         private Label lbPais;
         private TextBox txbPais;
-        private TextBox txbCep;
         private Label lbCEP;
+        private MaskedTextBox MtxtCNPJEmp;
+        private MaskedTextBox MtxbCEP;
     }
 }

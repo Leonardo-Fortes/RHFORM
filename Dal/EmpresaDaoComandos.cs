@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
@@ -20,9 +21,48 @@ namespace ProjetoRhForm.Dal
         public string cadastrarEmp(string nome, string cnpj, string rua, string numero, string bairro, string cidade, string uf, string pais, string cep)
         {
             tem = false;
-            cmd.CommandText = "insert into Empresa values (@nome,@cnpj,@rua,@numero,@bairro,@cidade,@uf,@pais,@cep)";
+            cmd.CommandText = "select 1 from Empresa where cnpj = @cnpj1";
+            cmd.Parameters.AddWithValue("@cnpj1", cnpj);
+            cmd.Connection = con.conectar();
+            dr = cmd.ExecuteReader();
+            if (!dr.Read())
+            {
+                cmd.CommandText = "insert into Empresa values (@nome,@cnpj,@rua,@numero,@bairro,@cidade,@uf,@pais,@cep)";
+                cmd.Parameters.AddWithValue("@nome", nome);
+                cmd.Parameters.AddWithValue("@cnpj", cnpj);
+                cmd.Parameters.AddWithValue("@rua", rua);
+                cmd.Parameters.AddWithValue("@numero", numero);
+                cmd.Parameters.AddWithValue("@bairro", bairro);
+                cmd.Parameters.AddWithValue("@cidade", cidade);
+                cmd.Parameters.AddWithValue("@uf", uf);
+                cmd.Parameters.AddWithValue("@pais", pais);
+                cmd.Parameters.AddWithValue("@cep", cep);
+                dr.Close();
+
+                try
+                {
+
+                    cmd.ExecuteNonQuery();
+                    con.desconectar();
+                    tem = true;
+                }
+                catch (SqlException e)
+                {
+
+                    this.msg = "erro com o banco" + e;
+                }
+            }
+            else
+            {
+                this.msg = "Já existe uma empresa com esse CNPJ";
+            }
+            return msg;
+        }
+        public string alterarEmp(string nome, string cnpj, string rua, string numero, string bairro, string cidade, string uf, string pais, string cep)
+        {
+            tem = false;
+            cmd.CommandText = "UPDATE Empresa SET nome = @nome, rua = @rua, numero = @numero, bairro = @bairro, cidade = @cidade, uf = @uf, pais = @pais, cep = @cep where cnpj = @cnpj1";
             cmd.Parameters.AddWithValue("@nome", nome);
-            cmd.Parameters.AddWithValue("@cnpj", cnpj);
             cmd.Parameters.AddWithValue("@rua", rua);
             cmd.Parameters.AddWithValue("@numero", numero);
             cmd.Parameters.AddWithValue("@bairro", bairro);
@@ -30,19 +70,97 @@ namespace ProjetoRhForm.Dal
             cmd.Parameters.AddWithValue("@uf", uf);
             cmd.Parameters.AddWithValue("@pais", pais);
             cmd.Parameters.AddWithValue("@cep", cep);
+            cmd.Parameters.AddWithValue("@cnpj1", cnpj);
             try
             {
                 cmd.Connection = con.conectar();
-                cmd.ExecuteNonQuery();
+                int rowsAffected = cmd.ExecuteNonQuery();
                 con.desconectar();
-                tem = true;
-            }
-            catch (SqlException e)
-            {
 
-                this.msg = "erro com o banco" + e;
+                if (rowsAffected == 0)
+                {
+                    this.msg = "Nenhum registro atualizado, Empresa Inexistente.";
+                }
+                else
+                {
+                    tem = true;
+                }
+            }
+            catch (SqlException ex)
+            {
+                this.msg = "Erro com o banco " + ex;
             }
             return msg;
         }
+
+        public DataTable ExibirEmpresa(string cnpj)
+        {
+            DataTable tabelaEmpresa = new DataTable();
+            tem = false;
+
+            try
+            {
+                string columnNamesEmpresa = "nome, cnpj, rua, numero, bairro, cidade, UF, pais, cep";
+                string queryFolha;
+
+                if (string.IsNullOrEmpty(cnpj))
+                {
+                    // Se o CNPJ for nulo, traga todas as empresas
+                    queryFolha = $"SELECT {columnNamesEmpresa} FROM Empresa";
+                }
+                else
+                {
+                    // Caso contrário, traga a empresa com o CNPJ especificado
+                    queryFolha = $"SELECT {columnNamesEmpresa} FROM Empresa WHERE cnpj = @cnpj";
+                    cmd.Parameters.AddWithValue("@cnpj", cnpj);
+                }
+
+                cmd.Connection = con.conectar();
+                cmd.CommandText = queryFolha;
+                dr = cmd.ExecuteReader();
+
+                foreach (var columnName in columnNamesEmpresa.Split(',').Select(c => c.Trim()))
+                {
+                    if (!tabelaEmpresa.Columns.Contains(columnName))
+                    {
+                        tabelaEmpresa.Columns.Add(columnName);
+                    }
+                }
+
+                try
+                {
+                    while (dr.Read())
+                    {
+                        DataRow linha = tabelaEmpresa.NewRow();
+
+                        foreach (var columnName in columnNamesEmpresa.Split(',').Select(c => c.Trim()))
+                        {
+                            linha[columnName] = dr[columnName];
+                        }
+
+                        tabelaEmpresa.Rows.Add(linha);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Erro ao processar dados da tabela Folha.", ex);
+                }
+                finally
+                {
+                    this.tem = true;
+                    dr.Close();
+                    con.desconectar();
+                }
+
+                // Retorna o DataTable com todas as linhas ou uma tabela vazia se não houver dados
+                return tabelaEmpresa.Rows.Count > 0 ? tabelaEmpresa : new DataTable();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Erro: " + ex.Message);
+                throw new Exception("Erro ao executar a consulta.", ex);
+            }
+        }
+
     }
 }

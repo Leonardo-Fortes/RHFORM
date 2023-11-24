@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ProjetoRhForm.Apresentação
 {
@@ -21,22 +22,22 @@ namespace ProjetoRhForm.Apresentação
 
         private void btnGerar_Click(object sender, EventArgs e)
         {
-            string dataInserida = txbData.Text;
+            string dataInserida = MTxbData.Text;
             string formatoAtual = "MM-yyyy";
             string formatoDesejado = "yyyy-MM";
-            int cnpj = int.Parse(txbCNPJ.Text);
+            string cnpj = MTxbCNPJ.Text;
 
             if (TryFormatarData(dataInserida, formatoAtual, formatoDesejado, out string dataFormatada))
             {
                 try
                 {
                     Controle controle = new Controle();
-                    controle.calcHorasTrabalhadas(txbCpfFunc.Text, dataFormatada, cnpj);
+                    controle.calcHorasTrabalhadas(MTxbCpfFunc.Text, dataFormatada, cnpj);
                     if (controle.msg.Equals(""))
                     {
                         if (controle.tem)
                         {
-                            MessageBox.Show("Folha Gerada Com Sucesso!!","Sucesso!",MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            MessageBox.Show("Folha Gerada Com Sucesso!!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         else
                         {
@@ -80,6 +81,27 @@ namespace ProjetoRhForm.Apresentação
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void MTxbCNPJ_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Program.IntNumber(e);
+            int limiteCaracteres = 14; // Substitua pelo limite desejado
+            if (MTxbCNPJ.Text.Length >= limiteCaracteres && e.KeyChar != (char)Keys.Back)
+            {
+                // Se o comprimento já atingiu o limite e a tecla pressionada não for Backspace, ignora a tecla
+                e.Handled = true;
+            }
+        }
+
+        private void MTxbCpfFunc_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Program.IntNumber(e);
+        }
+
+        private void MTxbData_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Program.IntNumber(e);
         }
     }
 }

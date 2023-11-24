@@ -113,7 +113,7 @@ namespace ProjetoRhForm.Modelo
             }
             return msg;
         }
-        public string calcHorasTrabalhadas (string cpf, string mesAno, int cnpj)
+        public string calcHorasTrabalhadas (string cpf, string mesAno, string cnpj)
         {
             FolhaDaoComandos folha = new FolhaDaoComandos ();
             this.msg = folha.CalcHorasFolha(cpf, mesAno, cnpj);
@@ -123,13 +123,48 @@ namespace ProjetoRhForm.Modelo
             }
             return msg;
         }
-        public DataRow ExibirFolha(string cpf, string data)
+        public DataTable ExibirFolha(string cpf, string data)
         {
             FolhaDaoComandos folhaDao = new FolhaDaoComandos();
             return folhaDao.ExibirFolha(cpf, data);
         }
+        public string BuscarDados(string cpf)
+        {
+            FolhaDaoComandos folhaDaoComandos = new FolhaDaoComandos();
+            this.msg = folhaDaoComandos.PegarNome(cpf);
+            if (folhaDaoComandos.tem)
+            {
+                this.tem = true;
+            }
+            return msg;
+        }
 
-
-
+        public string AlterarBeneficios(string cpf, double convenio, double valetransporte, double valealimentacao, double valerefeicao, double ferias, double decimoterceiro, string data)
+        {
+            BeneficiosDaoComandos beneficiosDao = new BeneficiosDaoComandos();
+            this.msg = beneficiosDao.AlterarBeneficio(cpf, convenio, valetransporte, valealimentacao, valerefeicao, ferias, decimoterceiro, data);
+            if(beneficiosDao.tem)
+            {
+                this.tem = true;
+            }
+            return msg;
+        }
+       
+        public string AlterarEmpresa(string nome, string cnpj, string rua, string numero, string bairro, string cidade, string uf, string pais, string cep)
+        {
+            EmpresaDaoComandos empresa = new EmpresaDaoComandos();
+            this.msg =  empresa.alterarEmp(nome, cnpj, rua, numero, bairro, cidade, uf, pais, cep);
+            if (empresa.tem)
+            {
+                this.tem = true;
+            }
+            return msg;
+        }
+        public DataTable ConsultarEmpresa(string cnpj)
+        {   
+            EmpresaDaoComandos emp = new EmpresaDaoComandos();
+            return  emp.ExibirEmpresa(cnpj);
+           
+        }
     }
 }

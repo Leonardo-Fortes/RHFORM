@@ -1,14 +1,6 @@
 ﻿using ProjetoRhForm.Dal;
 using ProjetoRhForm.Modelo;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+
 
 namespace ProjetoRhForm.Apresentação
 {
@@ -18,7 +10,10 @@ namespace ProjetoRhForm.Apresentação
         {
             InitializeComponent();
         }
-
+        public bool Adicionar
+        {
+            get; set;
+        }
         private void txtNomeEmp_TextChanged(object sender, EventArgs e)
         {
 
@@ -26,16 +21,15 @@ namespace ProjetoRhForm.Apresentação
 
         private void btnCadEmp_Click(object sender, EventArgs e)
         {
-
             string nomeEmp = txtNomeEmp.Text;
-            string cnpjEmp = txtCNPJEmp.Text;
+            string cnpjEmp = MtxtCNPJEmp.Text;
             string rua = txbRua.Text;
             string numero = txbNumero.Text;
             string bairro = txbBairro.Text;
             string cidade = txbCidade.Text;
             string uf = txbUF.Text;
             string pais = txbPais.Text;
-            string cep = txbCep.Text;
+            string cep = MtxbCEP.Text;
 
             // Verifica se algum valor é igual a null e lança uma exceção se necessário
             if (string.IsNullOrEmpty(nomeEmp) || string.IsNullOrEmpty(cnpjEmp) || string.IsNullOrEmpty(rua) ||
@@ -47,12 +41,13 @@ namespace ProjetoRhForm.Apresentação
             else
             {
                 Controle controle = new Controle();
-                controle.cadastrarEmp(txtNomeEmp.Text, txtCNPJEmp.Text, txbRua.Text, txbNumero.Text, txbBairro.Text, txbCidade.Text, txbUF.Text, txbPais.Text, txbCep.Text);
+                CadastrarOuAlterarEmpresa(controle, nomeEmp, cnpjEmp, rua, numero, bairro, cidade, uf, pais, cep);
+
                 if (controle.msg.Equals(""))
                 {
                     if (controle.tem)
                     {
-                        MessageBox.Show("Cadastrado com Sucesso", "Empresa Cadastrada!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Operação realizada com Sucesso", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Close();
                     }
                     else
@@ -64,7 +59,58 @@ namespace ProjetoRhForm.Apresentação
                 {
                     MessageBox.Show(controle.msg);
                 }
-            }          
+            }
+        }
+
+        private void CadastrarOuAlterarEmpresa(Controle controle, string nomeEmp, string cnpjEmp, string rua, string numero, string bairro, string cidade, string uf, string pais, string cep)
+        {
+            if (Adicionar)
+            {
+
+                controle.cadastrarEmp(nomeEmp, cnpjEmp, rua, numero, bairro, cidade, uf, pais, cep);
+
+            }
+            else
+            {
+                // Caso a empresa exista, realizar a lógica de alteração
+                controle.AlterarEmpresa(nomeEmp, cnpjEmp, rua, numero, bairro, cidade, uf, pais, cep);
+            }
+        }
+
+        private void MtxtCNPJEmp_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void MtxtCNPJEmp_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Program.IntNumber(e);
+        }
+
+        private void txbNumero_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txbNumero_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Program.IntNumber(e);
+        }
+
+        private void MtxbCEP_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Program.IntNumber(e);
+        }
+
+        private void txbUF_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            int limiteCaracteres = 2; // Substitua pelo limite desejado
+            if (txbUF.Text.Length >= limiteCaracteres && e.KeyChar != (char)Keys.Back)
+            {
+                // Se o comprimento já atingiu o limite e a tecla pressionada não for Backspace, ignora a tecla
+                e.Handled = true;
+            }
         }
     }
 }
+

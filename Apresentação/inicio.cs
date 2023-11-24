@@ -104,7 +104,8 @@ namespace ProjetoRhForm.Apresentação
         private void adicionarToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
             CadastroEmpresa cadastroEmpresa = new CadastroEmpresa();
-            cadastroEmpresa.Show();
+            cadastroEmpresa.Adicionar = true;
+            cadastroEmpresa.ShowDialog();
         }
 
         private void saírToolStripMenuItem_Click(object sender, EventArgs e)
@@ -296,6 +297,19 @@ namespace ProjetoRhForm.Apresentação
         {
             ExibirFolha exibir = new ExibirFolha();
             exibir.Show();
+        }
+
+        private void alterarToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            CadastroEmpresa emp = new CadastroEmpresa();
+            emp.Adicionar = false;
+            emp.ShowDialog();
+        }
+
+        private void consultarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConsultarEmpresa emp = new ConsultarEmpresa();
+            emp.Show();
         }
     }
 }

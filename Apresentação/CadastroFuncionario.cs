@@ -81,11 +81,11 @@ namespace ProjetoRhForm.Apresentação
             {
                 MessageBox.Show("Salário hora deve ser númerico");
             }
-               
-                
-                
-                
-            
+
+
+
+
+
         }
 
         private void txbHorista_TextChanged(object sender, EventArgs e)

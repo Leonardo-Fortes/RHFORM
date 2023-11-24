@@ -260,6 +260,7 @@
             Controls.Add(lbNomeFunc);
             Controls.Add(btnCadFunc);
             Name = "CadastroFuncionario";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "CadastroFuncionario";
             ResumeLayout(false);
             PerformLayout();

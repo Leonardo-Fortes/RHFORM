@@ -1,9 +1,11 @@
-﻿using ProjetoRhForm.Modelo;
+﻿using ProjetoRhForm.Dal;
+using ProjetoRhForm.Modelo;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,30 +22,42 @@ namespace ProjetoRhForm.Apresentação
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            string dataInserida = txbData.Text;
+            string dataInserida = MTxbData.Text;
             string formatoAtual = "MM-yyyy";
             string formatoDesejado = "yyyy-MM";
             string cpfUsu = UsuarioLogado.CPF;
+            Controle controle = new Controle();
+
 
             if (TryFormatarData(dataInserida, formatoAtual, formatoDesejado, out string dataFormatada))
             {
-                Controle controle = new Controle();
-                // Chame o método da camada de controle para obter os dados da folha
-                DataRow dadosFolha = controle.ExibirFolha(cpfUsu, dataFormatada);
+                string resultado = controle.BuscarDados(cpfUsu);
+                lbNomeEmpresa.Text = resultado;
 
-                // Atualize as labels com os dados obtidos
-                if (dadosFolha != null)
+                DataTable dadosFolha = controle.ExibirFolha(cpfUsu, dataFormatada);
+                if (dadosFolha != null && dadosFolha.Rows.Count > 0)
                 {
-                    lbTESTE.Text = $"Qtd Hora: {dadosFolha["qtd_hora"]}";
-                    MessageBox.Show("OK");
-                    /*labelHoraExtra.Text = $"Hora Extra: {dadosFolha["hora_extra"]}";
-                    labelSalarioBase.Text = $"Salário Base: {dadosFolha["salario_base"]}";
-                    // Atualize outras labels conforme necessário
-                    */
+                    DataRow linha = dadosFolha.Rows[0]; // Obtenha a primeira linha
+                    DataRow linha1 = dadosFolha.Rows[1];
+
+                    // Atribua os valores às labels
+                    lbValorSalarioBase.Text = $"{linha["salario_base"]}";
+                    lbValorHoraExtra.Text = $"{linha["hora_extra"]} Horas!";
+                    lbValorSalarioLiquido.Text = $"{linha["salario_liquido"]}";
+                    lbValorHora.Text = $"{linha["qtd_hora"]} Horas!";
+                    DateTime dataOriginal = DateTime.ParseExact(linha["mes_ano"].ToString(), "yyyy-MM", CultureInfo.InvariantCulture);
+                    string dataCerta = dataOriginal.ToString("MM-yyyy");
+                    lbDataFolha.Text = dataCerta;
+                    lbValorINSS.Text = $"{linha1["inss"]}";
+                    lbValorFGTS.Text = $"{linha1["fgts"]}";
+                    lbValorIRRF.Text = $"{linha1["irrf"]}";
+
+                    MessageBox.Show("Folha Consultada!!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 }
                 else
                 {
-                    // Lógica para lidar com a falta de dados
+                    MessageBox.Show("Nenhum dado encontrado para o CPF e data fornecidos.");
                 }
             }
 
@@ -62,6 +76,36 @@ namespace ProjetoRhForm.Apresentação
                 return false;
             }
         }
+
+        private void lbTESTE_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void lbHoraExtra_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MTxbData_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Program.IntNumber(e);
+        }
     }
-    
+
 }

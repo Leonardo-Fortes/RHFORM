@@ -40,9 +40,9 @@
             lbferias = new Label();
             txbDecimo = new TextBox();
             lbDecimo = new Label();
-            btnBeneficio = new Button();
-            txbData = new TextBox();
             lbData = new Label();
+            btnAlterar = new Button();
+            MTxbData = new MaskedTextBox();
             SuspendLayout();
             // 
             // lbConvenio
@@ -61,6 +61,7 @@
             txbConvenio.Name = "txbConvenio";
             txbConvenio.Size = new Size(94, 23);
             txbConvenio.TabIndex = 1;
+            txbConvenio.KeyPress += txbConvenio_KeyPress;
             // 
             // txbValeTransporte
             // 
@@ -69,6 +70,7 @@
             txbValeTransporte.Size = new Size(111, 23);
             txbValeTransporte.TabIndex = 3;
             txbValeTransporte.TextChanged += textBox2_TextChanged;
+            txbValeTransporte.KeyPress += txbValeTransporte_KeyPress;
             // 
             // lbValeTransporte
             // 
@@ -87,6 +89,8 @@
             txbValeRefeicao.Name = "txbValeRefeicao";
             txbValeRefeicao.Size = new Size(111, 23);
             txbValeRefeicao.TabIndex = 5;
+            txbValeRefeicao.TextChanged += txbValeRefeicao_TextChanged;
+            txbValeRefeicao.KeyPress += txbValeRefeicao_KeyPress;
             // 
             // lbValeRefeicao
             // 
@@ -104,6 +108,7 @@
             txbAlimentacao.Name = "txbAlimentacao";
             txbAlimentacao.Size = new Size(94, 23);
             txbAlimentacao.TabIndex = 7;
+            txbAlimentacao.KeyPress += txbAlimentacao_KeyPress;
             // 
             // lbValeAlimentacao
             // 
@@ -121,6 +126,7 @@
             txbFerias.Name = "txbFerias";
             txbFerias.Size = new Size(94, 23);
             txbFerias.TabIndex = 9;
+            txbFerias.KeyPress += txbFerias_KeyPress;
             // 
             // lbferias
             // 
@@ -138,6 +144,7 @@
             txbDecimo.Name = "txbDecimo";
             txbDecimo.Size = new Size(111, 23);
             txbDecimo.TabIndex = 11;
+            txbDecimo.KeyPress += txbDecimo_KeyPress;
             // 
             // lbDecimo
             // 
@@ -149,26 +156,6 @@
             lbDecimo.TabIndex = 10;
             lbDecimo.Text = "Décimo Terceiro";
             // 
-            // btnBeneficio
-            // 
-            btnBeneficio.BackColor = SystemColors.ButtonHighlight;
-            btnBeneficio.BackgroundImageLayout = ImageLayout.Center;
-            btnBeneficio.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btnBeneficio.Location = new Point(543, 162);
-            btnBeneficio.Name = "btnBeneficio";
-            btnBeneficio.Size = new Size(82, 37);
-            btnBeneficio.TabIndex = 12;
-            btnBeneficio.Text = "OK";
-            btnBeneficio.UseVisualStyleBackColor = false;
-            btnBeneficio.Click += btnBeneficio_Click;
-            // 
-            // txbData
-            // 
-            txbData.Location = new Point(209, 162);
-            txbData.Name = "txbData";
-            txbData.Size = new Size(94, 23);
-            txbData.TabIndex = 14;
-            // 
             // lbData
             // 
             lbData.AutoSize = true;
@@ -179,14 +166,36 @@
             lbData.TabIndex = 13;
             lbData.Text = "Mês/Ano";
             // 
+            // btnAlterar
+            // 
+            btnAlterar.BackColor = SystemColors.ButtonHighlight;
+            btnAlterar.BackgroundImageLayout = ImageLayout.Center;
+            btnAlterar.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnAlterar.Location = new Point(543, 162);
+            btnAlterar.Name = "btnAlterar";
+            btnAlterar.Size = new Size(82, 37);
+            btnAlterar.TabIndex = 15;
+            btnAlterar.Text = "OK";
+            btnAlterar.UseVisualStyleBackColor = false;
+            btnAlterar.Click += btnAlterar_Click_1;
+            // 
+            // MTxbData
+            // 
+            MTxbData.Location = new Point(209, 162);
+            MTxbData.Mask = "00-0000";
+            MTxbData.Name = "MTxbData";
+            MTxbData.Size = new Size(43, 23);
+            MTxbData.TabIndex = 16;
+            MTxbData.MaskInputRejected += MTxbData_MaskInputRejected;
+            // 
             // Beneficios
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(652, 205);
-            Controls.Add(txbData);
+            Controls.Add(MTxbData);
+            Controls.Add(btnAlterar);
             Controls.Add(lbData);
-            Controls.Add(btnBeneficio);
             Controls.Add(txbDecimo);
             Controls.Add(lbDecimo);
             Controls.Add(txbFerias);
@@ -199,7 +208,10 @@
             Controls.Add(lbValeTransporte);
             Controls.Add(txbConvenio);
             Controls.Add(lbConvenio);
+            MaximumSize = new Size(668, 244);
+            MinimumSize = new Size(668, 244);
             Name = "Beneficios";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Beneficios";
             ResumeLayout(false);
             PerformLayout();
@@ -219,8 +231,8 @@
         private Label lbferias;
         private TextBox txbDecimo;
         private Label lbDecimo;
-        private Button btnBeneficio;
-        private TextBox txbData;
         private Label lbData;
+        private Button btnAlterar;
+        private MaskedTextBox MTxbData;
     }
 }

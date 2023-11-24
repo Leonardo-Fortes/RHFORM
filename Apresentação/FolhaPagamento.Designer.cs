@@ -30,11 +30,11 @@
         {
             btnGerar = new Button();
             lbBuscarCPF = new Label();
-            txbCpfFunc = new TextBox();
-            txbData = new TextBox();
             lbData = new Label();
-            txbCNPJ = new TextBox();
             label1 = new Label();
+            MTxbCNPJ = new MaskedTextBox();
+            MTxbCpfFunc = new MaskedTextBox();
+            MTxbData = new MaskedTextBox();
             SuspendLayout();
             // 
             // btnGerar
@@ -58,37 +58,15 @@
             lbBuscarCPF.TabIndex = 1;
             lbBuscarCPF.Text = "CPF (Colaborador específico)";
             // 
-            // txbCpfFunc
-            // 
-            txbCpfFunc.Location = new Point(21, 64);
-            txbCpfFunc.Name = "txbCpfFunc";
-            txbCpfFunc.Size = new Size(228, 23);
-            txbCpfFunc.TabIndex = 2;
-            // 
-            // txbData
-            // 
-            txbData.Location = new Point(317, 64);
-            txbData.Name = "txbData";
-            txbData.Size = new Size(127, 23);
-            txbData.TabIndex = 3;
-            txbData.TextChanged += textBox1_TextChanged;
-            // 
             // lbData
             // 
             lbData.AutoSize = true;
             lbData.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lbData.Location = new Point(317, 31);
+            lbData.Location = new Point(356, 31);
             lbData.Name = "lbData";
             lbData.Size = new Size(131, 21);
             lbData.TabIndex = 4;
             lbData.Text = "DATA (Mês-Ano)";
-            // 
-            // txbCNPJ
-            // 
-            txbCNPJ.Location = new Point(21, 118);
-            txbCNPJ.Name = "txbCNPJ";
-            txbCNPJ.Size = new Size(128, 23);
-            txbCNPJ.TabIndex = 5;
             // 
             // label1
             // 
@@ -100,19 +78,54 @@
             label1.TabIndex = 6;
             label1.Text = "CNPJ ";
             // 
+            // MTxbCNPJ
+            // 
+            MTxbCNPJ.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            MTxbCNPJ.Location = new Point(21, 118);
+            MTxbCNPJ.Mask = "00.000.000/0000-00";
+            MTxbCNPJ.Name = "MTxbCNPJ";
+            MTxbCNPJ.Size = new Size(100, 29);
+            MTxbCNPJ.TabIndex = 20;
+            MTxbCNPJ.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            MTxbCNPJ.KeyPress += MTxbCNPJ_KeyPress;
+            // 
+            // MTxbCpfFunc
+            // 
+            MTxbCpfFunc.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            MTxbCpfFunc.Location = new Point(21, 58);
+            MTxbCpfFunc.Mask = "000.000.000-00";
+            MTxbCpfFunc.Name = "MTxbCpfFunc";
+            MTxbCpfFunc.Size = new Size(100, 29);
+            MTxbCpfFunc.TabIndex = 21;
+            MTxbCpfFunc.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            MTxbCpfFunc.KeyPress += MTxbCpfFunc_KeyPress;
+            // 
+            // MTxbData
+            // 
+            MTxbData.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            MTxbData.Location = new Point(393, 55);
+            MTxbData.Mask = "00-0000";
+            MTxbData.Name = "MTxbData";
+            MTxbData.Size = new Size(51, 25);
+            MTxbData.TabIndex = 22;
+            MTxbData.KeyPress += MTxbData_KeyPress;
+            // 
             // FolhaPagamento
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(499, 189);
+            Controls.Add(MTxbData);
+            Controls.Add(MTxbCpfFunc);
+            Controls.Add(MTxbCNPJ);
             Controls.Add(label1);
-            Controls.Add(txbCNPJ);
             Controls.Add(lbData);
-            Controls.Add(txbData);
-            Controls.Add(txbCpfFunc);
             Controls.Add(lbBuscarCPF);
             Controls.Add(btnGerar);
+            MaximumSize = new Size(515, 228);
+            MinimumSize = new Size(515, 228);
             Name = "FolhaPagamento";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "FolhaPagamento";
             ResumeLayout(false);
             PerformLayout();
@@ -122,10 +135,10 @@
 
         private Button btnGerar;
         private Label lbBuscarCPF;
-        private TextBox txbCpfFunc;
-        private TextBox txbData;
         private Label lbData;
-        private TextBox txbCNPJ;
         private Label label1;
+        private MaskedTextBox MTxbCNPJ;
+        private MaskedTextBox MTxbCpfFunc;
+        private MaskedTextBox MTxbData;
     }
 }

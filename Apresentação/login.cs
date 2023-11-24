@@ -1,21 +1,22 @@
 ﻿using ProjetoRhForm.Modelo;
 namespace ProjetoRhForm.Apresentação
 {
-
     public static class UsuarioLogado
     {
         public static string CPF
         {
             get; set;
-        } // ou int ID, dependendo de como você armazena o ID do usuário
+        }
     }
+
     public partial class login : Form
     {
+
         public login()
         {
             InitializeComponent();
         }
-        
+
         private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -24,7 +25,7 @@ namespace ProjetoRhForm.Apresentação
 
         private void btnEntrar_Click(object sender, EventArgs e)
         {
-            string Login = txbLogin.Text;
+            string Login = MTxbLogin.Text;
             string Senha = txbSenha.Text;
 
             if (string.IsNullOrEmpty(Login) || string.IsNullOrEmpty(Senha))
@@ -34,7 +35,7 @@ namespace ProjetoRhForm.Apresentação
             else
             {
                 Controle controle = new Controle();
-                controle.acessar(txbLogin.Text, txbSenha.Text);
+                controle.acessar(MTxbLogin.Text, txbSenha.Text);
                 if (controle.msg.Equals(""))
                 {
                     if (controle.tem)
@@ -60,5 +61,21 @@ namespace ProjetoRhForm.Apresentação
         {
 
         }
+
+        private void MTxbCpfFunc_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Program.IntNumber(e);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pcbInicio_Click(object sender, EventArgs e)
+        {
+
+        }
     }
+
 }

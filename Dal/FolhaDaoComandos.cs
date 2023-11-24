@@ -13,7 +13,7 @@ namespace ProjetoRhForm.Dal
         public string msg = "";
         Conexao con = new Conexao();
 
-        public string CalcHorasFolha(string cpf, string mes_ano, int cnpjEmpresa)
+        public string CalcHorasFolha(string cpf, string mes_ano, string cnpjEmpresa)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace ProjetoRhForm.Dal
                     int idFuncionario = BuscarIdFuncionarioPorCpf(cpf);
 
 
-                    if (idFuncionario != -1 )
+                    if (idFuncionario != -1)
                     {
                         // Verifique se o funcionário pertence à empresa especificada
                         if (FuncionarioPertenceAEmpresa(idFuncionario, idEmpresa))
@@ -127,7 +127,7 @@ namespace ProjetoRhForm.Dal
             }
             catch (SqlException ex)
             {
-                if (ex.Number == 50000)
+                if (ex.Number == 50000 || ex.Number == 50002)
                 {
                     this.msg = ex.Message;
                 }
@@ -241,25 +241,97 @@ namespace ProjetoRhForm.Dal
             }
             catch (SqlException ex)
             {
-                if (ex.Number == 50001)
+                if (ex.Number == 50000 || ex.Number == 50002)
                 {
                     this.msg = ex.Message;
                 }
             }
 
         }
+        public string PegarNome(string cpf)
+        {
+            tem = false;
+            int id_funcionario = 0;
+            string nome = "";
+            string nomeEmpresa = "";
 
-        public DataRow ExibirFolha(string cpf, string data)
+            try
+            {
+                // Consulta para obter o ID do funcionário com base no CPF
+                cmd.CommandText = "SELECT idfuncionario, id_empresa FROM Funcionario WHERE cpf = @cpf";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@cpf", cpf);
+
+                cmd.Connection = con.conectar();
+                dr = cmd.ExecuteReader();
+
+                if (dr.HasRows && dr.Read())
+                {
+                    id_funcionario = Convert.ToInt32(dr["idfuncionario"]);
+                    int id_empresa = Convert.ToInt32(dr["id_empresa"]);
+
+                    // Consulta para obter o nome da empresa
+                    cmd.CommandText = "SELECT nome FROM Empresa WHERE idempresa = @id_empresa";
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@id_empresa", id_empresa);
+
+                    dr.Close();
+                    dr = cmd.ExecuteReader();
+
+                    if (dr.HasRows && dr.Read())
+                    {
+                        nomeEmpresa = dr["nome"].ToString();
+                    }
+
+                    // Consulta para obter o nome do funcionário
+                    cmd.CommandText = "SELECT nome FROM Funcionario WHERE idfuncionario = @idfunc";
+                    cmd.Parameters.Clear();
+                    cmd.Parameters.AddWithValue("@idfunc", id_funcionario);
+
+                    dr.Close();
+                    dr = cmd.ExecuteReader();
+
+                    if (dr.HasRows && dr.Read())
+                    {
+                        nome = dr["nome"].ToString();
+                    }
+                    else
+                    {
+                        
+                        msg = "Funcionário não encontrado!";
+                    }
+
+                    dr.Close();
+                }
+                else
+                {
+                    
+                    msg = "Funcionário não encontrado!";
+                }
+            }
+            catch (Exception ex)
+            {
+                msg = "Erro ao obter nome do funcionário: " + ex.Message;
+            }
+            finally
+            {
+                dr.Close();
+            }
+            this.tem = true;
+            return $"Nome: {nome}\n" +
+                   $"Empresa: {nomeEmpresa}";
+        }
+
+        public DataTable ExibirFolha(string cpf, string data)
         {
             DataTable tabelaFolha = new DataTable();
-            tem = false;
             int id_funcionario = 0;
 
             try
             {
                 // Consulta para obter o ID do funcionário com base no CPF
                 cmd.CommandText = "SELECT idfuncionario FROM Funcionario WHERE cpf = @cpf";
-                cmd.Parameters.Clear();  // Limpa os parâmetros anteriores
+                cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@cpf", cpf);
 
                 cmd.Connection = con.conectar();
@@ -271,48 +343,99 @@ namespace ProjetoRhForm.Dal
                 }
 
                 dr.Close();
+                   
+                // Consulta para obter os dados da tabela Folha
+                string columnNamesFolha = "mes_ano, hora_extra, qtd_hora, salario_base, salario_liquido";
+                string queryFolha = $"SELECT {columnNamesFolha} FROM Folha WHERE id_funcionario = @idfunc AND mes_ano = @data";
 
-                // Consulta para obter os dados da folha com base no ID do funcionário e na data
-                string columnNames = "qtd_hora, hora_extra, salario_base, salario_liquido, inss, irrf, fgts, data";
-                cmd.CommandText = $"SELECT {columnNames} FROM Folha WHERE id_funcionario = @idfunc AND mes_ano = @data";
-                cmd.Parameters.Clear();  // Limpa os parâmetros anteriores
+                // Consulta para obter os dados da tabela Desconto
+                string columnNamesDesconto = "inss, fgts, irrf";
+                string queryDesconto = $"SELECT {columnNamesDesconto} FROM Desconto WHERE id_funcionario = @idfunc AND mes_ano = @data";
+
                 cmd.Parameters.AddWithValue("@idfunc", id_funcionario);
                 cmd.Parameters.AddWithValue("@data", data);
 
+                // Executar a consulta da tabela Folha
+                cmd.CommandText = queryFolha;
                 dr = cmd.ExecuteReader();
 
-                while (dr.Read())
+                foreach (var columnName in columnNamesFolha.Split(',').Select(c => c.Trim()))
                 {
-                    // Adicione os valores das colunas à tabela
-                    DataRow linha = tabelaFolha.NewRow();
-                    linha["qtd_hora"] = dr["qtd_hora"];
-                    linha["hora_extra"] = dr["hora_extra"];
-                    linha["salario_base"] = dr["salario_base"];
-                    linha["salario_liquido"] = dr["salario_liquido"];
-                    linha["inss"] = dr["inss"];
-                    linha["irrf"] = dr["irrf"];
-                    linha["fgts"] = dr["fgts"];
-                    linha["data"] = dr["data"];
-                    tabelaFolha.Rows.Add(linha);
+                    if (!tabelaFolha.Columns.Contains(columnName))
+                    {
+                        tabelaFolha.Columns.Add(columnName);
+                    }
                 }
 
-                tem = true;
-                dr.Close();
-                con.desconectar();
-
-                if (tabelaFolha.Rows.Count > 0)
+                try
                 {
-                    return tabelaFolha.Rows[0]; // Retorna a primeira linha da tabela (se houver)
+                    while (dr.Read())
+                    {
+                        DataRow linha = tabelaFolha.NewRow();
+
+                        foreach (var columnName in columnNamesFolha.Split(',').Select(c => c.Trim()))
+                        {
+                            linha[columnName] = dr[columnName];
+                        }
+
+                        tabelaFolha.Rows.Add(linha);
+                    }
                 }
+                catch (Exception ex)
+                {
+                    throw new Exception("Erro ao processar dados da tabela Folha.", ex);
+                }
+                finally
+                {
+                    dr.Close();
+                }
+
+                // Executar a consulta da tabela Desconto
+                cmd.CommandText = queryDesconto;
+                dr = cmd.ExecuteReader();
+
+                foreach (var columnName in columnNamesDesconto.Split(',').Select(c => c.Trim()))
+                {
+                    if (!tabelaFolha.Columns.Contains(columnName))
+                    {
+                        tabelaFolha.Columns.Add(columnName);
+                    }
+                }
+
+                try
+                {
+                    while (dr.Read())
+                    {
+                        DataRow linha = tabelaFolha.NewRow();
+
+                        foreach (var columnName in columnNamesDesconto.Split(',').Select(c => c.Trim()))
+                        {
+                            linha[columnName] = dr[columnName];
+                        }
+
+                        tabelaFolha.Rows.Add(linha);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Erro ao processar dados da tabela Desconto.", ex);
+                }
+                finally
+                {
+                    dr.Close();
+                }
+
+                // Retorna o DataTable com todas as linhas ou uma tabela vazia se não houver dados
+                return tabelaFolha.Rows.Count > 0 ? tabelaFolha : new DataTable();
             }
-            catch (SqlException ex)
+            catch (Exception ex)
             {
-                msg = "Erro: " + ex.Message;
+                Console.WriteLine("Erro: " + ex.Message);
+                throw new Exception("Erro ao executar a consulta.", ex);
             }
-
-            return null; // Retorna null se não houver dados
         }
-    }
 
+    }
 }
+
 

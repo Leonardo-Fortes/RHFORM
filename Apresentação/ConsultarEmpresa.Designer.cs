@@ -28,26 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
-            panel1 = new Panel();
+            btnConsultar = new Button();
             lbConsul = new Label();
+            dataGridView1 = new DataGridView();
+            MTxbCNPJ = new MaskedTextBox();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
-            // button1
+            // btnConsultar
             // 
-            button1.Location = new Point(642, 301);
-            button1.Name = "button1";
-            button1.Size = new Size(59, 25);
-            button1.TabIndex = 0;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // panel1
-            // 
-            panel1.Location = new Point(31, 130);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(539, 286);
-            panel1.TabIndex = 1;
+            btnConsultar.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            btnConsultar.Location = new Point(424, 48);
+            btnConsultar.Name = "btnConsultar";
+            btnConsultar.Size = new Size(84, 25);
+            btnConsultar.TabIndex = 0;
+            btnConsultar.Text = "Consultar";
+            btnConsultar.UseVisualStyleBackColor = true;
+            btnConsultar.Click += button1_Click;
             // 
             // lbConsul
             // 
@@ -55,28 +52,55 @@
             lbConsul.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lbConsul.Location = new Point(31, 48);
             lbConsul.Name = "lbConsul";
-            lbConsul.Size = new Size(321, 50);
+            lbConsul.Size = new Size(251, 25);
             lbConsul.TabIndex = 2;
-            lbConsul.Text = "Inserir o Nome ou CNPJ da empresa\r\n\r\n";
+            lbConsul.Text = "CNPJ (Buscar uma empresa)";
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(31, 101);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowTemplate.Height = 25;
+            dataGridView1.Size = new Size(747, 318);
+            dataGridView1.TabIndex = 3;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            // 
+            // MTxbCNPJ
+            // 
+            MTxbCNPJ.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            MTxbCNPJ.Location = new Point(288, 46);
+            MTxbCNPJ.Mask = "00.000.000/0000-00";
+            MTxbCNPJ.Name = "MTxbCNPJ";
+            MTxbCNPJ.Size = new Size(130, 29);
+            MTxbCNPJ.TabIndex = 21;
+            MTxbCNPJ.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            MTxbCNPJ.KeyPress += MTxbCNPJ_KeyPress;
             // 
             // ConsultarEmpresa
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(MTxbCNPJ);
+            Controls.Add(dataGridView1);
             Controls.Add(lbConsul);
-            Controls.Add(panel1);
-            Controls.Add(button1);
+            Controls.Add(btnConsultar);
+            MaximumSize = new Size(816, 489);
+            MinimumSize = new Size(816, 489);
             Name = "ConsultarEmpresa";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "ConsultarEmpresa";
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private Button button1;
-        private Panel panel1;
+        private Button btnConsultar;
         private Label lbConsul;
+        private DataGridView dataGridView1;
+        private MaskedTextBox MTxbCNPJ;
     }
 }
