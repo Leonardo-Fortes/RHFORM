@@ -10,7 +10,7 @@ namespace ProjetoRhForm.Apresentação
 
         }
 
-        
+
         public void txbCPFINSERIDO_TextChanged(object sender, EventArgs e)
         {
 
@@ -30,6 +30,7 @@ namespace ProjetoRhForm.Apresentação
                 {
                     beneficios1.Adicionar = true;
                     beneficios1.ShowDialog();
+                    this.Close();
                 }
                 else
                 {
@@ -45,7 +46,7 @@ namespace ProjetoRhForm.Apresentação
 
         private void btnAlterar_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void MTxbCPF_KeyPress(object sender, KeyPressEventArgs e)

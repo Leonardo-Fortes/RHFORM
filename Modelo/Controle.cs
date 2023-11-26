@@ -18,16 +18,23 @@ namespace ProjetoRhForm.Modelo
             }
             return tem;
         }
-        public string cadastrar(string login, string senha, string confSenha)
+        public string cadastrar(string login, string senha, string confSenha, string tipo)
         {
             LoginDaoComandos loginDao = new LoginDaoComandos();
-            this.msg = loginDao.cadastrarUsuario(login, senha, confSenha);
+            this.msg = loginDao.cadastrarUsuario(login, senha, confSenha, tipo);
             if (loginDao.tem) 
             {
                 this.tem = true;
             }
             return msg;
         }
+        public bool verificarAdmin(string cpf)
+        {
+            LoginDaoComandos loginDaoComandos = new LoginDaoComandos();
+            bool isAdmin = loginDaoComandos.verificaTipo(cpf);
+            return isAdmin;
+        }
+
         public string cadastrarFunc(string nome, DateTime date, string telefone, string email, string sexo, string cpf, string cargo, string cnpj, DateTime dataadmissao, int salarioHr)
         {
             
@@ -165,6 +172,41 @@ namespace ProjetoRhForm.Modelo
             EmpresaDaoComandos emp = new EmpresaDaoComandos();
             return  emp.ExibirEmpresa(cnpj);
            
+        }
+        public string DeleteEmpresa(string cnpj)
+        {
+            EmpresaDaoComandos emp = new EmpresaDaoComandos();
+            this.msg = emp.DeleteEmpresa(cnpj);
+            if(emp.tem)
+            {
+                this.tem = true;
+            }
+            return msg;
+        }
+        public string AlterFunc(string nome, DateTime date, string telefone, string email, string sexo, string cpf, string cargo, string cnpj, DateTime dataadmissao, int salarioHr)
+        {
+            FuncionarioDaoComandos func = new FuncionarioDaoComandos();
+            this.msg = func.alterarFunc(nome, date, telefone, email, sexo, cpf, cargo, cnpj, dataadmissao, salarioHr);
+            if(func.tem)
+            {
+                this.tem = true;
+            }
+            return msg;
+        }
+        public DataTable ConsultarFunc(string cpf)
+        {
+            FuncionarioDaoComandos func = new FuncionarioDaoComandos();          
+                return func.ConsultarFuncionario(cpf);          
+        }
+        public string DeletarFunc(string cpf)
+        {
+            FuncionarioDaoComandos func = new FuncionarioDaoComandos();
+            this.msg = func.DeletarFunc(cpf);
+            if (func.tem)
+            {
+                this.tem = true;
+            }
+            return msg;
         }
     }
 }

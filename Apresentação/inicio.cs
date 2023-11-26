@@ -10,6 +10,24 @@ namespace ProjetoRhForm.Apresentação
         public inicio()
         {
             InitializeComponent();
+            Controle controle = new Controle();
+            string cpfVerifica = UsuarioLogado.CPF;
+            if (!string.IsNullOrEmpty(cpfVerifica))
+            {
+                bool isAdmin = controle.verificarAdmin(cpfVerifica);
+                gerarFolhaToolStripMenuItem.Visible = isAdmin;
+                adicionarToolStripMenuItem.Visible = isAdmin;
+                alterarToolStripMenuItem.Visible = isAdmin;
+                descontosToolStripMenuItem.Visible = isAdmin;
+                alterarToolStripMenuItem1.Visible = isAdmin;
+                beneficiosToolStripMenuItem.Visible = isAdmin;
+                saírToolStripMenuItem.Visible = isAdmin;
+                funcionárioToolStripMenuItem.Visible = isAdmin;
+                empresaToolStripMenuItem.Visible = isAdmin;
+                beneficiosToolStripMenuItem1.Visible = isAdmin;
+                this.Visible = isAdmin;
+            }
+
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -86,7 +104,8 @@ namespace ProjetoRhForm.Apresentação
 
         private void beneficiosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            ConsultarFuncionario consultar = new ConsultarFuncionario();
+            consultar.Show();
         }
 
         private void beneficiosToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -98,7 +117,8 @@ namespace ProjetoRhForm.Apresentação
         private void descontosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CadastroFuncionario cadastroFuncionario = new CadastroFuncionario();
-            cadastroFuncionario.Show();
+            cadastroFuncionario.Adicionar = true;
+            cadastroFuncionario.ShowDialog();
         }
 
         private void adicionarToolStripMenuItem_Click_1(object sender, EventArgs e)
@@ -310,6 +330,28 @@ namespace ProjetoRhForm.Apresentação
         {
             ConsultarEmpresa emp = new ConsultarEmpresa();
             emp.Show();
+        }
+
+        private void removerToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void alterarToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            CadastroFuncionario cadastro = new CadastroFuncionario();
+            cadastro.Adicionar = false;
+            cadastro.ShowDialog();
+        }
+
+        private void removerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void sairToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

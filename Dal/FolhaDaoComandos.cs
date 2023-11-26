@@ -41,14 +41,64 @@ namespace ProjetoRhForm.Dal
                     if (idFuncionario != -1)
                     {
                         // Verifique se o funcionário pertence à empresa especificada
+                        
                         if (FuncionarioPertenceAEmpresa(idFuncionario, idEmpresa))
                         {
                             // Se encontrou o ID e o funcionário pertence à empresa, execute a stored procedure para esse funcionário
-                            ExecutarStoredProcedure(idFuncionario, mes_ano);
-                            ExecutarStoredProcedureSalarioBase(idFuncionario, mes_ano);
-                            ExecutarStoredProcedureCalcularDesconto(idFuncionario, mes_ano);
-                            ExecutarStoredProcedureSalarioLiquido(idFuncionario, mes_ano);
-                            this.tem = true;
+                            try
+                            {
+                                ExecutarStoredProcedure(idFuncionario, mes_ano);
+                                tem = true;
+                            }
+                            catch(SqlException ex) 
+                            {
+                                if (ex.Number == 50000 || ex.Number == 50005)
+                                {
+                                    this.msg = ex.Message;
+                                    tem = false;
+                                }
+                            }
+                            try
+                            {
+                                ExecutarStoredProcedureSalarioBase(idFuncionario, mes_ano);
+                                tem = true;
+                            }
+                             
+                            catch(SqlException ex)
+                            {
+                                if (ex.Number == 50000 )
+                                {
+                                    this.msg = ex.Message;
+                                    tem = false;
+                                }
+                            }
+                            try
+                            {
+                                ExecutarStoredProcedureCalcularDesconto(idFuncionario, mes_ano);
+                                tem = true;
+                            }
+                            catch (SqlException ex)
+                            {
+                                if (ex.Number == 50000 || ex.Number == 50002)
+                                {
+                                    this.msg = ex.Message;
+                                    tem = false;
+                                }
+                            }
+                            try
+                            {
+                                ExecutarStoredProcedureSalarioLiquido(idFuncionario, mes_ano);
+                                tem = true;
+                            }
+                            catch(SqlException ex)
+                            {
+                                if (ex.Number == 50001)
+                                {
+                                    this.msg = ex.Message;
+                                    tem = false;
+                                }
+                            }
+                            
                         }
                         else
                         {
@@ -64,16 +114,65 @@ namespace ProjetoRhForm.Dal
                 {
                     // Se nenhum CPF foi fornecido, busque todos os IDs de funcionários da empresa especificada
                     List<int> idsFuncionarios = BuscarTodosIDsFuncionariosDaEmpresa(idEmpresa);
-
+                    this.tem = true;
                     // Itere sobre todos os IDs e execute a stored procedure para cada um
                     foreach (int idFuncionario in idsFuncionarios)
                     {
-                        ExecutarStoredProcedure(idFuncionario, mes_ano);
-                        ExecutarStoredProcedureSalarioBase(idFuncionario, mes_ano);
-                        ExecutarStoredProcedureCalcularDesconto(idFuncionario, mes_ano);
-                        ExecutarStoredProcedureSalarioLiquido(idFuncionario, mes_ano);
-                        this.tem = true;
+                        try
+                        {
+                            ExecutarStoredProcedure(idFuncionario, mes_ano);
+                        }
+                        catch (SqlException ex)
+                        {
+                            if (ex.Number == 50000 || ex.Number == 50005)
+                            {
+                                this.msg = ex.Message;
+                                tem = false;
+                            }
+                        }
+
+                        try
+                        {
+                            ExecutarStoredProcedureSalarioBase(idFuncionario, mes_ano);
+                        }
+                        catch (SqlException ex)
+                        {
+                            if (ex.Number == 50000)
+                            {
+                                this.msg = ex.Message;
+                                tem = false;
+                            }
+                        }
+
+                        try
+                        {
+                            ExecutarStoredProcedureCalcularDesconto(idFuncionario, mes_ano);
+                        }
+                        catch (SqlException ex)
+                        {
+                            if (ex.Number == 50000 || ex.Number == 50002)
+                            {
+                                this.msg = ex.Message;
+                                tem = false;
+                            }
+                        }
+
+                        try
+                        {
+                            ExecutarStoredProcedureSalarioLiquido(idFuncionario, mes_ano);
+                        }
+                        catch (SqlException ex)
+                        {
+                            if (ex.Number == 50001)
+                            {
+                                this.msg = ex.Message;
+                                tem = false;
+                            }
+                        }
                     }
+
+                    // Continue com o código aqui após o loop
+
 
                     tem = true;
                 }
@@ -91,21 +190,21 @@ namespace ProjetoRhForm.Dal
         private int BuscarIdFuncionarioPorCpf(string cpf)
         {
             int idFuncionario = -1;
-
-            cmd.CommandText = "SELECT idfuncionario FROM Funcionario WHERE cpf = @cpfinserido";
+            int status = 1;
+            cmd.CommandText = "SELECT idfuncionario FROM Funcionario WHERE cpf = @cpfinserido and status = @status";
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@cpfinserido", cpf);
-            cmd.Connection = con.conectar();
-            dr = cmd.ExecuteReader();
+            cmd.Parameters.AddWithValue("@status", status);
+         
+                cmd.Connection = con.conectar();
+                dr = cmd.ExecuteReader();
 
-            if (dr.HasRows && dr.Read())
-            {
-                idFuncionario = Convert.ToInt32(dr["idfuncionario"]);
-            }
-
-            dr.Close();
-            con.desconectar();
-
+                if (dr.HasRows && dr.Read())
+                {
+                    idFuncionario = Convert.ToInt32(dr["idfuncionario"]);
+                }
+                dr.Close();
+                con.desconectar();        
             return idFuncionario;
         }
 
@@ -113,47 +212,41 @@ namespace ProjetoRhForm.Dal
 
         private void ExecutarStoredProcedure(int idFuncionario, string mes_ano)
         {
-
-            try
-            {
-                cmd.CommandText = "execute CalcularHorasTrabalhadas @id, @mes_ano ";
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@id", idFuncionario);
-                cmd.Parameters.AddWithValue("@mes_ano", mes_ano);
-                cmd.Connection = con.conectar();
-                cmd.ExecuteNonQuery();
-                con.desconectar();
-
-            }
-            catch (SqlException ex)
-            {
-                if (ex.Number == 50000 || ex.Number == 50002)
-                {
-                    this.msg = ex.Message;
-                }
-            }
-
+            cmd.CommandText = "execute CalcularHorasTrabalhadas @id, @mes_ano ";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@id", idFuncionario);
+            cmd.Parameters.AddWithValue("@mes_ano", mes_ano);
+            cmd.Connection = con.conectar();
+            cmd.ExecuteNonQuery();
+            con.desconectar();
         }
 
-
-        private List<int> BuscarTodosIDsFuncionariosDaEmpresa(int idEmpresa)
+    private List<int> BuscarTodosIDsFuncionariosDaEmpresa(int idEmpresa)
         {
             List<int> idsFuncionarios = new List<int>();
-
-            cmd.CommandText = "SELECT idfuncionario FROM Funcionario WHERE id_empresa = @idempresa";
+            int status = 1;
+            cmd.CommandText = "SELECT idfuncionario FROM Funcionario WHERE id_empresa = @idempresa and status = @status";
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@idempresa", idEmpresa);
-            cmd.Connection = con.conectar();
-            dr = cmd.ExecuteReader();
-
-            while (dr.Read())
+            cmd.Parameters.AddWithValue("@status", status);
+            try
             {
-                int idFuncionario = Convert.ToInt32(dr["idfuncionario"]);
-                idsFuncionarios.Add(idFuncionario);
-            }
+                cmd.Connection = con.conectar();
+                dr = cmd.ExecuteReader();
 
-            dr.Close();
-            con.desconectar();
+                while (dr.Read())
+                {
+                    int idFuncionario = Convert.ToInt32(dr["idfuncionario"]);
+                    idsFuncionarios.Add(idFuncionario);
+                }
+                dr.Close();
+                con.desconectar();
+            }
+            catch
+            {
+                this.msg = "Funcionário não existe / inativo";
+            }
+         
 
             return idsFuncionarios;
         }
@@ -174,39 +267,19 @@ namespace ProjetoRhForm.Dal
 
         private void ExecutarStoredProcedureSalarioBase(int idFuncionario, string mes_ano)
         {
-            try
-            {
                 cmd.CommandText = "execute CalcularSalarioBase @id, @mes_ano ";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@id", idFuncionario);
                 cmd.Parameters.AddWithValue("@mes_ano", mes_ano);
                 cmd.Connection = con.conectar();
                 cmd.ExecuteNonQuery();
-                int rowsAffected = cmd.ExecuteNonQuery();
                 con.desconectar();
-
-                if (rowsAffected == 0)
-                {
-                    this.msg = "Nenhum registro atualizado, Funcionário fora de serviço.";
-                }
-                else
-                {
-                    tem = true;
-                }
-            }
-            catch (SqlException ex)
-            {
-                if (ex.Number == 50000)
-                {
-                    this.msg = ex.Message;
-                }
-            }
+         
 
         }
         private void ExecutarStoredProcedureSalarioLiquido(int idFuncionario, string mes_ano)
         {
-            try
-            {
+  
                 cmd.CommandText = "execute SalarioLiquido @id, @mes_ano ";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@id", idFuncionario);
@@ -214,22 +287,10 @@ namespace ProjetoRhForm.Dal
                 cmd.Connection = con.conectar();
                 cmd.ExecuteNonQuery();
                 con.desconectar();
-
-            }
-            catch (SqlException ex)
-            {
-                if (ex.Number == 50001)
-                {
-                    this.msg = ex.Message;
-                }
-            }
-
         }
 
         private void ExecutarStoredProcedureCalcularDesconto(int idFuncionario, string mesAno)
         {
-            try
-            {
                 cmd.CommandText = "execute CalcularDescontos @id, @mesAno";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@id", idFuncionario);
@@ -237,16 +298,6 @@ namespace ProjetoRhForm.Dal
                 cmd.Connection = con.conectar();
                 cmd.ExecuteNonQuery();
                 con.desconectar();
-
-            }
-            catch (SqlException ex)
-            {
-                if (ex.Number == 50000 || ex.Number == 50002)
-                {
-                    this.msg = ex.Message;
-                }
-            }
-
         }
         public string PegarNome(string cpf)
         {

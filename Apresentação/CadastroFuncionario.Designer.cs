@@ -35,223 +35,281 @@
             lbEmailFunc = new Label();
             lbSexoFunc = new Label();
             lbCPFFunc = new Label();
-            txbNomeFunc = new TextBox();
-            txbDataFunc = new TextBox();
-            txbTelefoneFunc = new TextBox();
-            txbEmailFunc = new TextBox();
-            txbSexoFunc = new TextBox();
-            txbCPFFunc = new TextBox();
             lbCargo = new Label();
-            txbCargo = new TextBox();
-            txbCNPJ = new TextBox();
             lbEmpresa = new Label();
             lbAdmissao = new Label();
-            txbAdmissao = new TextBox();
             lbSalarioHr = new Label();
-            txbHorista = new TextBox();
+            MTxbCNPJ = new MaskedTextBox();
+            MTxbTelefoneFunc = new MaskedTextBox();
+            MTxbDataNascimento = new MaskedTextBox();
+            MtxbCPFFunc = new MaskedTextBox();
+            MtxbAdmissao = new MaskedTextBox();
+            MtxbHorista = new MaskedTextBox();
+            MtxbSexoFunc = new MaskedTextBox();
+            txbEmail = new TextBox();
+            txbCargoFunc = new TextBox();
+            txbNomeFunc = new TextBox();
             SuspendLayout();
             // 
             // btnCadFunc
             // 
-            btnCadFunc.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
-            btnCadFunc.Location = new Point(570, 370);
+            btnCadFunc.BackColor = SystemColors.ControlLightLight;
+            btnCadFunc.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnCadFunc.Location = new Point(678, 240);
             btnCadFunc.Name = "btnCadFunc";
-            btnCadFunc.Size = new Size(177, 49);
+            btnCadFunc.Size = new Size(110, 38);
             btnCadFunc.TabIndex = 0;
-            btnCadFunc.Text = "Cadastrar";
-            btnCadFunc.UseVisualStyleBackColor = true;
+            btnCadFunc.Text = "OK";
+            btnCadFunc.UseVisualStyleBackColor = false;
             btnCadFunc.Click += btnCadFunc_Click;
             // 
             // lbNomeFunc
             // 
             lbNomeFunc.AutoSize = true;
-            lbNomeFunc.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lbNomeFunc.Location = new Point(40, 9);
+            lbNomeFunc.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            lbNomeFunc.Location = new Point(12, 52);
             lbNomeFunc.Name = "lbNomeFunc";
-            lbNomeFunc.Size = new Size(96, 40);
+            lbNomeFunc.Size = new Size(247, 32);
             lbNomeFunc.TabIndex = 1;
-            lbNomeFunc.Text = "Nome";
+            lbNomeFunc.Text = "Nome Colaborador :";
             // 
             // lbDataFunc
             // 
             lbDataFunc.AutoSize = true;
-            lbDataFunc.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lbDataFunc.Location = new Point(40, 76);
+            lbDataFunc.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            lbDataFunc.Location = new Point(12, 150);
             lbDataFunc.Name = "lbDataFunc";
-            lbDataFunc.Size = new Size(277, 40);
+            lbDataFunc.Size = new Size(259, 32);
             lbDataFunc.TabIndex = 2;
-            lbDataFunc.Text = "Data de Nascimento";
+            lbDataFunc.Text = "Data de Nascimento :";
             // 
             // lbTelefoneFunc
             // 
             lbTelefoneFunc.AutoSize = true;
-            lbTelefoneFunc.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lbTelefoneFunc.Location = new Point(40, 141);
+            lbTelefoneFunc.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            lbTelefoneFunc.Location = new Point(12, 87);
             lbTelefoneFunc.Name = "lbTelefoneFunc";
-            lbTelefoneFunc.Size = new Size(123, 40);
+            lbTelefoneFunc.Size = new Size(170, 32);
             lbTelefoneFunc.TabIndex = 3;
-            lbTelefoneFunc.Text = "Telefone";
+            lbTelefoneFunc.Text = "Fone Celular :";
             // 
             // lbEmailFunc
             // 
             lbEmailFunc.AutoSize = true;
-            lbEmailFunc.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lbEmailFunc.Location = new Point(40, 213);
+            lbEmailFunc.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            lbEmailFunc.Location = new Point(12, 117);
             lbEmailFunc.Name = "lbEmailFunc";
-            lbEmailFunc.Size = new Size(86, 40);
+            lbEmailFunc.Size = new Size(90, 32);
             lbEmailFunc.TabIndex = 4;
-            lbEmailFunc.Text = "Email";
+            lbEmailFunc.Text = "Email :";
             // 
             // lbSexoFunc
             // 
             lbSexoFunc.AutoSize = true;
-            lbSexoFunc.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lbSexoFunc.Location = new Point(40, 278);
+            lbSexoFunc.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            lbSexoFunc.Location = new Point(296, 87);
             lbSexoFunc.Name = "lbSexoFunc";
-            lbSexoFunc.Size = new Size(77, 40);
+            lbSexoFunc.Size = new Size(82, 32);
             lbSexoFunc.TabIndex = 5;
-            lbSexoFunc.Text = "Sexo";
+            lbSexoFunc.Text = "Sexo :";
+            lbSexoFunc.Click += lbSexoFunc_Click;
             // 
             // lbCPFFunc
             // 
             lbCPFFunc.AutoSize = true;
-            lbCPFFunc.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lbCPFFunc.Location = new Point(40, 351);
+            lbCPFFunc.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            lbCPFFunc.Location = new Point(479, 18);
             lbCPFFunc.Name = "lbCPFFunc";
-            lbCPFFunc.Size = new Size(65, 40);
+            lbCPFFunc.Size = new Size(206, 32);
             lbCPFFunc.TabIndex = 6;
-            lbCPFFunc.Text = "CPF";
-            // 
-            // txbNomeFunc
-            // 
-            txbNomeFunc.Location = new Point(40, 50);
-            txbNomeFunc.Name = "txbNomeFunc";
-            txbNomeFunc.Size = new Size(277, 23);
-            txbNomeFunc.TabIndex = 7;
-            // 
-            // txbDataFunc
-            // 
-            txbDataFunc.Location = new Point(40, 119);
-            txbDataFunc.Name = "txbDataFunc";
-            txbDataFunc.Size = new Size(277, 23);
-            txbDataFunc.TabIndex = 8;
-            // 
-            // txbTelefoneFunc
-            // 
-            txbTelefoneFunc.Location = new Point(40, 187);
-            txbTelefoneFunc.Name = "txbTelefoneFunc";
-            txbTelefoneFunc.Size = new Size(277, 23);
-            txbTelefoneFunc.TabIndex = 9;
-            // 
-            // txbEmailFunc
-            // 
-            txbEmailFunc.Location = new Point(40, 256);
-            txbEmailFunc.Name = "txbEmailFunc";
-            txbEmailFunc.Size = new Size(277, 23);
-            txbEmailFunc.TabIndex = 10;
-            // 
-            // txbSexoFunc
-            // 
-            txbSexoFunc.Location = new Point(40, 325);
-            txbSexoFunc.Name = "txbSexoFunc";
-            txbSexoFunc.Size = new Size(277, 23);
-            txbSexoFunc.TabIndex = 11;
-            // 
-            // txbCPFFunc
-            // 
-            txbCPFFunc.Location = new Point(40, 397);
-            txbCPFFunc.Name = "txbCPFFunc";
-            txbCPFFunc.Size = new Size(277, 23);
-            txbCPFFunc.TabIndex = 12;
+            lbCPFFunc.Text = "CPF Colaborador";
             // 
             // lbCargo
             // 
             lbCargo.AutoSize = true;
-            lbCargo.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lbCargo.Location = new Point(476, 9);
+            lbCargo.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            lbCargo.Location = new Point(13, 181);
             lbCargo.Name = "lbCargo";
-            lbCargo.Size = new Size(94, 40);
+            lbCargo.Size = new Size(96, 32);
             lbCargo.TabIndex = 13;
-            lbCargo.Text = "Cargo";
-            // 
-            // txbCargo
-            // 
-            txbCargo.Location = new Point(476, 50);
-            txbCargo.Name = "txbCargo";
-            txbCargo.Size = new Size(277, 23);
-            txbCargo.TabIndex = 14;
-            // 
-            // txbCNPJ
-            // 
-            txbCNPJ.Location = new Point(476, 119);
-            txbCNPJ.Name = "txbCNPJ";
-            txbCNPJ.Size = new Size(277, 23);
-            txbCNPJ.TabIndex = 15;
+            lbCargo.Text = "Cargo :";
             // 
             // lbEmpresa
             // 
             lbEmpresa.AutoSize = true;
-            lbEmpresa.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lbEmpresa.Location = new Point(476, 76);
+            lbEmpresa.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            lbEmpresa.Location = new Point(9, 19);
             lbEmpresa.Name = "lbEmpresa";
-            lbEmpresa.Size = new Size(81, 40);
+            lbEmpresa.Size = new Size(324, 32);
             lbEmpresa.TabIndex = 16;
-            lbEmpresa.Text = "CNPJ";
+            lbEmpresa.Text = "CNPJ Empresa Cadastrada :";
+            lbEmpresa.Click += lbEmpresa_Click;
             // 
             // lbAdmissao
             // 
             lbAdmissao.AutoSize = true;
-            lbAdmissao.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lbAdmissao.Location = new Point(476, 159);
+            lbAdmissao.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            lbAdmissao.Location = new Point(451, 151);
             lbAdmissao.Name = "lbAdmissao";
-            lbAdmissao.Size = new Size(249, 40);
+            lbAdmissao.Size = new Size(234, 32);
             lbAdmissao.TabIndex = 17;
-            lbAdmissao.Text = "Data de Admissão";
-            // 
-            // txbAdmissao
-            // 
-            txbAdmissao.Location = new Point(476, 202);
-            txbAdmissao.Name = "txbAdmissao";
-            txbAdmissao.Size = new Size(277, 23);
-            txbAdmissao.TabIndex = 18;
+            lbAdmissao.Text = "Data de Admissão :";
+            lbAdmissao.Click += lbAdmissao_Click;
             // 
             // lbSalarioHr
             // 
             lbSalarioHr.AutoSize = true;
-            lbSalarioHr.Font = new Font("Segoe UI", 21.75F, FontStyle.Regular, GraphicsUnit.Point);
-            lbSalarioHr.Location = new Point(476, 239);
+            lbSalarioHr.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            lbSalarioHr.Location = new Point(570, 181);
             lbSalarioHr.Name = "lbSalarioHr";
-            lbSalarioHr.Size = new Size(203, 40);
+            lbSalarioHr.Size = new Size(106, 32);
             lbSalarioHr.TabIndex = 19;
-            lbSalarioHr.Text = "Sálario Horista";
+            lbSalarioHr.Text = "Sálario :";
             // 
-            // txbHorista
+            // MTxbCNPJ
             // 
-            txbHorista.Location = new Point(476, 282);
-            txbHorista.Name = "txbHorista";
-            txbHorista.Size = new Size(277, 23);
-            txbHorista.TabIndex = 20;
-            txbHorista.TextChanged += txbHorista_TextChanged;
+            MTxbCNPJ.BackColor = SystemColors.ControlLightLight;
+            MTxbCNPJ.BorderStyle = BorderStyle.None;
+            MTxbCNPJ.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            MTxbCNPJ.Location = new Point(339, 27);
+            MTxbCNPJ.Mask = "00,000,000/0000-00";
+            MTxbCNPJ.Name = "MTxbCNPJ";
+            MTxbCNPJ.Size = new Size(134, 22);
+            MTxbCNPJ.TabIndex = 22;
+            MTxbCNPJ.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            MTxbCNPJ.Click += MTxbCNPJ_Click;
+            // 
+            // MTxbTelefoneFunc
+            // 
+            MTxbTelefoneFunc.BackColor = SystemColors.ControlLightLight;
+            MTxbTelefoneFunc.BorderStyle = BorderStyle.None;
+            MTxbTelefoneFunc.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            MTxbTelefoneFunc.Location = new Point(195, 95);
+            MTxbTelefoneFunc.Mask = "00000-9999";
+            MTxbTelefoneFunc.Name = "MTxbTelefoneFunc";
+            MTxbTelefoneFunc.Size = new Size(95, 22);
+            MTxbTelefoneFunc.TabIndex = 23;
+            MTxbTelefoneFunc.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            MTxbTelefoneFunc.Click += MTxbTelefoneFunc_Click;
+            // 
+            // MTxbDataNascimento
+            // 
+            MTxbDataNascimento.BackColor = SystemColors.ControlLightLight;
+            MTxbDataNascimento.BorderStyle = BorderStyle.None;
+            MTxbDataNascimento.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            MTxbDataNascimento.Location = new Point(272, 158);
+            MTxbDataNascimento.Mask = "00-00-0000";
+            MTxbDataNascimento.Name = "MTxbDataNascimento";
+            MTxbDataNascimento.Size = new Size(85, 22);
+            MTxbDataNascimento.TabIndex = 26;
+            MTxbDataNascimento.ValidatingType = typeof(DateTime);
+            MTxbDataNascimento.MaskInputRejected += MTxbDataNascimento_MaskInputRejected;
+            MTxbDataNascimento.Click += MTxbDataNascimento_Click;
+            // 
+            // MtxbCPFFunc
+            // 
+            MtxbCPFFunc.BackColor = SystemColors.ControlLightLight;
+            MtxbCPFFunc.BorderStyle = BorderStyle.None;
+            MtxbCPFFunc.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            MtxbCPFFunc.Location = new Point(691, 27);
+            MtxbCPFFunc.Mask = "000,000,000-00";
+            MtxbCPFFunc.Name = "MtxbCPFFunc";
+            MtxbCPFFunc.Size = new Size(105, 22);
+            MtxbCPFFunc.TabIndex = 27;
+            MtxbCPFFunc.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            MtxbCPFFunc.ValidatingType = typeof(DateTime);
+            MtxbCPFFunc.Click += MtxbCPFFunc_Click;
+            // 
+            // MtxbAdmissao
+            // 
+            MtxbAdmissao.BackColor = SystemColors.ControlLightLight;
+            MtxbAdmissao.BorderStyle = BorderStyle.None;
+            MtxbAdmissao.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            MtxbAdmissao.Location = new Point(703, 158);
+            MtxbAdmissao.Mask = "00-00-0000";
+            MtxbAdmissao.Name = "MtxbAdmissao";
+            MtxbAdmissao.Size = new Size(85, 22);
+            MtxbAdmissao.TabIndex = 28;
+            MtxbAdmissao.ValidatingType = typeof(DateTime);
+            MtxbAdmissao.MaskInputRejected += MtxbAdmissao_MaskInputRejected;
+            MtxbAdmissao.Click += MtxbAdmissao_Click;
+            // 
+            // MtxbHorista
+            // 
+            MtxbHorista.BackColor = SystemColors.ControlLightLight;
+            MtxbHorista.BorderStyle = BorderStyle.None;
+            MtxbHorista.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            MtxbHorista.Location = new Point(682, 186);
+            MtxbHorista.Mask = "aaaa";
+            MtxbHorista.Name = "MtxbHorista";
+            MtxbHorista.Size = new Size(108, 22);
+            MtxbHorista.TabIndex = 30;
+            MtxbHorista.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            MtxbHorista.MaskInputRejected += MtxbHorista_MaskInputRejected;
+            MtxbHorista.Click += MtxbHorista_Click;
+            MtxbHorista.KeyPress += MtxbHorista_KeyPress;
+            // 
+            // MtxbSexoFunc
+            // 
+            MtxbSexoFunc.BackColor = SystemColors.ControlLightLight;
+            MtxbSexoFunc.BorderStyle = BorderStyle.None;
+            MtxbSexoFunc.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            MtxbSexoFunc.Location = new Point(384, 97);
+            MtxbSexoFunc.Mask = "LLLLLLLLLLLLLLLLLLLLL";
+            MtxbSexoFunc.Name = "MtxbSexoFunc";
+            MtxbSexoFunc.Size = new Size(89, 22);
+            MtxbSexoFunc.TabIndex = 25;
+            MtxbSexoFunc.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            MtxbSexoFunc.MaskInputRejected += MtxbSexoFunc_MaskInputRejected;
+            MtxbSexoFunc.Click += MtxbSexoFunc_Click;
+            // 
+            // txbEmail
+            // 
+            txbEmail.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            txbEmail.Location = new Point(108, 123);
+            txbEmail.Name = "txbEmail";
+            txbEmail.Size = new Size(662, 25);
+            txbEmail.TabIndex = 32;
+            txbEmail.Click += txbEmail_Click;
+            // 
+            // txbCargoFunc
+            // 
+            txbCargoFunc.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            txbCargoFunc.Location = new Point(108, 186);
+            txbCargoFunc.Name = "txbCargoFunc";
+            txbCargoFunc.Size = new Size(456, 25);
+            txbCargoFunc.TabIndex = 33;
+            txbCargoFunc.Click += txbCargoFunc_Click;
+            // 
+            // txbNomeFunc
+            // 
+            txbNomeFunc.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            txbNomeFunc.Location = new Point(265, 59);
+            txbNomeFunc.Name = "txbNomeFunc";
+            txbNomeFunc.Size = new Size(523, 25);
+            txbNomeFunc.TabIndex = 34;
+            txbNomeFunc.Click += txbNomeFunc_Click;
             // 
             // CadastroFuncionario
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(txbHorista);
+            BackColor = SystemColors.ControlLightLight;
+            ClientSize = new Size(808, 287);
+            Controls.Add(txbNomeFunc);
+            Controls.Add(txbCargoFunc);
+            Controls.Add(txbEmail);
+            Controls.Add(MtxbHorista);
+            Controls.Add(MtxbAdmissao);
+            Controls.Add(MtxbCPFFunc);
+            Controls.Add(MTxbDataNascimento);
+            Controls.Add(MtxbSexoFunc);
+            Controls.Add(MTxbTelefoneFunc);
+            Controls.Add(MTxbCNPJ);
             Controls.Add(lbSalarioHr);
-            Controls.Add(txbAdmissao);
             Controls.Add(lbAdmissao);
             Controls.Add(lbEmpresa);
-            Controls.Add(txbCNPJ);
-            Controls.Add(txbCargo);
             Controls.Add(lbCargo);
-            Controls.Add(txbCPFFunc);
-            Controls.Add(txbSexoFunc);
-            Controls.Add(txbEmailFunc);
-            Controls.Add(txbTelefoneFunc);
-            Controls.Add(txbDataFunc);
-            Controls.Add(txbNomeFunc);
             Controls.Add(lbCPFFunc);
             Controls.Add(lbSexoFunc);
             Controls.Add(lbEmailFunc);
@@ -259,6 +317,8 @@
             Controls.Add(lbDataFunc);
             Controls.Add(lbNomeFunc);
             Controls.Add(btnCadFunc);
+            MaximumSize = new Size(824, 326);
+            MinimumSize = new Size(824, 326);
             Name = "CadastroFuncionario";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "CadastroFuncionario";
@@ -276,18 +336,22 @@
         private Label lbSexoFunc;
         private Label lbCPFFunc;
         private TextBox txbNomeFunc;
-        private TextBox txbDataFunc;
         private TextBox txbTelefoneFunc;
-        private TextBox txbEmailFunc;
-        private TextBox txbSexoFunc;
-        private TextBox txbCPFFunc;
         private Label lbCargo;
-        private TextBox txbCargo;
-        private TextBox txbCNPJ;
         private Label lbEmpresa;
         private Label lbAdmissao;
-        private TextBox txbAdmissao;
         private Label lbSalarioHr;
-        private TextBox txbHorista;
+        private MaskedTextBox MTxbCNPJ;
+        private MaskedTextBox MTxbTelefoneFunc;
+        private MaskedTextBox MTxbDataNascimento;
+        private MaskedTextBox MtxbCPFFunc;
+        private MaskedTextBox MtxbAdmissao;
+        private MaskedTextBox MtxbHorista;
+        private MaskedTextBox MtxbSexoFunc;
+        private TextBox txbEmail;
+        private TextBox txbCargoFunc;
+        private TextBox textBox1;
+        private TextBox txbNome;
+
     }
 }

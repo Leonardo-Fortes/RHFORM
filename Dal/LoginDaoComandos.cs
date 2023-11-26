@@ -16,10 +16,13 @@ namespace ProjetoRhForm.Dal
         Conexao con = new Conexao();
         public bool verificarLogin(string login, string senha)
         {
+            int status = 1;
             //comandos sql de verificação //
             cmd.CommandText = "select * from Usuario where nome = @login and senha = @senha";
             cmd.Parameters.AddWithValue("@login", login);
             cmd.Parameters.AddWithValue("@senha", senha);
+            cmd.CommandText = "select cpf from Funcionario where status = @status";
+            cmd.Parameters.AddWithValue("@status", status);
             try
             {
                 cmd.Connection = con.conectar();
@@ -28,6 +31,7 @@ namespace ProjetoRhForm.Dal
                 {
                     tem = true;
                 }
+                
                 con.desconectar();
                 dr.Close();
             }
@@ -37,12 +41,14 @@ namespace ProjetoRhForm.Dal
             }
             return tem;
         }
-        public string cadastrarUsuario(string login, string senha, string confSenha) //cadastro usuario
+        public string cadastrarUsuario(string login, string senha, string confSenha, string tipo) //cadastro usuario
         {
+            int status = 1;
             if (senha.Equals(confSenha)) // verificação de senha
             {
-                cmd.CommandText = "Select cpf from Funcionario where cpf = @login";
+                cmd.CommandText = "Select cpf from Funcionario where cpf = @login and status = @status";
                 cmd.Parameters.AddWithValue("@login", login);
+                cmd.Parameters.AddWithValue("@status", status);
                 try
                 {
                     cmd.Connection = con.conectar();
@@ -50,12 +56,32 @@ namespace ProjetoRhForm.Dal
                     if (dr.HasRows)
                     {
                         dr.Close();
-                        cmd.CommandText = "insert into Usuario (nome,senha) values (@l,@s)";
-                        cmd.Parameters.AddWithValue("@l", login);
-                        cmd.Parameters.AddWithValue("@s", senha);
-                        cmd.ExecuteNonQuery(); // executando dados 
-                        con.desconectar();
+                        cmd.CommandText = "Select login from Usuario where login = @cpff";
+                        cmd.Parameters.AddWithValue("@cpff", login);
+                        dr = cmd.ExecuteReader();
+                        if (!dr.HasRows)
+                        {
+                            dr.Close ();
+                            cmd.CommandText = "insert into Usuario (login,senha,tipo) values (@l,@s,@t)";
+                            cmd.Parameters.AddWithValue("@l", login);
+                            cmd.Parameters.AddWithValue("@s", senha);
+                            cmd.Parameters.AddWithValue("@t", tipo);
+                            cmd.ExecuteNonQuery(); // executando dados 
+                            con.desconectar();
+                            tem = true;
+                        }
+                        else
+                        {
+                            this.msg = "Já existe um Usuário com essas credenciais!";
+                        }
+                       
                     }
+                    else
+                    {
+                        this.msg = "Funcionário inexistente!";
+                    }
+    
+                    
                 }
                 catch (SqlException ex)
                 {
@@ -69,11 +95,31 @@ namespace ProjetoRhForm.Dal
             return msg;
         }
 
+        public bool verificaTipo(string cpf)
+        {
+            if (string.IsNullOrEmpty(cpf)) // Adicione essa verificação
+            {
+                return false;
+            }
 
-     
+            string admin = "admin";
+            cmd.CommandText = "SELECT login FROM Usuario WHERE login = @cpf AND tipo = @tipo";
+            cmd.Parameters.AddWithValue("@cpf", cpf);
+            cmd.Parameters.AddWithValue("@tipo", admin);
+            cmd.Connection = con.conectar();
+
+            dr = cmd.ExecuteReader();
+
+            bool temAdmin = dr.HasRows;
+
+            dr.Close();
+            con.desconectar();
+
+            return temAdmin;
+        }
+
 
     }
-
 }
 
 

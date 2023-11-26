@@ -23,9 +23,10 @@ namespace ProjetoRhForm.Apresentação
 
         private void brnCadUsu_Click(object sender, EventArgs e)
         {
-            string Cadusu = txbCadUsu.Text;
+            string Cadusu = MtxbCPFFunc.Text;
             string CadSenha = txbCadSenha.Text;
             string ConfSenha = txbConfirmarSenha.Text;
+            string tipo = cbTipo.Text;
 
             if (string.IsNullOrEmpty(Cadusu) || string.IsNullOrEmpty(CadSenha) || string.IsNullOrEmpty(ConfSenha))
             {
@@ -34,24 +35,19 @@ namespace ProjetoRhForm.Apresentação
             else
             {
                 Controle controle = new Controle();
-                controle.cadastrar(txbCadUsu.Text, txbCadSenha.Text, txbConfirmarSenha.Text);
+                controle.cadastrar(MtxbCPFFunc.Text, txbCadSenha.Text, txbConfirmarSenha.Text, tipo);
 
                 if (controle.msg.Equals(""))
                 {
-
                     if (controle.tem)
                     {
                         MessageBox.Show("Cadastrado com sucesso", "Cadastrado!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-
                         this.Close();
                     }
-
                     else
                     {
                         MessageBox.Show("tente novamente!", "ERRO!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-
                 }
                 else
                 {

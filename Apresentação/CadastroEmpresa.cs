@@ -110,6 +110,12 @@ namespace ProjetoRhForm.Apresentação
                 // Se o comprimento já atingiu o limite e a tecla pressionada não for Backspace, ignora a tecla
                 e.Handled = true;
             }
+            Program.charChar(e);
+        }
+
+        private void txbUF_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

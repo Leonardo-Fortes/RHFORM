@@ -94,11 +94,12 @@
             // 
             MTxbLogin.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             MTxbLogin.Location = new Point(126, 22);
-            MTxbLogin.Mask = "000.000.000-00";
+            MTxbLogin.Mask = "000,000,000-00";
             MTxbLogin.Name = "MTxbLogin";
             MTxbLogin.Size = new Size(122, 29);
             MTxbLogin.TabIndex = 22;
             MTxbLogin.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
+            MTxbLogin.Click += MTxbLogin_Click;
             MTxbLogin.KeyPress += MTxbCpfFunc_KeyPress;
             // 
             // pcbInicio

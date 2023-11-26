@@ -19,14 +19,12 @@ namespace ProjetoRhForm.Apresentação
         {
             InitializeComponent();
         }
-
         private void btnGerar_Click(object sender, EventArgs e)
         {
             string dataInserida = MTxbData.Text;
             string formatoAtual = "MM-yyyy";
             string formatoDesejado = "yyyy-MM";
             string cnpj = MTxbCNPJ.Text;
-
             if (TryFormatarData(dataInserida, formatoAtual, formatoDesejado, out string dataFormatada))
             {
                 try
@@ -58,31 +56,20 @@ namespace ProjetoRhForm.Apresentação
             {
                 Console.WriteLine("Formato de data inválido.");
             }
-
-
-
-
         }
-
         static bool TryFormatarData(string dataInserida, string formatoAtual, string formatoDesejado, out string dataFormatada)
         {
             if (DateTime.TryParseExact(dataInserida, formatoAtual, null, System.Globalization.DateTimeStyles.None, out DateTime dataConvertida))
             {
-                // Se a conversão for bem-sucedida, você pode agora formatar a data no novo formato desejado
                 dataFormatada = dataConvertida.ToString(formatoDesejado);
                 return true;
             }
-
             dataFormatada = null;
             return false;
         }
-
-
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
         }
-
         private void MTxbCNPJ_KeyPress(object sender, KeyPressEventArgs e)
         {
             Program.IntNumber(e);

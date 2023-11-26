@@ -20,5 +20,10 @@ namespace ProjetoRhForm
             if (!char.IsDigit(e.KeyChar) && e.KeyChar != 8)
                 e.Handled = true;
         }
+        public static void charChar(KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar) && e.KeyChar != 8)
+                e.Handled = true;
+        }
     }
 }

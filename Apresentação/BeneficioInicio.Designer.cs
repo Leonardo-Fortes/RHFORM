@@ -29,62 +29,65 @@
         private void InitializeComponent()
         {
             lbCPF = new Label();
-            lbTitulo = new Label();
             btnAdicionar = new Button();
             MTxbCPF = new MaskedTextBox();
             btnAlterar = new Button();
+            panel1 = new Panel();
             SuspendLayout();
             // 
             // lbCPF
             // 
             lbCPF.AutoSize = true;
+            lbCPF.BackColor = SystemColors.ButtonFace;
             lbCPF.Font = new Font("Segoe UI Semibold", 16F, FontStyle.Bold, GraphicsUnit.Point);
             lbCPF.Location = new Point(36, 83);
             lbCPF.Name = "lbCPF";
             lbCPF.Size = new Size(51, 30);
             lbCPF.TabIndex = 1;
             lbCPF.Text = "CPF";
-            // 
-            // lbTitulo
-            // 
-            lbTitulo.AutoSize = true;
-            lbTitulo.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point);
-            lbTitulo.Location = new Point(33, 25);
-            lbTitulo.Name = "lbTitulo";
-            lbTitulo.Size = new Size(417, 45);
-            lbTitulo.TabIndex = 2;
-            lbTitulo.Text = "Informar CPF Colaborador";
+            lbCPF.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // btnAdicionar
             // 
+            btnAdicionar.BackColor = SystemColors.ButtonHighlight;
             btnAdicionar.Location = new Point(283, 91);
             btnAdicionar.Name = "btnAdicionar";
             btnAdicionar.Size = new Size(75, 23);
             btnAdicionar.TabIndex = 4;
             btnAdicionar.Text = "Adicionar";
-            btnAdicionar.UseVisualStyleBackColor = true;
+            btnAdicionar.UseVisualStyleBackColor = false;
             btnAdicionar.Click += btnAdicionar_Click;
             // 
             // MTxbCPF
             // 
+            MTxbCPF.BackColor = SystemColors.HighlightText;
             MTxbCPF.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             MTxbCPF.Location = new Point(93, 83);
             MTxbCPF.Mask = "000.000.000-00";
             MTxbCPF.Name = "MTxbCPF";
-            MTxbCPF.Size = new Size(100, 29);
+            MTxbCPF.Size = new Size(109, 29);
             MTxbCPF.TabIndex = 20;
             MTxbCPF.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             MTxbCPF.KeyPress += MTxbCPF_KeyPress;
             // 
             // btnAlterar
             // 
-            btnAlterar.Location = new Point(375, 89);
+            btnAlterar.BackColor = SystemColors.ButtonHighlight;
+            btnAlterar.Location = new Point(377, 91);
             btnAlterar.Name = "btnAlterar";
             btnAlterar.Size = new Size(75, 23);
             btnAlterar.TabIndex = 21;
             btnAlterar.Text = "Alterar";
-            btnAlterar.UseVisualStyleBackColor = true;
+            btnAlterar.UseVisualStyleBackColor = false;
             btnAlterar.Click += btnAlterar_Click_1;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = SystemColors.ButtonShadow;
+            panel1.Location = new Point(-1, -1);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(482, 36);
+            panel1.TabIndex = 22;
             // 
             // BeneficioInicio
             // 
@@ -94,8 +97,8 @@
             Controls.Add(btnAlterar);
             Controls.Add(MTxbCPF);
             Controls.Add(btnAdicionar);
-            Controls.Add(lbTitulo);
             Controls.Add(lbCPF);
+            Controls.Add(panel1);
             MaximumSize = new Size(494, 205);
             MinimumSize = new Size(494, 205);
             Name = "BeneficioInicio";
@@ -107,9 +110,9 @@
 
         #endregion
         private Label lbCPF;
-        private Label lbTitulo;
         private Button btnAdicionar;
         private MaskedTextBox MTxbCPF;
         private Button btnAlterar;
+        private Panel panel1;
     }
 }

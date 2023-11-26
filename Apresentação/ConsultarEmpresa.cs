@@ -47,5 +47,38 @@ namespace ProjetoRhForm.Apresentação
             }
 
         }
+
+        private void lbConsul_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MTxbCNPJ_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            string cnpj = MTxbCNPJ.Text;
+            Controle controle = new Controle();
+            controle.DeleteEmpresa(cnpj);
+            if (controle.msg.Equals(""))
+            {
+                if (controle.tem)
+                {
+                    MessageBox.Show("Empresa deletada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Empresa inexistente, tenta novamente!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                }
+            }
+            else
+            {
+                MessageBox.Show(controle.msg);
+            }
+        }
     }
 }

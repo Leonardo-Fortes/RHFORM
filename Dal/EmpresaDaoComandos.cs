@@ -20,6 +20,7 @@ namespace ProjetoRhForm.Dal
 
         public string cadastrarEmp(string nome, string cnpj, string rua, string numero, string bairro, string cidade, string uf, string pais, string cep)
         {
+            int status = 1;
             tem = false;
             cmd.CommandText = "select 1 from Empresa where cnpj = @cnpj1";
             cmd.Parameters.AddWithValue("@cnpj1", cnpj);
@@ -27,7 +28,7 @@ namespace ProjetoRhForm.Dal
             dr = cmd.ExecuteReader();
             if (!dr.Read())
             {
-                cmd.CommandText = "insert into Empresa values (@nome,@cnpj,@rua,@numero,@bairro,@cidade,@uf,@pais,@cep)";
+                cmd.CommandText = "insert into Empresa (nome, cnpj, rua, numero, bairro, cidade, UF, pais, cep, status)  values (@nome,@cnpj,@rua,@numero,@bairro,@cidade,@uf,@pais,@cep,@status)";
                 cmd.Parameters.AddWithValue("@nome", nome);
                 cmd.Parameters.AddWithValue("@cnpj", cnpj);
                 cmd.Parameters.AddWithValue("@rua", rua);
@@ -37,6 +38,7 @@ namespace ProjetoRhForm.Dal
                 cmd.Parameters.AddWithValue("@uf", uf);
                 cmd.Parameters.AddWithValue("@pais", pais);
                 cmd.Parameters.AddWithValue("@cep", cep);
+                cmd.Parameters.AddWithValue("@status", status);
                 dr.Close();
 
                 try
@@ -100,7 +102,7 @@ namespace ProjetoRhForm.Dal
 
             try
             {
-                string columnNamesEmpresa = "nome, cnpj, rua, numero, bairro, cidade, UF, pais, cep";
+                string columnNamesEmpresa = "nome, cnpj, rua, numero, bairro, cidade, UF, pais, cep, status, dataQuebraContrato";
                 string queryFolha;
 
                 if (string.IsNullOrEmpty(cnpj))
@@ -160,6 +162,38 @@ namespace ProjetoRhForm.Dal
                 Console.WriteLine("Erro: " + ex.Message);
                 throw new Exception("Erro ao executar a consulta.", ex);
             }
+        }
+        public string DeleteEmpresa(string cnpj)
+        {
+            DateTime data = DateTime.Now;
+            int status = 0;
+            tem = false;
+            cmd.CommandText = "update Empresa set status = @status, dataQuebraContrato = @data where cnpj = @cnpj";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@cnpj", cnpj);
+            cmd.Parameters.AddWithValue("@status", status);
+            cmd.Parameters.AddWithValue("@data", SqlDbType.Date).Value = data;
+            try
+            {
+                cmd.Connection = con.conectar();
+                int rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected == 0)
+                {
+                    this.msg = "Nenhum registro deletado, Empresa Inexistente.";
+                }
+                else
+                {
+                    tem = true;
+                }
+                con.desconectar();
+               
+            }
+            catch
+            {
+                this.msg = "Cnpj não foi encontrado!";
+            }
+
+            return msg;
         }
 
     }

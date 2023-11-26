@@ -7,7 +7,9 @@ namespace ProjetoRhForm.Apresentação
         {
             get; set;
         }
+
     }
+
 
     public partial class login : Form
     {
@@ -15,6 +17,11 @@ namespace ProjetoRhForm.Apresentação
         public login()
         {
             InitializeComponent();
+            MTxbLogin.TabIndex = 0;
+            txbSenha.TabIndex = 1;
+            btnEntrar.TabIndex = 2;
+            btnSair.TabIndex = 3;
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -40,11 +47,12 @@ namespace ProjetoRhForm.Apresentação
                 {
                     if (controle.tem)
                     {
+                        UsuarioLogado.CPF = Login;
                         MessageBox.Show("Logado com sucesso", "Logado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        inicio inicio = new inicio();
+                        inicio inicio = new inicio();                       
                         inicio.Show();
                         this.Hide();
-                        UsuarioLogado.CPF = Login;
+                        
                     }
                     else
                     {
@@ -75,6 +83,14 @@ namespace ProjetoRhForm.Apresentação
         private void pcbInicio_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void MTxbLogin_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(MTxbLogin.Text))
+            {
+                MTxbLogin.SelectionStart = 0;
+            }
         }
     }
 

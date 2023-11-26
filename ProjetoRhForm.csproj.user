@@ -19,6 +19,9 @@
     <Compile Update="Apresentação\ConsultarEmpresa.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Apresentação\ConsultarFuncionario.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Apresentação\ExibirFolha.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -33,3 +33,4 @@ C:\Users\Leonardo\source\repos\ProjetoRhForm\ProjetoRhForm\obj\Debug\net6.0-wind
 C:\Users\Leonardo\source\repos\ProjetoRhForm\ProjetoRhForm\obj\Debug\net6.0-windows\ProjetoRhForm.Apresentação.SenhaInicio.resources
 C:\Users\Leonardo\source\repos\ProjetoRhForm\ProjetoRhForm\obj\Debug\net6.0-windows\ProjetoRhForm.Apresentação.FolhaPagamento.resources
 C:\Users\Leonardo\source\repos\ProjetoRhForm\ProjetoRhForm\obj\Debug\net6.0-windows\ProjetoRhForm.Apresentação.ExibirFolha.resources
+C:\Users\Leonardo\source\repos\ProjetoRhForm\ProjetoRhForm\obj\Debug\net6.0-windows\ProjetoRhForm.Apresentação.ConsultarFuncionario.resources

@@ -1,37 +1,43 @@
 ﻿using ProjetoRhForm.Modelo;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics.Eventing.Reader;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
 namespace ProjetoRhForm.Apresentação
 {
     public partial class CadastroFuncionario : Form
     {
+
         public CadastroFuncionario()
         {
             InitializeComponent();
+            MTxbCNPJ.TabIndex = 0;
+            MtxbCPFFunc.TabIndex = 1;
+            txbNomeFunc.TabIndex = 2;
+            MTxbTelefoneFunc.TabIndex = 3;
+            MtxbSexoFunc.TabIndex = 4;
+            txbEmail.TabIndex = 5;
+            MTxbDataNascimento.TabIndex = 6;
+            MtxbAdmissao.TabIndex = 7;
+            txbCargoFunc.TabIndex = 8;
+            MtxbHorista.TabIndex = 9;
+            btnCadFunc.TabIndex = 10;
         }
+        public bool Adicionar
+        {
+            get; set;
+        }
+
         private void btnCadFunc_Click(object sender, EventArgs e)
         {
             Controle controle = new Controle();
-            string dataDigitada = txbDataFunc.Text;
+            string dataDigitada = MTxbDataNascimento.Text;
             string nomeFunc = txbNomeFunc.Text;
-            string telefoneFunc = txbTelefoneFunc.Text;
-            string emailFunc = txbEmailFunc.Text;
-            string sexoFunc = txbSexoFunc.Text;
-            string cpfFunc = txbCPFFunc.Text;
-            string cargo = txbCargo.Text;
-            string cnpj = txbCNPJ.Text;
-            string dataAdmissao = txbAdmissao.Text;
+            string telefoneFunc = MTxbTelefoneFunc.Text;
+            string emailFunc = txbEmail.Text;
+            string sexoFunc = MtxbSexoFunc.Text;
+            string cpfFunc = MtxbCPFFunc.Text;
+            string cargo = txbCargoFunc.Text;
+            string cnpj = MTxbCNPJ.Text;
+            string dataAdmissao = MtxbAdmissao.Text;
             int salarioHr;
-            if (int.TryParse(txbHorista.Text, out salarioHr))
+            if (int.TryParse(MtxbHorista.Text, out salarioHr))
             {
                 if (string.IsNullOrEmpty(nomeFunc) || string.IsNullOrEmpty(telefoneFunc) || string.IsNullOrEmpty(emailFunc) || string.IsNullOrEmpty(sexoFunc) || string.IsNullOrEmpty(cpfFunc) || string.IsNullOrEmpty(cargo) || string.IsNullOrEmpty(cnpj) || string.IsNullOrEmpty(dataDigitada))
                 {
@@ -52,23 +58,7 @@ namespace ProjetoRhForm.Apresentação
                         }
                         else
                         {
-                            controle.cadastrarFunc(txbNomeFunc.Text, dataInserida, txbTelefoneFunc.Text, txbEmailFunc.Text, txbSexoFunc.Text, txbCPFFunc.Text, txbCargo.Text, txbCNPJ.Text, dataadmissao, salarioHr);
-                            if (controle.msg.Equals(""))
-                            {
-                                if (controle.tem)
-                                {
-                                    MessageBox.Show("Cadastrado com Sucesso", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    this.Close();
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Ocorreu algo de errado, tente novamente", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                }
-                            }
-                            else
-                            {
-                                MessageBox.Show(controle.msg);
-                            }
+                            AdicionarOUAlterar(controle, txbNomeFunc.Text, dataInserida, MTxbTelefoneFunc.Text, txbEmail.Text, MtxbSexoFunc.Text, MtxbCPFFunc.Text, txbCargoFunc.Text, MTxbCNPJ.Text, dataadmissao, salarioHr);
                         }
                     }
                     else
@@ -81,14 +71,191 @@ namespace ProjetoRhForm.Apresentação
             {
                 MessageBox.Show("Salário hora deve ser númerico");
             }
+        }
+        private void AdicionarOUAlterar(Controle controle, string nome, DateTime date, string telefone, string email, string sexo, string cpf, string cargo, string cnpj, DateTime dataadmissao, int salarioHr)
+        {
+            if (Adicionar)
+            {
+                controle.cadastrarFunc(nome, date, telefone, email, sexo, cpf, cargo, cnpj, dataadmissao, salarioHr);
+                if (controle.msg.Equals(""))
+                {
+                    if (controle.tem)
+                    {
+                        MessageBox.Show("Cadastrado com Sucesso", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ocorreu algo de errado, tente novamente", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(controle.msg);
+                }
+            }
+            else
+            {
+                controle.AlterFunc(nome, date, telefone, email, sexo, cpf, cargo, cnpj, dataadmissao, salarioHr);
+                if (controle.msg.Equals(""))
+                {
+                    if (controle.tem)
+                    {
+                        MessageBox.Show("Alterado com Sucesso", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ocorreu algo de errado, tente novamente", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show(controle.msg);
+                }
+            }
+        }
+        private void txbHorista_TextChanged(object sender, EventArgs e)
+        {
+        }
+        private void lbSexoFunc_Click(object sender, EventArgs e)
+        {
+        }
 
-
-
-
+        private void lbEmpresa_Click(object sender, EventArgs e)
+        {
 
         }
 
-        private void txbHorista_TextChanged(object sender, EventArgs e)
+
+
+        private void MTxbCNPJ_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(MTxbCNPJ.Text))
+            {
+                MTxbCNPJ.SelectionStart = 0;
+            }
+        }
+
+        private void MtxbCPFFunc_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(MtxbCPFFunc.Text))
+            {
+                MtxbCPFFunc.SelectionStart = 0;
+            }
+        }
+
+        private void MtxbNomeFunc_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+        }
+
+        private void MTxbTelefoneFunc_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(MTxbTelefoneFunc.Text))
+            {
+                MTxbTelefoneFunc.SelectionStart = 0;
+            }
+        }
+
+        private void MtxbSexoFunc_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void MTxbDataNascimento_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(MTxbDataNascimento.Text))
+            {
+                MTxbDataNascimento.SelectionStart = 0;
+            }
+        }
+
+        private void MtxbAdmissao_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(MtxbAdmissao.Text))
+            {
+                MtxbAdmissao.SelectionStart = 0;
+            }
+        }
+
+        private void MtxbCargoFunc_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void MtxbHorista_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(MtxbHorista.Text))
+            {
+                MtxbHorista.SelectionStart = 0;
+            }
+        }
+
+        private void MtxbEmailFunc_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+
+
+        private void MTxbDataNascimento_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void txbNomeFunc_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txbNomeFunc.Text))
+            {
+                txbNomeFunc.SelectionStart = 0;
+            }
+        }
+
+        private void MtxbSexoFunc_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(MtxbSexoFunc.Text))
+            {
+                MtxbSexoFunc.SelectionStart = 0;
+            }
+        }
+
+        private void txbEmail_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txbEmail.Text))
+            {
+                txbEmail.SelectionStart = 0;
+            }
+        }
+
+        private void lbAdmissao_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txbCargoFunc_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txbCargoFunc.Text))
+            {
+                txbCargoFunc.SelectionStart = 0;
+            }
+        }
+
+        private void MtxbHorista_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void MtxbHorista_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Program.IntNumber(e);
+        }
+
+        private void MtxbAdmissao_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
 
         }

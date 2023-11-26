@@ -179,6 +179,7 @@
             txbUF.Name = "txbUF";
             txbUF.Size = new Size(115, 25);
             txbUF.TabIndex = 14;
+            txbUF.TextChanged += txbUF_TextChanged;
             txbUF.KeyPress += txbUF_KeyPress;
             // 
             // lbPais
@@ -213,7 +214,7 @@
             // 
             MtxtCNPJEmp.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             MtxtCNPJEmp.Location = new Point(139, 60);
-            MtxtCNPJEmp.Mask = "00.000.000/0000-00";
+            MtxtCNPJEmp.Mask = "00,000,000/0000-00";
             MtxtCNPJEmp.Name = "MtxtCNPJEmp";
             MtxtCNPJEmp.Size = new Size(100, 29);
             MtxtCNPJEmp.TabIndex = 19;
@@ -227,7 +228,7 @@
             MtxbCEP.Location = new Point(139, 266);
             MtxbCEP.Mask = "00000-000";
             MtxbCEP.Name = "MtxbCEP";
-            MtxbCEP.Size = new Size(70, 29);
+            MtxbCEP.Size = new Size(91, 29);
             MtxbCEP.TabIndex = 20;
             MtxbCEP.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             MtxbCEP.KeyPress += MtxbCEP_KeyPress;
@@ -236,6 +237,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ButtonHighlight;
             ClientSize = new Size(820, 323);
             Controls.Add(MtxbCEP);
             Controls.Add(MtxtCNPJEmp);

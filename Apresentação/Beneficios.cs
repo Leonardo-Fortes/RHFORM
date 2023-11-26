@@ -74,6 +74,7 @@ namespace ProjetoRhForm.Apresentação
                     if (controle.tem)
                     {
                         MessageBox.Show("Benefícios alterados com sucesso", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Close();
                     }
                     else
                     {
@@ -137,13 +138,42 @@ namespace ProjetoRhForm.Apresentação
             string feriasStr = txbFerias.Text;
             string decimoStr = txbDecimo.Text;
 
-            double convenio = double.Parse(convenioStr);
-            double valeTransporte = double.Parse(valeTransporteStr);
-            double alimentacao = double.Parse(alimentacaoStr);
-            double valeRefeicao = double.Parse(valeRefeicaoStr);
-            double ferias = double.Parse(feriasStr);
-            double decimo = double.Parse(decimoStr);
+            double? convenio = null;
+            double? valeTransporte = null;
+            double? alimentacao = null;
+            double? valeRefeicao = null;
+            double? ferias = null;
+            double? decimo = null;
 
+            if (double.TryParse(convenioStr, out double convenioValue))
+            {
+                convenio = convenioValue;
+            }
+
+            if (double.TryParse(valeTransporteStr, out double valeTransporteValue))
+            {
+                valeTransporte = valeTransporteValue;
+            }
+
+            if (double.TryParse(alimentacaoStr, out double alimentacaoValue))
+            {
+                alimentacao = alimentacaoValue;
+            }
+
+            if (double.TryParse(valeRefeicaoStr, out double valeRefeicaoValue))
+            {
+                valeRefeicao = valeRefeicaoValue;
+            }
+
+            if (double.TryParse(feriasStr, out double feriasValue))
+            {
+                ferias = feriasValue;
+            }
+
+            if (double.TryParse(decimoStr, out double decimoValue))
+            {
+                decimo = decimoValue;
+            }
             if (string.IsNullOrWhiteSpace(this.cpf))
             {
                 MessageBox.Show("Por favor, insira um CPF válido.");
@@ -157,7 +187,7 @@ namespace ProjetoRhForm.Apresentação
             if (TryFormatarData(dataInserida, formatoAtual, formatoDesejado, out string dataFormatada))
             {
 
-                AdiocionarOUALterar(controle, this.cpf, convenio, valeTransporte, alimentacao, valeRefeicao, ferias, decimo, dataFormatada);
+                AdiocionarOUALterar(controle, this.cpf, convenioValue, valeTransporteValue, alimentacaoValue, valeRefeicaoValue, feriasValue, decimoValue, dataFormatada);
 
             }
             else
