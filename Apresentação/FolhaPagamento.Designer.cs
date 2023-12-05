@@ -39,13 +39,14 @@
             // 
             // btnGerar
             // 
-            btnGerar.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btnGerar.Location = new Point(369, 108);
+            btnGerar.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            btnGerar.ForeColor = SystemColors.ControlText;
+            btnGerar.Location = new Point(369, 107);
             btnGerar.Name = "btnGerar";
-            btnGerar.Size = new Size(75, 36);
+            btnGerar.Size = new Size(75, 33);
             btnGerar.TabIndex = 0;
             btnGerar.Text = "Gerar";
-            btnGerar.UseVisualStyleBackColor = true;
+            btnGerar.UseVisualStyleBackColor = false;
             btnGerar.Click += btnGerar_Click;
             // 
             // lbBuscarCPF
@@ -80,33 +81,36 @@
             // 
             // MTxbCNPJ
             // 
+            MTxbCNPJ.BorderStyle = BorderStyle.None;
             MTxbCNPJ.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             MTxbCNPJ.Location = new Point(21, 118);
             MTxbCNPJ.Mask = "00.000.000/0000-00";
             MTxbCNPJ.Name = "MTxbCNPJ";
-            MTxbCNPJ.Size = new Size(100, 29);
+            MTxbCNPJ.Size = new Size(100, 22);
             MTxbCNPJ.TabIndex = 20;
             MTxbCNPJ.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             MTxbCNPJ.KeyPress += MTxbCNPJ_KeyPress;
             // 
             // MTxbCpfFunc
             // 
+            MTxbCpfFunc.BorderStyle = BorderStyle.None;
             MTxbCpfFunc.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             MTxbCpfFunc.Location = new Point(21, 58);
             MTxbCpfFunc.Mask = "000.000.000-00";
             MTxbCpfFunc.Name = "MTxbCpfFunc";
-            MTxbCpfFunc.Size = new Size(100, 29);
+            MTxbCpfFunc.Size = new Size(100, 22);
             MTxbCpfFunc.TabIndex = 21;
             MTxbCpfFunc.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             MTxbCpfFunc.KeyPress += MTxbCpfFunc_KeyPress;
             // 
             // MTxbData
             // 
+            MTxbData.BorderStyle = BorderStyle.None;
             MTxbData.Font = new Font("Segoe UI Semibold", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             MTxbData.Location = new Point(393, 55);
             MTxbData.Mask = "00-0000";
             MTxbData.Name = "MTxbData";
-            MTxbData.Size = new Size(51, 25);
+            MTxbData.Size = new Size(51, 18);
             MTxbData.TabIndex = 22;
             MTxbData.KeyPress += MTxbData_KeyPress;
             // 
@@ -114,6 +118,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ControlLightLight;
             ClientSize = new Size(499, 189);
             Controls.Add(MTxbData);
             Controls.Add(MTxbCpfFunc);
@@ -126,7 +131,7 @@
             MinimumSize = new Size(515, 228);
             Name = "FolhaPagamento";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "FolhaPagamento";
+            Text = "TechInnovate";
             ResumeLayout(false);
             PerformLayout();
         }

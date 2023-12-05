@@ -9,8 +9,6 @@ namespace ProjetoRhForm.Apresentação
         }
 
     }
-
-
     public partial class login : Form
     {
 
@@ -49,10 +47,9 @@ namespace ProjetoRhForm.Apresentação
                     {
                         UsuarioLogado.CPF = Login;
                         MessageBox.Show("Logado com sucesso", "Logado", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        inicio inicio = new inicio();                       
+                       inicio inicio = new inicio();                       
                         inicio.Show();
-                        this.Hide();
-                        
+                        this.Hide();                      
                     }
                     else
                     {

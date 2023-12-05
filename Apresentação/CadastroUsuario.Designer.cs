@@ -131,6 +131,7 @@
             cbTipo.Name = "cbTipo";
             cbTipo.Size = new Size(121, 23);
             cbTipo.TabIndex = 30;
+            cbTipo.SelectedIndexChanged += cbTipo_SelectedIndexChanged;
             // 
             // lbTipo
             // 
@@ -161,7 +162,7 @@
             MaximumSize = new Size(500, 300);
             Name = "CadastroUsuario";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "CadastroUsuario";
+            Text = "TechInnovate";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();

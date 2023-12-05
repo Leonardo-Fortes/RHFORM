@@ -40,10 +40,8 @@ namespace ProjetoRhForm.Dal
                 cmd.Parameters.AddWithValue("@cep", cep);
                 cmd.Parameters.AddWithValue("@status", status);
                 dr.Close();
-
                 try
                 {
-
                     cmd.ExecuteNonQuery();
                     con.desconectar();
                     tem = true;
@@ -185,14 +183,12 @@ namespace ProjetoRhForm.Dal
                 {
                     tem = true;
                 }
-                con.desconectar();
-               
+                con.desconectar();              
             }
             catch
             {
                 this.msg = "Cnpj não foi encontrado!";
             }
-
             return msg;
         }
 

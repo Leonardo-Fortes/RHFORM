@@ -39,6 +39,7 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.BackgroundColor = SystemColors.ControlLightLight;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(12, 74);
             dataGridView1.Name = "dataGridView1";
@@ -116,7 +117,7 @@
             Controls.Add(btnConsultar);
             Controls.Add(dataGridView1);
             Name = "ConsultarFuncionario";
-            Text = "ConsultarFuncionario";
+            Text = "TechInnovate";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();

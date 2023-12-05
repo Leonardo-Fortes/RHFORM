@@ -21,6 +21,7 @@ namespace ProjetoRhForm.Apresentação
             InitializeComponent();
         }
 
+
         private void brnCadUsu_Click(object sender, EventArgs e)
         {
             string Cadusu = MtxbCPFFunc.Text;
@@ -35,30 +36,70 @@ namespace ProjetoRhForm.Apresentação
             else
             {
                 Controle controle = new Controle();
-                controle.cadastrar(MtxbCPFFunc.Text, txbCadSenha.Text, txbConfirmarSenha.Text, tipo);
-
-                if (controle.msg.Equals(""))
+                if (VerificarSenhaForte(CadSenha))
                 {
-                    if (controle.tem)
+                    controle.cadastrar(MtxbCPFFunc.Text, txbCadSenha.Text, txbConfirmarSenha.Text, tipo);
+
+                    if (controle.msg.Equals(""))
                     {
-                        MessageBox.Show("Cadastrado com sucesso", "Cadastrado!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.Close();
+                        if (controle.tem)
+                        {
+                            MessageBox.Show("Cadastrado com sucesso", "Cadastrado!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("tente novamente!", "ERRO!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("tente novamente!", "ERRO!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(controle.msg);
                     }
                 }
                 else
                 {
-                    MessageBox.Show(controle.msg);
+                    MessageBox.Show("Senha fraca, Por favor cadastrar uma senha forte seguindo os requisitos", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 
 
         }
 
+        static bool VerificarSenhaForte(string senha)
+        {
 
+            if (!senha.Any(char.IsDigit))
+            {
+                return false;
+            }
 
+            // Verificar a presença de pelo menos uma letra maiúscula
+            if (!senha.Any(char.IsUpper))
+            {
+                return false;
+            }
+
+            // Verificar a presença de pelo menos um caractere especial
+            if (!senha.Any(ch => !char.IsLetterOrDigit(ch)))
+            {
+                return false;
+            }
+            if (senha.Length < 8)
+            {
+                return false;
+            }
+
+            // A senha atende a todos os critérios
+            return true;
+        }
+
+        private void cbTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
+
+
 }
+

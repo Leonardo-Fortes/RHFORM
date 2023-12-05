@@ -18,7 +18,7 @@ namespace ProjetoRhForm.Dal
         public string msg = "";
         Conexao con = new Conexao();
 
-        public string cadastrarFuncionario(string nome, DateTime date, string telefone, string email, string sexo, string cpf, string cargo, string cnpj, DateTime dateadmissao, int salarioHr)
+        public string cadastrarFuncionario(string nome, DateTime date, string telefone, string email, string sexo, string cpf, string cargo, string cnpj, DateTime dateadmissao, int salarioHr, int valeTrans, int valeAli)
         {
             int status = 1;
             int empresaId = 0;
@@ -46,7 +46,7 @@ namespace ProjetoRhForm.Dal
                         }
                         dr.Close();
                         cmd.Parameters.Clear();
-                        cmd.CommandText = "insert into Funcionario (nome, telefone, email, sexo, cpf, cargo, cnpj_empresa, datanascimento, id_empresa, dataadmissao, salario_hora, status) values (@nomeemp,@telefone,@email,@sexo,@cpf,@cargo,@cnpj,@data,@idempresa,@dataadmissao,@salarioHr, @status)";
+                        cmd.CommandText = "insert into Funcionario (nome, telefone, email, sexo, cpf, cargo, cnpj_empresa, datanascimento, id_empresa, dataadmissao, salario_hora, status, valetransporte, valealimentacao) values (@nomeemp,@telefone,@email,@sexo,@cpf,@cargo,@cnpj,@data,@idempresa,@dataadmissao,@salarioHr, @status, @valeTrans, @valeAli)";
                         cmd.Parameters.AddWithValue("@nomeemp", nome);
                         cmd.Parameters.AddWithValue("@telefone", telefone);
                         cmd.Parameters.AddWithValue("@email", email);
@@ -59,6 +59,8 @@ namespace ProjetoRhForm.Dal
                         cmd.Parameters.AddWithValue("@dataadmissao", SqlDbType.Date).Value = dateadmissao;
                         cmd.Parameters.AddWithValue("@salarioHr", salarioHr);
                         cmd.Parameters.AddWithValue("@status", ativo);
+                        cmd.Parameters.AddWithValue("@valeTrans", valeTrans);
+                        cmd.Parameters.AddWithValue("@valeAli", valeAli);
 
                         try
                         {
@@ -87,7 +89,7 @@ namespace ProjetoRhForm.Dal
             }
             return msg;
         }
-        public string alterarFunc(string nome, DateTime date, string telefone, string email, string sexo, string cpf, string cargo, string cnpj, DateTime dateadmissao, int salarioHr)
+        public string alterarFunc(string nome, DateTime date, string telefone, string email, string sexo, string cpf, string cargo, string cnpj, DateTime dateadmissao, int salarioHr, int valeTrans, int valeAli)
         {
             tem = false;
             int empresaId = 0;
@@ -115,7 +117,7 @@ namespace ProjetoRhForm.Dal
                         dr.Close();
 
                         cmd.Parameters.Clear();
-                        cmd.CommandText = "UPDATE Funcionario SET nome = @nomeemp, telefone = @telefone, email = @email, sexo = @sexo, cpf = @cpf, cargo = @cargo,  cnpj_empresa = @cnpj, datanascimento = @data, id_empresa = @idempresa, dataadmissao = @dataadmissao, salario_hora = @salarioHr, status = @status where  cpf = @cppf";
+                        cmd.CommandText = "UPDATE Funcionario SET nome = @nomeemp, telefone = @telefone, email = @email, sexo = @sexo, cpf = @cpf, cargo = @cargo,  cnpj_empresa = @cnpj, datanascimento = @data, id_empresa = @idempresa, dataadmissao = @dataadmissao, salario_hora = @salarioHr, status = @status, valetransporte = @valeTrans, valealimentacao = @valeAli where  cpf = @cppf";
                         cmd.Parameters.AddWithValue("@nomeemp", nome);
                         cmd.Parameters.AddWithValue("@telefone", telefone);
                         cmd.Parameters.AddWithValue("@email", email);
@@ -129,6 +131,8 @@ namespace ProjetoRhForm.Dal
                         cmd.Parameters.AddWithValue("@salarioHr", salarioHr);
                         cmd.Parameters.AddWithValue("@status", ativo);
                         cmd.Parameters.AddWithValue("@cppf", cpf);
+                        cmd.Parameters.AddWithValue("@valeTrans", valeTrans);
+                        cmd.Parameters.AddWithValue("@valeAli", valeAli);
                         try
                         {
                             cmd.Connection = con.conectar();

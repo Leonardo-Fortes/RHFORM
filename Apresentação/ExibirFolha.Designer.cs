@@ -32,19 +32,19 @@
             lbData = new Label();
             lbINF = new Label();
             panel1 = new Panel();
+            lbValeAliResul = new Label();
+            lbValeTransResul = new Label();
+            lbValeAli = new Label();
+            lbValeTrans = new Label();
             lbValorIRRF = new Label();
             lbIRRF = new Label();
             lbValorFGTS = new Label();
             lbFGTS = new Label();
             lbValorINSS = new Label();
             lbINSS = new Label();
-            lbValorHora = new Label();
-            lbHoras = new Label();
             lbValorSalarioLiquido = new Label();
-            lbValorHoraExtra = new Label();
             lbValorSalarioBase = new Label();
             label3 = new Label();
-            lbHoraExtra = new Label();
             lb_salarioBase = new Label();
             label2 = new Label();
             lbVencimento = new Label();
@@ -52,6 +52,8 @@
             lbDataFolha = new Label();
             lbNomeEmpresa = new Label();
             MTxbData = new MaskedTextBox();
+            printDocument1 = new System.Drawing.Printing.PrintDocument();
+            btnImprimir = new Button();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -88,27 +90,67 @@
             // panel1
             // 
             panel1.BackColor = SystemColors.ControlLightLight;
+            panel1.Controls.Add(lbValeAliResul);
+            panel1.Controls.Add(lbValeTransResul);
+            panel1.Controls.Add(lbValeAli);
+            panel1.Controls.Add(lbValeTrans);
             panel1.Controls.Add(lbValorIRRF);
             panel1.Controls.Add(lbIRRF);
             panel1.Controls.Add(lbValorFGTS);
             panel1.Controls.Add(lbFGTS);
             panel1.Controls.Add(lbValorINSS);
             panel1.Controls.Add(lbINSS);
-            panel1.Controls.Add(lbValorHora);
-            panel1.Controls.Add(lbHoras);
             panel1.Controls.Add(lbValorSalarioLiquido);
-            panel1.Controls.Add(lbValorHoraExtra);
             panel1.Controls.Add(lbValorSalarioBase);
             panel1.Controls.Add(label3);
-            panel1.Controls.Add(lbHoraExtra);
             panel1.Controls.Add(lb_salarioBase);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(lbVencimento);
             panel1.Controls.Add(lbDesc);
             panel1.Location = new Point(12, 137);
             panel1.Name = "panel1";
-            panel1.Size = new Size(579, 301);
+            panel1.Size = new Size(610, 313);
             panel1.TabIndex = 7;
+            panel1.Paint += panel1_Paint;
+            // 
+            // lbValeAliResul
+            // 
+            lbValeAliResul.AutoSize = true;
+            lbValeAliResul.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lbValeAliResul.Location = new Point(437, 267);
+            lbValeAliResul.Name = "lbValeAliResul";
+            lbValeAliResul.Size = new Size(0, 21);
+            lbValeAliResul.TabIndex = 21;
+            // 
+            // lbValeTransResul
+            // 
+            lbValeTransResul.AutoSize = true;
+            lbValeTransResul.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lbValeTransResul.Location = new Point(437, 233);
+            lbValeTransResul.Name = "lbValeTransResul";
+            lbValeTransResul.Size = new Size(0, 21);
+            lbValeTransResul.TabIndex = 20;
+            // 
+            // lbValeAli
+            // 
+            lbValeAli.AutoSize = true;
+            lbValeAli.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lbValeAli.Location = new Point(32, 267);
+            lbValeAli.Name = "lbValeAli";
+            lbValeAli.Size = new Size(144, 21);
+            lbValeAli.TabIndex = 19;
+            lbValeAli.Text = "Vale Alimentacao";
+            // 
+            // lbValeTrans
+            // 
+            lbValeTrans.AutoSize = true;
+            lbValeTrans.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lbValeTrans.Location = new Point(32, 233);
+            lbValeTrans.Name = "lbValeTrans";
+            lbValeTrans.Size = new Size(128, 21);
+            lbValeTrans.TabIndex = 18;
+            lbValeTrans.Text = "Vale Transporte";
+            lbValeTrans.Click += lbValeTrans_Click;
             // 
             // lbValorIRRF
             // 
@@ -167,26 +209,6 @@
             lbINSS.TabIndex = 12;
             lbINSS.Text = "INSS";
             // 
-            // lbValorHora
-            // 
-            lbValorHora.AutoSize = true;
-            lbValorHora.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lbValorHora.Location = new Point(143, 251);
-            lbValorHora.Name = "lbValorHora";
-            lbValorHora.Size = new Size(0, 17);
-            lbValorHora.TabIndex = 11;
-            // 
-            // lbHoras
-            // 
-            lbHoras.AutoSize = true;
-            lbHoras.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lbHoras.ForeColor = SystemColors.Highlight;
-            lbHoras.Location = new Point(16, 251);
-            lbHoras.Name = "lbHoras";
-            lbHoras.Size = new Size(123, 17);
-            lbHoras.TabIndex = 10;
-            lbHoras.Text = "QTD Hora Mensais";
-            // 
             // lbValorSalarioLiquido
             // 
             lbValorSalarioLiquido.AutoSize = true;
@@ -195,15 +217,6 @@
             lbValorSalarioLiquido.Name = "lbValorSalarioLiquido";
             lbValorSalarioLiquido.Size = new Size(0, 21);
             lbValorSalarioLiquido.TabIndex = 9;
-            // 
-            // lbValorHoraExtra
-            // 
-            lbValorHoraExtra.AutoSize = true;
-            lbValorHoraExtra.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lbValorHoraExtra.Location = new Point(180, 268);
-            lbValorHoraExtra.Name = "lbValorHoraExtra";
-            lbValorHoraExtra.Size = new Size(0, 17);
-            lbValorHoraExtra.TabIndex = 8;
             // 
             // lbValorSalarioBase
             // 
@@ -224,18 +237,6 @@
             label3.TabIndex = 6;
             label3.Text = "Sálario Liquido";
             label3.Click += label3_Click;
-            // 
-            // lbHoraExtra
-            // 
-            lbHoraExtra.AutoSize = true;
-            lbHoraExtra.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lbHoraExtra.ForeColor = SystemColors.Highlight;
-            lbHoraExtra.Location = new Point(16, 268);
-            lbHoraExtra.Name = "lbHoraExtra";
-            lbHoraExtra.Size = new Size(158, 17);
-            lbHoraExtra.TabIndex = 5;
-            lbHoraExtra.Text = "QTD Hora Extra Mensais";
-            lbHoraExtra.Click += lbHoraExtra_Click;
             // 
             // lb_salarioBase
             // 
@@ -305,11 +306,23 @@
             MTxbData.TabIndex = 19;
             MTxbData.KeyPress += MTxbData_KeyPress;
             // 
+            // btnImprimir
+            // 
+            btnImprimir.Location = new Point(198, 46);
+            btnImprimir.Name = "btnImprimir";
+            btnImprimir.Size = new Size(75, 23);
+            btnImprimir.TabIndex = 20;
+            btnImprimir.Text = "imprimir";
+            btnImprimir.UseVisualStyleBackColor = true;
+            btnImprimir.Click += btnImprimir_Click;
+            // 
             // ExibirFolha
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(613, 450);
+            BackColor = SystemColors.ControlLightLight;
+            ClientSize = new Size(636, 462);
+            Controls.Add(btnImprimir);
             Controls.Add(MTxbData);
             Controls.Add(lbNomeEmpresa);
             Controls.Add(lbDataFolha);
@@ -317,11 +330,9 @@
             Controls.Add(lbINF);
             Controls.Add(lbData);
             Controls.Add(btnBuscar);
-            MaximumSize = new Size(629, 489);
-            MinimumSize = new Size(629, 489);
             Name = "ExibirFolha";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "ExibirFolha";
+            Text = "TechInnovate";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
@@ -337,13 +348,9 @@
         private Label lbDesc;
         private Label lb_salarioBase;
         private Label label2;
-        private Label lbHoraExtra;
         private Label label3;
         private Label lbValorSalarioLiquido;
-        private Label lbValorHoraExtra;
         private Label lbValorSalarioBase;
-        private Label lbValorHora;
-        private Label lbHoras;
         private Label lbINSS;
         private Label lbValorINSS;
         private Label lbValorFGTS;
@@ -353,5 +360,11 @@
         private Label lbDataFolha;
         private Label lbNomeEmpresa;
         private MaskedTextBox MTxbData;
+        private Label lbValeAliResul;
+        private Label lbValeTransResul;
+        private Label lbValeAli;
+        private Label lbValeTrans;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private Button btnImprimir;
     }
 }

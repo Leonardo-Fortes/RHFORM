@@ -30,14 +30,10 @@ namespace ProjetoRhForm.Dal
                     idEmpresa = Convert.ToInt32(dr["idempresa"]);
                 }
                 dr.Close();
-
-
                 if (!string.IsNullOrEmpty(cpf))
                 {
                     // Se um CPF foi fornecido, busque o ID do funcionário associado
                     int idFuncionario = BuscarIdFuncionarioPorCpf(cpf);
-
-
                     if (idFuncionario != -1)
                     {
                         // Verifique se o funcionário pertence à empresa especificada
@@ -98,7 +94,14 @@ namespace ProjetoRhForm.Dal
                                     tem = false;
                                 }
                             }
-                            
+                            try
+                            {
+                                ExecutarStoredProcedureBeneficios(idFuncionario, mes_ano);
+                            }
+                            catch
+                            {
+                                tem = false;
+                            }
                         }
                         else
                         {
@@ -169,11 +172,15 @@ namespace ProjetoRhForm.Dal
                                 tem = false;
                             }
                         }
+                        try
+                        {
+                            ExecutarStoredProcedureBeneficios(idFuncionario, mes_ano);
+                        }
+                        catch
+                        {
+                            tem = false;
+                        }
                     }
-
-                    // Continue com o código aqui após o loop
-
-
                     tem = true;
                 }
             }
@@ -181,10 +188,7 @@ namespace ProjetoRhForm.Dal
             {
                 this.msg = "Erro com o banco: " + ex.Message;
             }
-
             return msg;
-
-
         }
 
         private int BuscarIdFuncionarioPorCpf(string cpf)
@@ -207,15 +211,23 @@ namespace ProjetoRhForm.Dal
                 con.desconectar();        
             return idFuncionario;
         }
-
-
-
         private void ExecutarStoredProcedure(int idFuncionario, string mes_ano)
         {
             cmd.CommandText = "execute CalcularHorasTrabalhadas @id, @mes_ano ";
             cmd.Parameters.Clear();
             cmd.Parameters.AddWithValue("@id", idFuncionario);
             cmd.Parameters.AddWithValue("@mes_ano", mes_ano);
+            cmd.Connection = con.conectar();
+            cmd.ExecuteNonQuery();
+            con.desconectar();
+        }
+
+        private void ExecutarStoredProcedureBeneficios(int idFuncionario, string mes_ano)
+        {
+            cmd.CommandText = "execute CalcularBeneficios @id, @mes_ano";
+            cmd.Parameters.Clear();
+            cmd.Parameters.AddWithValue("@id", idFuncionario);
+            cmd.Parameters.AddWithValue("@mes_ano", mes_ano );
             cmd.Connection = con.conectar();
             cmd.ExecuteNonQuery();
             con.desconectar();
@@ -246,7 +258,6 @@ namespace ProjetoRhForm.Dal
             {
                 this.msg = "Funcionário não existe / inativo";
             }
-         
 
             return idsFuncionarios;
         }
@@ -264,7 +275,6 @@ namespace ProjetoRhForm.Dal
             con.desconectar();
             return pertence;
         }
-
         private void ExecutarStoredProcedureSalarioBase(int idFuncionario, string mes_ano)
         {
                 cmd.CommandText = "execute CalcularSalarioBase @id, @mes_ano ";
@@ -273,13 +283,10 @@ namespace ProjetoRhForm.Dal
                 cmd.Parameters.AddWithValue("@mes_ano", mes_ano);
                 cmd.Connection = con.conectar();
                 cmd.ExecuteNonQuery();
-                con.desconectar();
-         
-
+                con.desconectar();        
         }
         private void ExecutarStoredProcedureSalarioLiquido(int idFuncionario, string mes_ano)
         {
-  
                 cmd.CommandText = "execute SalarioLiquido @id, @mes_ano ";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@id", idFuncionario);
@@ -396,12 +403,15 @@ namespace ProjetoRhForm.Dal
                 dr.Close();
                    
                 // Consulta para obter os dados da tabela Folha
-                string columnNamesFolha = "mes_ano, hora_extra, qtd_hora, salario_base, salario_liquido";
+                string columnNamesFolha = "mes_ano, valorExtra, qtd_hora, salario_base, salario_liquido";
                 string queryFolha = $"SELECT {columnNamesFolha} FROM Folha WHERE id_funcionario = @idfunc AND mes_ano = @data";
 
                 // Consulta para obter os dados da tabela Desconto
                 string columnNamesDesconto = "inss, fgts, irrf";
                 string queryDesconto = $"SELECT {columnNamesDesconto} FROM Desconto WHERE id_funcionario = @idfunc AND mes_ano = @data";
+
+                string columnNamesBeneficios = "valetransporte, valealimentacao";
+                string queryBeneficios = $"SELECT {columnNamesBeneficios} FROM Beneficios WHERE id_funcionario = @idfunc and mes_ano = @data";
 
                 cmd.Parameters.AddWithValue("@idfunc", id_funcionario);
                 cmd.Parameters.AddWithValue("@data", data);
@@ -439,7 +449,7 @@ namespace ProjetoRhForm.Dal
                 finally
                 {
                     dr.Close();
-                }
+                }                         
 
                 // Executar a consulta da tabela Desconto
                 cmd.CommandText = queryDesconto;
@@ -470,6 +480,40 @@ namespace ProjetoRhForm.Dal
                 catch (Exception ex)
                 {
                     throw new Exception("Erro ao processar dados da tabela Desconto.", ex);
+                }
+                finally
+                {
+                    dr.Close();
+                }
+
+                cmd.CommandText = queryBeneficios;
+                dr = cmd.ExecuteReader();
+
+                foreach (var columnName in columnNamesBeneficios.Split(',').Select(c => c.Trim()))
+                {
+                    if (!tabelaFolha.Columns.Contains(columnName))
+                    {
+                        tabelaFolha.Columns.Add(columnName);
+                    }
+                }
+
+                try
+                {
+                    while (dr.Read())
+                    {
+                        DataRow linha = tabelaFolha.NewRow();
+
+                        foreach (var columnName in columnNamesBeneficios.Split(',').Select(c => c.Trim()))
+                        {
+                            linha[columnName] = dr[columnName];
+                        }
+
+                        tabelaFolha.Rows.Add(linha);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Erro ao processar dados da tabela Folha.", ex);
                 }
                 finally
                 {

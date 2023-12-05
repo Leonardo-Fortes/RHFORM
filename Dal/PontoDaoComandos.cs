@@ -14,7 +14,6 @@ namespace ProjetoRhForm.Dal
         public bool tem = false;
         public string msg = "";
         Conexao con = new Conexao();
-
         public string cadPontoEntrada(DateTime entrada, string cpf, DateTime data)
         {
             tem = false;
@@ -77,9 +76,6 @@ namespace ProjetoRhForm.Dal
             }
             return msg;
         }
-
-
-
         public string cadPontoInicio(string cpf, DateTime inicioIntervalo, DateTime data)
         {
             tem = false;
@@ -225,7 +221,5 @@ namespace ProjetoRhForm.Dal
             return msg;
 
         }
-    }
-
-    
+    }    
 }

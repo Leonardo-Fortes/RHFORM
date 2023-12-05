@@ -23,6 +23,8 @@ namespace ProjetoRhForm.Apresentação
         {
             get; set;
         }
+        private int valorTransporte;
+        private int valorAlimentacao;
 
         private void btnCadFunc_Click(object sender, EventArgs e)
         {
@@ -37,46 +39,74 @@ namespace ProjetoRhForm.Apresentação
             string cnpj = MTxbCNPJ.Text;
             string dataAdmissao = MtxbAdmissao.Text;
             int salarioHr;
-            if (int.TryParse(MtxbHorista.Text, out salarioHr))
+            if (cbValeTransporte.SelectedItem != null && cbValeAlimentacao.SelectedItem != null)
             {
-                if (string.IsNullOrEmpty(nomeFunc) || string.IsNullOrEmpty(telefoneFunc) || string.IsNullOrEmpty(emailFunc) || string.IsNullOrEmpty(sexoFunc) || string.IsNullOrEmpty(cpfFunc) || string.IsNullOrEmpty(cargo) || string.IsNullOrEmpty(cnpj) || string.IsNullOrEmpty(dataDigitada))
+                string texto = cbValeTransporte.SelectedItem.ToString();
+                if (texto == "Sim")
                 {
-                    MessageBox.Show("Nenhum campo pode estar vazio!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    valorTransporte = 1;
                 }
                 else
                 {
-                    if (DateTime.TryParseExact(dataDigitada, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dataInserida) && DateTime.TryParseExact(dataAdmissao, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dataadmissao))
+                    valorTransporte = 0;
+                }
+
+                string texto1 = cbValeAlimentacao.SelectedItem.ToString();
+                if (texto1 == "Sim")
+                {
+                    valorAlimentacao = 1;
+                }
+                else
+                {
+                    valorAlimentacao = 0;
+                }
+
+
+                if (int.TryParse(MtxbHorista.Text, out salarioHr))
+                {
+                    if (string.IsNullOrEmpty(nomeFunc) || string.IsNullOrEmpty(telefoneFunc) || string.IsNullOrEmpty(emailFunc) || string.IsNullOrEmpty(sexoFunc) || string.IsNullOrEmpty(cpfFunc) || string.IsNullOrEmpty(cargo) || string.IsNullOrEmpty(cnpj) || string.IsNullOrEmpty(dataDigitada))
                     {
-                        // Verifique se a data inserida está acima ou igual à data mínima suportada pelo SQL Server (01/01/1753)
-                        if (dataInserida < new DateTime(1753, 1, 1) || dataadmissao < new DateTime(1753, 1, 1))
-                        {
-                            MessageBox.Show("A data inserida está abaixo do limite .", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        if (dataadmissao > DateTime.Now || dataInserida > DateTime.Now)
-                        {
-                            MessageBox.Show("A data inserida está acima do limite .", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        else
-                        {
-                            AdicionarOUAlterar(controle, txbNomeFunc.Text, dataInserida, MTxbTelefoneFunc.Text, txbEmail.Text, MtxbSexoFunc.Text, MtxbCPFFunc.Text, txbCargoFunc.Text, MTxbCNPJ.Text, dataadmissao, salarioHr);
-                        }
+                        MessageBox.Show("Nenhum campo pode estar vazio!", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     else
                     {
-                        MessageBox.Show("A data inserida não está no formato correto");
+                        if (DateTime.TryParseExact(dataDigitada, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dataInserida) && DateTime.TryParseExact(dataAdmissao, "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out DateTime dataadmissao))
+                        {
+                            // Verifique se a data inserida está acima ou igual à data mínima suportada pelo SQL Server (01/01/1753)
+                            if (dataInserida < new DateTime(1753, 1, 1) || dataadmissao < new DateTime(1753, 1, 1))
+                            {
+                                MessageBox.Show("A data inserida está abaixo do limite .", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                            if (dataadmissao > DateTime.Now || dataInserida > DateTime.Now)
+                            {
+                                MessageBox.Show("A data inserida está acima do limite .", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                            else
+                            {
+                                AdicionarOUAlterar(controle, txbNomeFunc.Text, dataInserida, MTxbTelefoneFunc.Text, txbEmail.Text, MtxbSexoFunc.Text, MtxbCPFFunc.Text, txbCargoFunc.Text, MTxbCNPJ.Text, dataadmissao, salarioHr, valorTransporte, valorAlimentacao);
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("A data inserida não está no formato correto");
+                        }
                     }
+                }
+                else
+                {
+                    MessageBox.Show("Salário hora deve ser númerico");
                 }
             }
             else
             {
-                MessageBox.Show("Salário hora deve ser númerico");
+                MessageBox.Show("Valetransporte / ValeAlimentação não pode ser vazio", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void AdicionarOUAlterar(Controle controle, string nome, DateTime date, string telefone, string email, string sexo, string cpf, string cargo, string cnpj, DateTime dataadmissao, int salarioHr)
+        private void AdicionarOUAlterar(Controle controle, string nome, DateTime date, string telefone, string email, string sexo, string cpf, string cargo, string cnpj, DateTime dataadmissao, int salarioHr, int valeTrans, int valeAli)
         {
             if (Adicionar)
             {
-                controle.cadastrarFunc(nome, date, telefone, email, sexo, cpf, cargo, cnpj, dataadmissao, salarioHr);
+                controle.cadastrarFunc(nome, date, telefone, email, sexo, cpf, cargo, cnpj, dataadmissao, salarioHr, valeTrans, valeAli);
                 if (controle.msg.Equals(""))
                 {
                     if (controle.tem)
@@ -96,7 +126,7 @@ namespace ProjetoRhForm.Apresentação
             }
             else
             {
-                controle.AlterFunc(nome, date, telefone, email, sexo, cpf, cargo, cnpj, dataadmissao, salarioHr);
+                controle.AlterFunc(nome, date, telefone, email, sexo, cpf, cargo, cnpj, dataadmissao, salarioHr, valeTrans, valeAli);
                 if (controle.msg.Equals(""))
                 {
                     if (controle.tem)
@@ -190,22 +220,16 @@ namespace ProjetoRhForm.Apresentação
                 MtxbHorista.SelectionStart = 0;
             }
         }
-
         private void MtxbEmailFunc_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
 
         }
-
-
-
         private void MTxbDataNascimento_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
-
         }
 
         private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
-
         }
 
         private void txbNomeFunc_Click(object sender, EventArgs e)
@@ -234,7 +258,6 @@ namespace ProjetoRhForm.Apresentação
 
         private void lbAdmissao_Click(object sender, EventArgs e)
         {
-
         }
 
         private void txbCargoFunc_Click(object sender, EventArgs e)
@@ -247,17 +270,14 @@ namespace ProjetoRhForm.Apresentação
 
         private void MtxbHorista_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
-
         }
 
         private void MtxbHorista_KeyPress(object sender, KeyPressEventArgs e)
         {
             Program.IntNumber(e);
         }
-
         private void MtxbAdmissao_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
-
         }
     }
 }

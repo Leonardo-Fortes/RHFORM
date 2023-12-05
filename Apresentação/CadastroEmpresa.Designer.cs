@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btnCadEmp = new Button();
             lbNomeEmp = new Label();
             txtNomeEmp = new TextBox();
             lbCNPJ = new Label();
@@ -47,17 +46,8 @@
             lbCEP = new Label();
             MtxtCNPJEmp = new MaskedTextBox();
             MtxbCEP = new MaskedTextBox();
+            btnCadEmp = new Button();
             SuspendLayout();
-            // 
-            // btnCadEmp
-            // 
-            btnCadEmp.Location = new Point(709, 270);
-            btnCadEmp.Name = "btnCadEmp";
-            btnCadEmp.Size = new Size(90, 25);
-            btnCadEmp.TabIndex = 0;
-            btnCadEmp.Text = "OK";
-            btnCadEmp.UseVisualStyleBackColor = true;
-            btnCadEmp.Click += btnCadEmp_Click;
             // 
             // lbNomeEmp
             // 
@@ -233,6 +223,17 @@
             MtxbCEP.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             MtxbCEP.KeyPress += MtxbCEP_KeyPress;
             // 
+            // btnCadEmp
+            // 
+            btnCadEmp.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            btnCadEmp.Location = new Point(727, 266);
+            btnCadEmp.Name = "btnCadEmp";
+            btnCadEmp.Size = new Size(72, 29);
+            btnCadEmp.TabIndex = 0;
+            btnCadEmp.Text = "OK";
+            btnCadEmp.UseVisualStyleBackColor = false;
+            btnCadEmp.Click += btnCadEmp_Click;
+            // 
             // CadastroEmpresa
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -263,14 +264,12 @@
             MinimumSize = new Size(836, 362);
             Name = "CadastroEmpresa";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "CadastroEmpresa";
+            Text = "TechInnovate";
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private Button btnCadEmp;
         private Label lbNomeEmp;
         private TextBox txtNomeEmp;
         private Label lbCNPJ;
@@ -289,5 +288,6 @@
         private Label lbCEP;
         private MaskedTextBox MtxtCNPJEmp;
         private MaskedTextBox MtxbCEP;
+        private Button btnCadEmp;
     }
 }

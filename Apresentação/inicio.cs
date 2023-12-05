@@ -24,8 +24,19 @@ namespace ProjetoRhForm.Apresentação
                 saírToolStripMenuItem.Visible = isAdmin;
                 funcionárioToolStripMenuItem.Visible = isAdmin;
                 empresaToolStripMenuItem.Visible = isAdmin;
-                beneficiosToolStripMenuItem1.Visible = isAdmin;
                 this.Visible = isAdmin;
+            }
+            if (!string.IsNullOrEmpty(cpfVerifica))
+            {
+                bool isUsu = controle.verificarUsu(cpfVerifica);
+                lbEntrada.Visible = isUsu;
+                lbInicio.Visible = isUsu;
+                lbFim.Visible = isUsu;
+                lbSaida.Visible = isUsu;
+                btnEntrada.Visible = isUsu;
+                btnInicio.Visible = isUsu;
+                btnFIm.Visible = isUsu;
+                btnSaida.Visible = isUsu;
             }
 
         }
@@ -55,12 +66,9 @@ namespace ProjetoRhForm.Apresentação
 
         private void cadasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
         }
-
         private void alterarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
         }
 
         private void adicionarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -108,11 +116,7 @@ namespace ProjetoRhForm.Apresentação
             consultar.Show();
         }
 
-        private void beneficiosToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            BeneficioInicio beneficio = new BeneficioInicio();
-            beneficio.Show();
-        }
+
 
         private void descontosToolStripMenuItem_Click(object sender, EventArgs e)
         {

@@ -18,18 +18,24 @@ namespace ProjetoRhForm.Dal
         {
             int status = 1;
             //comandos sql de verificação //
-            cmd.CommandText = "select * from Usuario where nome = @login and senha = @senha";
+            cmd.CommandText = "SELECT Usuario.*, Funcionario.cpf FROM Usuario INNER JOIN Funcionario ON Usuario.login = Funcionario.cpf WHERE Usuario.login = @login AND Usuario.senha = @senha AND Funcionario.status = @status";
+            
+            cmd.Parameters.AddWithValue("@status", status);
             cmd.Parameters.AddWithValue("@login", login);
             cmd.Parameters.AddWithValue("@senha", senha);
-            cmd.CommandText = "select cpf from Funcionario where status = @status";
-            cmd.Parameters.AddWithValue("@status", status);
+           
             try
             {
                 cmd.Connection = con.conectar();
                 dr = cmd.ExecuteReader();
                 if (dr.HasRows) // verificar se tem informação do banco //
                 {
+
                     tem = true;
+                }
+                else
+                {
+                    return false;
                 }
                 
                 con.desconectar();
@@ -44,28 +50,41 @@ namespace ProjetoRhForm.Dal
         public string cadastrarUsuario(string login, string senha, string confSenha, string tipo) //cadastro usuario
         {
             int status = 1;
+            int id_funcionario = -1;
             if (senha.Equals(confSenha)) // verificação de senha
             {
-                cmd.CommandText = "Select cpf from Funcionario where cpf = @login and status = @status";
+                cmd.CommandText = "Select idfuncionario from Funcionario where cpf = @login and status = @status";
                 cmd.Parameters.AddWithValue("@login", login);
                 cmd.Parameters.AddWithValue("@status", status);
+                
                 try
                 {
                     cmd.Connection = con.conectar();
                     dr = cmd.ExecuteReader();
+                    
                     if (dr.HasRows)
                     {
-                        dr.Close();
+                        if (dr.Read())
+                        {
+                            id_funcionario = Convert.ToInt32(dr["idfuncionario"]);
+                        }
+                    }
+                    else
+                    {
+                        this.msg = "Funcionário inexistente!";
+                    }
+                    dr.Close();
                         cmd.CommandText = "Select login from Usuario where login = @cpff";
                         cmd.Parameters.AddWithValue("@cpff", login);
                         dr = cmd.ExecuteReader();
                         if (!dr.HasRows)
                         {
                             dr.Close ();
-                            cmd.CommandText = "insert into Usuario (login,senha,tipo) values (@l,@s,@t)";
+                            cmd.CommandText = "insert into Usuario (login,senha,tipo,id_funcionario) values (@l,@s,@t,@id)";
                             cmd.Parameters.AddWithValue("@l", login);
                             cmd.Parameters.AddWithValue("@s", senha);
                             cmd.Parameters.AddWithValue("@t", tipo);
+                            cmd.Parameters.AddWithValue("@id", id_funcionario);
                             cmd.ExecuteNonQuery(); // executando dados 
                             con.desconectar();
                             tem = true;
@@ -74,14 +93,6 @@ namespace ProjetoRhForm.Dal
                         {
                             this.msg = "Já existe um Usuário com essas credenciais!";
                         }
-                       
-                    }
-                    else
-                    {
-                        this.msg = "Funcionário inexistente!";
-                    }
-    
-                    
                 }
                 catch (SqlException ex)
                 {
@@ -118,7 +129,28 @@ namespace ProjetoRhForm.Dal
             return temAdmin;
         }
 
+        public bool verificaUsu(string cpf)
+        {
+            if (string.IsNullOrEmpty(cpf)) // Adicione essa verificação
+            {
+                return false;
+            }
 
+            string usu = "funcionario";
+            cmd.CommandText = "SELECT login FROM Usuario WHERE login = @cpf AND tipo = @tipo";
+            cmd.Parameters.AddWithValue("@cpf", cpf);
+            cmd.Parameters.AddWithValue("@tipo", usu);
+            cmd.Connection = con.conectar();
+
+            dr = cmd.ExecuteReader();
+
+            bool temUsu = dr.HasRows;
+
+            dr.Close();
+            con.desconectar();
+
+            return temUsu;
+        }
     }
 }
 

@@ -62,6 +62,7 @@
             // 
             // dataGridView1
             // 
+            dataGridView1.BackgroundColor = SystemColors.ControlLightLight;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(31, 70);
             dataGridView1.Name = "dataGridView1";
@@ -123,7 +124,7 @@
             MinimumSize = new Size(816, 489);
             Name = "ConsultarEmpresa";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "ConsultarEmpresa";
+            Text = "TechInnovate";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();

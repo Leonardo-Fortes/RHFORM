@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ProjetoRhForm")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3ff25289750f7f7b77e9c9f0685d3029c597a313")]
 [assembly: System.Reflection.AssemblyProductAttribute("ProjetoRhForm")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ProjetoRhForm")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

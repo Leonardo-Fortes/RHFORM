@@ -34,12 +34,18 @@ namespace ProjetoRhForm.Modelo
             bool isAdmin = loginDaoComandos.verificaTipo(cpf);
             return isAdmin;
         }
+        public bool verificarUsu(string cpf)
+        {
+            LoginDaoComandos loginDaoComandos = new LoginDaoComandos();
+            bool isUsu = loginDaoComandos.verificaUsu(cpf);
+            return isUsu;
+        }
 
-        public string cadastrarFunc(string nome, DateTime date, string telefone, string email, string sexo, string cpf, string cargo, string cnpj, DateTime dataadmissao, int salarioHr)
+        public string cadastrarFunc(string nome, DateTime date, string telefone, string email, string sexo, string cpf, string cargo, string cnpj, DateTime dataadmissao, int salarioHr, int valeTrans, int valeAli)
         {
             
             FuncionarioDaoComandos funcDao = new FuncionarioDaoComandos ();
-            this.msg = funcDao.cadastrarFuncionario(nome, date, telefone, email, sexo, cpf, cargo, cnpj, dataadmissao, salarioHr );
+            this.msg = funcDao.cadastrarFuncionario(nome, date, telefone, email, sexo, cpf, cargo, cnpj, dataadmissao, salarioHr, valeTrans, valeAli );
            
             if (funcDao.tem)
             {
@@ -66,16 +72,6 @@ namespace ProjetoRhForm.Modelo
             {
                 this.tem = true;
             }        
-            return msg;
-        }
-        public string cadastrarBeneficios(string cpf,double convenio, double valetransporte, double valealimentacao, double valerefeicao, double ferias, double decimoterceiro, string data)
-        {
-            BeneficiosDaoComandos beneficiosDao = new BeneficiosDaoComandos ();
-            this.msg = beneficiosDao.CadastrarBeneficio(cpf, convenio, valetransporte,valealimentacao, valerefeicao, ferias, decimoterceiro, data);
-            if(beneficiosDao.tem)
-            {
-                this.tem = true;
-            }
             return msg;
         }
  
@@ -146,17 +142,6 @@ namespace ProjetoRhForm.Modelo
             return msg;
         }
 
-        public string AlterarBeneficios(string cpf, double convenio, double valetransporte, double valealimentacao, double valerefeicao, double ferias, double decimoterceiro, string data)
-        {
-            BeneficiosDaoComandos beneficiosDao = new BeneficiosDaoComandos();
-            this.msg = beneficiosDao.AlterarBeneficio(cpf, convenio, valetransporte, valealimentacao, valerefeicao, ferias, decimoterceiro, data);
-            if(beneficiosDao.tem)
-            {
-                this.tem = true;
-            }
-            return msg;
-        }
-       
         public string AlterarEmpresa(string nome, string cnpj, string rua, string numero, string bairro, string cidade, string uf, string pais, string cep)
         {
             EmpresaDaoComandos empresa = new EmpresaDaoComandos();
@@ -183,10 +168,10 @@ namespace ProjetoRhForm.Modelo
             }
             return msg;
         }
-        public string AlterFunc(string nome, DateTime date, string telefone, string email, string sexo, string cpf, string cargo, string cnpj, DateTime dataadmissao, int salarioHr)
+        public string AlterFunc(string nome, DateTime date, string telefone, string email, string sexo, string cpf, string cargo, string cnpj, DateTime dataadmissao, int salarioHr, int valeTrans, int valeAli)
         {
             FuncionarioDaoComandos func = new FuncionarioDaoComandos();
-            this.msg = func.alterarFunc(nome, date, telefone, email, sexo, cpf, cargo, cnpj, dataadmissao, salarioHr);
+            this.msg = func.alterarFunc(nome, date, telefone, email, sexo, cpf, cargo, cnpj, dataadmissao, salarioHr, valeTrans, valeAli);
             if(func.tem)
             {
                 this.tem = true;

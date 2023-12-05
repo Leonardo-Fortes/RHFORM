@@ -43,19 +43,16 @@ namespace ProjetoRhForm.Apresentação
                 if (controle.tem)
                 {
                     MessageBox.Show("Funcionário deletado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                 }
                 else
                 {
                     MessageBox.Show("Funcionário inexistente, tenta novamente!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
                 }
             }
             else
             {
                 MessageBox.Show(controle.msg);
             }
-
         }
     }
 }

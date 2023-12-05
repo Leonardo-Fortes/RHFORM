@@ -16,9 +16,7 @@ namespace ProjetoRhForm.Apresentação
         }
         private void txtNomeEmp_TextChanged(object sender, EventArgs e)
         {
-
         }
-
         private void btnCadEmp_Click(object sender, EventArgs e)
         {
             string nomeEmp = txtNomeEmp.Text;
@@ -79,9 +77,7 @@ namespace ProjetoRhForm.Apresentação
 
         private void MtxtCNPJEmp_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
         {
-
         }
-
         private void MtxtCNPJEmp_KeyPress(object sender, KeyPressEventArgs e)
         {
             Program.IntNumber(e);

@@ -49,13 +49,17 @@
             txbEmail = new TextBox();
             txbCargoFunc = new TextBox();
             txbNomeFunc = new TextBox();
+            lbValeTransporte = new Label();
+            cbValeTransporte = new ComboBox();
+            lbValeAlimentacao = new Label();
+            cbValeAlimentacao = new ComboBox();
             SuspendLayout();
             // 
             // btnCadFunc
             // 
             btnCadFunc.BackColor = SystemColors.ControlLightLight;
             btnCadFunc.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btnCadFunc.Location = new Point(678, 240);
+            btnCadFunc.Location = new Point(691, 237);
             btnCadFunc.Name = "btnCadFunc";
             btnCadFunc.Size = new Size(110, 38);
             btnCadFunc.TabIndex = 0;
@@ -290,12 +294,56 @@
             txbNomeFunc.TabIndex = 34;
             txbNomeFunc.Click += txbNomeFunc_Click;
             // 
+            // lbValeTransporte
+            // 
+            lbValeTransporte.AutoSize = true;
+            lbValeTransporte.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            lbValeTransporte.Location = new Point(13, 214);
+            lbValeTransporte.Name = "lbValeTransporte";
+            lbValeTransporte.Size = new Size(192, 32);
+            lbValeTransporte.TabIndex = 35;
+            lbValeTransporte.Text = "Vale Transporte";
+            // 
+            // cbValeTransporte
+            // 
+            cbValeTransporte.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            cbValeTransporte.FormattingEnabled = true;
+            cbValeTransporte.Items.AddRange(new object[] { "Sim", "Não" });
+            cbValeTransporte.Location = new Point(211, 221);
+            cbValeTransporte.Name = "cbValeTransporte";
+            cbValeTransporte.Size = new Size(121, 25);
+            cbValeTransporte.TabIndex = 36;
+            // 
+            // lbValeAlimentacao
+            // 
+            lbValeAlimentacao.AutoSize = true;
+            lbValeAlimentacao.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            lbValeAlimentacao.Location = new Point(349, 214);
+            lbValeAlimentacao.Name = "lbValeAlimentacao";
+            lbValeAlimentacao.Size = new Size(211, 32);
+            lbValeAlimentacao.TabIndex = 37;
+            lbValeAlimentacao.Text = "Vale Alimentação";
+            // 
+            // cbValeAlimentacao
+            // 
+            cbValeAlimentacao.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            cbValeAlimentacao.FormattingEnabled = true;
+            cbValeAlimentacao.Items.AddRange(new object[] { "Sim", "Não" });
+            cbValeAlimentacao.Location = new Point(555, 221);
+            cbValeAlimentacao.Name = "cbValeAlimentacao";
+            cbValeAlimentacao.Size = new Size(121, 25);
+            cbValeAlimentacao.TabIndex = 38;
+            // 
             // CadastroFuncionario
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLightLight;
             ClientSize = new Size(808, 287);
+            Controls.Add(cbValeAlimentacao);
+            Controls.Add(lbValeAlimentacao);
+            Controls.Add(cbValeTransporte);
+            Controls.Add(lbValeTransporte);
             Controls.Add(txbNomeFunc);
             Controls.Add(txbCargoFunc);
             Controls.Add(txbEmail);
@@ -321,7 +369,7 @@
             MinimumSize = new Size(824, 326);
             Name = "CadastroFuncionario";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "CadastroFuncionario";
+            Text = "TechInnovate";
             ResumeLayout(false);
             PerformLayout();
         }
@@ -352,6 +400,9 @@
         private TextBox txbCargoFunc;
         private TextBox textBox1;
         private TextBox txbNome;
-
+        private Label lbValeTransporte;
+        private ComboBox cbValeTransporte;
+        private Label lbValeAlimentacao;
+        private ComboBox cbValeAlimentacao;
     }
 }

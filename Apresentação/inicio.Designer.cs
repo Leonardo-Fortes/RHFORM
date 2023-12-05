@@ -44,7 +44,6 @@
             adicionarToolStripMenuItem = new ToolStripMenuItem();
             alterarToolStripMenuItem1 = new ToolStripMenuItem();
             folhaToolStripMenuItem = new ToolStripMenuItem();
-            beneficiosToolStripMenuItem1 = new ToolStripMenuItem();
             gerarFolhaToolStripMenuItem = new ToolStripMenuItem();
             consultarFolhaToolStripMenuItem = new ToolStripMenuItem();
             timer1 = new System.Windows.Forms.Timer(components);
@@ -52,7 +51,6 @@
             btnInicio = new Button();
             btnFIm = new Button();
             btnSaida = new Button();
-            lbData = new Label();
             lbEntrada = new Label();
             lbInicio = new Label();
             lbFim = new Label();
@@ -82,8 +80,8 @@
             // 
             ínicioToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { trocarUsuárioToolStripMenuItem, saírToolStripMenuItem, sairToolStripMenuItem });
             ínicioToolStripMenuItem.Name = "ínicioToolStripMenuItem";
-            ínicioToolStripMenuItem.Size = new Size(70, 29);
-            ínicioToolStripMenuItem.Text = "ínicio";
+            ínicioToolStripMenuItem.Size = new Size(71, 29);
+            ínicioToolStripMenuItem.Text = "Início";
             // 
             // trocarUsuárioToolStripMenuItem
             // 
@@ -165,17 +163,10 @@
             // 
             // folhaToolStripMenuItem
             // 
-            folhaToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { beneficiosToolStripMenuItem1, gerarFolhaToolStripMenuItem, consultarFolhaToolStripMenuItem });
+            folhaToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { gerarFolhaToolStripMenuItem, consultarFolhaToolStripMenuItem });
             folhaToolStripMenuItem.Name = "folhaToolStripMenuItem";
             folhaToolStripMenuItem.Size = new Size(71, 29);
             folhaToolStripMenuItem.Text = "Folha";
-            // 
-            // beneficiosToolStripMenuItem1
-            // 
-            beneficiosToolStripMenuItem1.Name = "beneficiosToolStripMenuItem1";
-            beneficiosToolStripMenuItem1.Size = new Size(218, 30);
-            beneficiosToolStripMenuItem1.Text = "Beneficios";
-            beneficiosToolStripMenuItem1.Click += beneficiosToolStripMenuItem1_Click;
             // 
             // gerarFolhaToolStripMenuItem
             // 
@@ -198,57 +189,51 @@
             // 
             // btnEntrada
             // 
+            btnEntrada.BackColor = SystemColors.ControlLightLight;
             btnEntrada.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnEntrada.Location = new Point(9, 177);
             btnEntrada.Name = "btnEntrada";
             btnEntrada.Size = new Size(75, 33);
             btnEntrada.TabIndex = 4;
             btnEntrada.Text = "Entrada";
-            btnEntrada.UseVisualStyleBackColor = true;
+            btnEntrada.UseVisualStyleBackColor = false;
             btnEntrada.Click += btnEntrada_Click;
             // 
             // btnInicio
             // 
+            btnInicio.BackColor = SystemColors.ControlLightLight;
             btnInicio.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnInicio.Location = new Point(90, 177);
             btnInicio.Name = "btnInicio";
             btnInicio.Size = new Size(142, 33);
             btnInicio.TabIndex = 5;
             btnInicio.Text = "Início Invervalo";
-            btnInicio.UseVisualStyleBackColor = true;
+            btnInicio.UseVisualStyleBackColor = false;
             btnInicio.Click += btnInicio_Click;
             // 
             // btnFIm
             // 
+            btnFIm.BackColor = SystemColors.ControlLightLight;
             btnFIm.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnFIm.Location = new Point(247, 177);
             btnFIm.Name = "btnFIm";
             btnFIm.Size = new Size(142, 33);
             btnFIm.TabIndex = 6;
             btnFIm.Text = "Fim Invervalo";
-            btnFIm.UseVisualStyleBackColor = true;
+            btnFIm.UseVisualStyleBackColor = false;
             btnFIm.Click += btnFIm_Click;
             // 
             // btnSaida
             // 
+            btnSaida.BackColor = SystemColors.ControlLightLight;
             btnSaida.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnSaida.Location = new Point(416, 177);
             btnSaida.Name = "btnSaida";
             btnSaida.Size = new Size(75, 33);
             btnSaida.TabIndex = 7;
             btnSaida.Text = "Saída";
-            btnSaida.UseVisualStyleBackColor = true;
+            btnSaida.UseVisualStyleBackColor = false;
             btnSaida.Click += btnSaida_Click;
-            // 
-            // lbData
-            // 
-            lbData.AutoSize = true;
-            lbData.Font = new Font("Segoe UI Semibold", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lbData.Location = new Point(343, 48);
-            lbData.Name = "lbData";
-            lbData.Size = new Size(75, 25);
-            lbData.TabIndex = 12;
-            lbData.Text = "DATA : ";
             // 
             // lbEntrada
             // 
@@ -317,7 +302,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 17F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.Control;
+            BackColor = SystemColors.ButtonHighlight;
             ClientSize = new Size(519, 222);
             Controls.Add(lbUsu);
             Controls.Add(lbSaida);
@@ -330,14 +315,13 @@
             Controls.Add(btnInicio);
             Controls.Add(menuStrip1);
             Controls.Add(btnEntrada);
-            Controls.Add(lbData);
             Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             MainMenuStrip = menuStrip1;
             MaximumSize = new Size(535, 261);
             MinimumSize = new Size(535, 261);
             Name = "inicio";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "inicio";
+            Text = "TechInnovate";
             FormClosing += inicio_FormClosing;
             Load += inicio_Load;
             menuStrip1.ResumeLayout(false);
@@ -361,7 +345,6 @@
         private ToolStripMenuItem consultarToolStripMenuItem;
         private ToolStripMenuItem adicionarToolStripMenuItem;
         private ToolStripMenuItem alterarToolStripMenuItem1;
-        private ToolStripMenuItem beneficiosToolStripMenuItem1;
         private ToolStripMenuItem gerarFolhaToolStripMenuItem;
         private ToolStripMenuItem sairToolStripMenuItem;
         private System.Windows.Forms.Timer timer1;
@@ -369,7 +352,6 @@
         private Button btnInicio;
         private Button btnFIm;
         private Button btnSaida;
-        private Label lbData;
         private Label lbEntrada;
         private Label lbInicio;
         private Label lbFim;
